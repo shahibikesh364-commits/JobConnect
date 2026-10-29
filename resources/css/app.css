@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 4.5rem;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    color: #4f46e5;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.password-toggle:focus-visible {
+    border-radius: 0.25rem;
+    outline: 2px solid #4f46e5;
+    outline-offset: 2px;
+}
+
+.guest-brand-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.guest-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #20283a;
+    font-size: 20px;
+    font-weight: 750;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+}
+
+.login-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 1rem;
+}
+
+.login-forgot-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 4px;
+    white-space: nowrap;
+}
+
+.login-submit {
+    min-height: 42px;
+    justify-content: center;
+    margin-left: 0;
+    white-space: nowrap;
+}
+
+.login-register-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.login-register-prompt a {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    padding: 0 4px;
+}
+
+@media (max-width: 480px) {
+    .login-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+
+    .login-forgot-link {
+        justify-content: center;
+    }
+
+    .login-submit {
+        width: 100%;
+    }
+}
