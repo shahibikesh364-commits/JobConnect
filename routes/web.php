@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\JobSeekerDashboardController;
 use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminManagementController;
@@ -20,6 +21,8 @@ Route::get('/jobs/{job}', [JobListingController::class, 'show'])
 
 // Job seeker routes
 Route::middleware(['auth', 'role:job_seeker'])->group(function () {
+    Route::get('/dashboard', [JobSeekerDashboardController::class, 'index'])
+        ->name('dashboard');
     Route::get('/jobs/{job}/apply', [JobApplicationController::class, 'start'])
         ->name('jobs.apply.start');
 

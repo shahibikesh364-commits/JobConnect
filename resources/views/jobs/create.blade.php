@@ -113,10 +113,7 @@
             </form>
         </section>
 
-        <footer class="management-footer">
-            <p>&copy; {{ date('Y') }} JobConnect. Employer workspace.</p>
-            <a href="{{ route('jobs.index') }}">Browse public job listings</a>
-        </footer>
+        @include('components.footer')
     </main>
 </body>
 </html>

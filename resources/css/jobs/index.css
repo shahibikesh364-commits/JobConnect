@@ -15,13 +15,15 @@ a { color: inherit; }
 button, input, select { font: inherit; }
 .dashboard-shell { min-height: 100vh; display: flex; }
 
-.sidebar { position: sticky; top: 0; display: flex; flex: 0 0 68px; height: 100vh; flex-direction: column; align-items: center; padding: 15px 9px; border-right: 1px solid var(--line); background: #fff; }
-.brand-mark { display: grid; width: 38px; height: 38px; place-items: center; text-decoration: none; }
+.sidebar { position: sticky; top: 0; display: flex; flex: 0 0 210px; height: 100vh; flex-direction: column; align-items: stretch; padding: 20px 14px; border-right: 1px solid var(--line); background: #fff; }
+.brand-mark { display: flex; align-items: center; gap: 10px; padding: 0 7px; color: #27324a; font-size: 16px; font-weight: 750; text-decoration: none; }
 .brand-mark-logo { width: 38px; height: 38px; }
-.side-nav, .sidebar-bottom { display: flex; width: 100%; flex-direction: column; align-items: center; gap: 10px; }
-.side-nav { margin-top: 28px; }
-.sidebar-bottom { margin-top: auto; }
-.side-link { display: grid; width: 42px; height: 42px; place-items: center; border: 0; border-radius: 10px; background: transparent; color: #687386; font-size: 20px; text-decoration: none; cursor: pointer; }
+.brand-label { white-space: nowrap; }
+.side-nav { display: flex; width: 100%; flex-direction: column; gap: 5px; margin-top: 34px; }
+.sidebar-bottom { display: flex; width: 100%; flex-direction: column; align-items: stretch; gap: 10px; margin-top: auto; }
+.side-link { display: flex; width: 100%; min-height: 42px; align-items: center; gap: 11px; padding: 0 11px; border: 0; border-radius: 8px; background: transparent; color: #687386; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; }
+.side-icon { display: grid; width: 22px; flex: 0 0 22px; place-items: center; font-size: 19px; }
+.side-label { white-space: nowrap; }
 .side-link:hover, .side-link.active { background: #eef0ff; color: var(--blue); }
 .sidebar form { margin: 0; }
 
@@ -91,8 +93,10 @@ button, input, select { font: inherit; }
 
 @media (max-width: 1050px) { .job-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 680px) {
-    .sidebar { flex-basis: 54px; padding-inline: 6px; }
-    .side-link { width: 38px; height: 38px; }
+    .sidebar { flex-basis: 54px; align-items: center; padding: 15px 6px; }
+    .brand-label, .side-label { display: none; }
+    .side-nav, .sidebar-bottom { align-items: center; }
+    .side-link { width: 38px; height: 38px; justify-content: center; padding: 0; }
     .topbar { align-items: stretch; flex-direction: column; gap: 10px; padding: 12px 14px; }
     .account-area { justify-content: flex-end; }
     .jobs-dashboard { padding: 20px 14px 36px; }

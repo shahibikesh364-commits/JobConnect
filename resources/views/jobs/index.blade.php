@@ -13,23 +13,32 @@
         <aside class="sidebar" aria-label="Main navigation">
             <a class="brand-mark" href="{{ route('jobs.index') }}" aria-label="JobConnect home">
                 <x-jobconnect-logo class="brand-mark-logo" />
+                <span class="brand-label">JobConnect</span>
             </a>
 
             <nav class="side-nav">
+                @auth
+                    @if (auth()->user()->isJobSeeker())
+                        <a class="side-link" href="{{ route('dashboard') }}" title="Dashboard" aria-label="Dashboard">
+                            <span class="side-icon">▦</span><span class="side-label">Dashboard</span>
+                        </a>
+                    @endif
+                @endauth
+
                 <a class="side-link active" href="{{ route('jobs.index') }}" title="Find jobs" aria-label="Find jobs">
-                    <span>⌕</span>
+                    <span class="side-icon">⌕</span><span class="side-label">Find Jobs</span>
                 </a>
 
                 @auth
                     @if (auth()->user()->isJobSeeker())
                         <a class="side-link" href="{{ route('applications.mine') }}" title="My applications"
                             aria-label="My applications">
-                            <span>▤</span>
+                            <span class="side-icon">▤</span><span class="side-label">My Applications</span>
                         </a>
                     @else
                         <a class="side-link" href="{{ route('employer.jobs.index') }}" title="Manage jobs"
                             aria-label="Manage jobs">
-                            <span>▣</span>
+                            <span class="side-icon">▣</span><span class="side-label">Manage Jobs</span>
                         </a>
                     @endif
                 @endauth
@@ -38,7 +47,7 @@
             <div class="sidebar-bottom">
                 @guest
                     <a class="side-link" href="{{ route('login') }}" title="Log in" aria-label="Log in">
-                        <span>⇥</span>
+                        <span class="side-icon">⇥</span><span class="side-label">Log in</span>
                     </a>
                 @endguest
             </div>
@@ -281,6 +290,7 @@
             </main>
         </div>
     </div>
+    @include('components.footer')
 </body>
 
 </html>

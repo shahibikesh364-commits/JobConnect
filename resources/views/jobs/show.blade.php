@@ -37,6 +37,9 @@
                             Manage Jobs
                         </a>
                     @else
+                        @if (auth()->user()->isJobSeeker())
+                            <a class="header-link" href="{{ route('dashboard') }}">Dashboard</a>
+                        @endif
                         <a class="header-button" href="{{ route('applications.mine') }}">
                             My Applications
                         </a>
@@ -121,6 +124,27 @@
                     @endif
                 </div>
             </div>
+
+            <aside class="job-hero-summary" aria-label="Compensation and application deadline">
+                <div class="hero-summary-item">
+                    <span class="hero-summary-label">Salary range</span>
+                    <strong>
+                        @if ($job->salary_min !== null || $job->salary_max !== null)
+                            NPR {{ $job->salary_min !== null ? number_format((float) $job->salary_min) : '—' }}
+                            – {{ $job->salary_max !== null ? number_format((float) $job->salary_max) : '—' }}
+                            <small>/ month</small>
+                        @else
+                            Not specified
+                        @endif
+                    </strong>
+                </div>
+                <div class="hero-summary-item">
+                    <span class="hero-summary-label">Application deadline</span>
+                    <strong>
+                        {{ $job->application_deadline ? $job->application_deadline->format('M j, Y') : 'No deadline listed' }}
+                    </strong>
+                </div>
+            </aside>
         </section>
 
         {{-- Main content and sidebar --}}
@@ -288,6 +312,23 @@
                     <span aria-hidden="true">←</span>
                     Back to All Jobs
                 </a>
+
+                @if ($hasApplied)
+                    <section class="content-card application-tips">
+                        <div class="application-tips-heading">
+                            <span class="application-tips-icon" aria-hidden="true">✓</span>
+                            <div>
+                                <h2>Application tips</h2>
+                                <p>A few ways to make your application stronger.</p>
+                            </div>
+                        </div>
+                        <ul class="application-tips-list">
+                            <li><span>Tailor your resume to the role.</span></li>
+                            <li><span>Highlight experience that matches the requirements.</span></li>
+                            <li><span>Keep your contact details up to date.</span></li>
+                        </ul>
+                    </section>
+                @endif
             </div>
 
             {{-- Job summary sidebar --}}
@@ -312,40 +353,12 @@
                         </div>
                     </div>
 
-                    <div class="overview-item">
-                        <span class="overview-icon" aria-hidden="true">NPR</span>
-                        <div>
-                            <span class="overview-label">Salary Range</span>
-                            <strong>
-                                @if ($job->salary_min !== null || $job->salary_max !== null)
-                                    NPR
-                                    {{ $job->salary_min !== null ? number_format((float) $job->salary_min) : '—' }}
-                                    –
-                                    {{ $job->salary_max !== null ? number_format((float) $job->salary_max) : '—' }}
-                                    <small>/ month</small>
-                                @else
-                                    Not specified
-                                @endif
-                            </strong>
-                        </div>
-                    </div>
-
                     @if ($job->created_at)
                         <div class="overview-item">
                             <span class="overview-icon" aria-hidden="true">◷</span>
                             <div>
                                 <span class="overview-label">Date Posted</span>
                                 <strong>{{ $job->created_at->format('M j, Y') }}</strong>
-                            </div>
-                        </div>
-                    @endif
-
-                    @if ($job->application_deadline)
-                        <div class="overview-item">
-                            <span class="overview-icon" aria-hidden="true">▦</span>
-                            <div>
-                                <span class="overview-label">Deadline</span>
-                                <strong>{{ $job->application_deadline->format('M j, Y') }}</strong>
                             </div>
                         </div>
                     @endif
@@ -408,9 +421,7 @@
         </div>
     </main>
 
-    <footer class="page-footer">
-        <p>© {{ date('Y') }} JobConnect. Connecting people with opportunities.</p>
-    </footer>
+    @include('components.footer')
 
 </body>
 

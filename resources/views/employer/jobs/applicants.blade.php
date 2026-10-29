@@ -145,10 +145,7 @@
             @endif
         </section>
 
-        <footer class="management-footer">
-            <p>&copy; {{ date('Y') }} JobConnect. Employer workspace.</p>
-            <a href="{{ route('employer.jobs.index') }}">Manage your jobs</a>
-        </footer>
+        @include('components.footer')
     </main>
 </body>
 

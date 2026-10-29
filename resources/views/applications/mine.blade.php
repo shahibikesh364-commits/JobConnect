@@ -13,12 +13,14 @@
         <aside class="application-sidebar" aria-label="Main navigation">
             <a class="application-brand-mark" href="{{ route('jobs.index') }}" aria-label="JobConnect home">
                 <x-jobconnect-logo class="application-brand-logo" />
+                <span class="application-brand-label">JobConnect</span>
             </a>
 
             <nav class="application-nav">
-                <a href="{{ route('jobs.index') }}" title="Find jobs" aria-label="Find jobs">⌕</a>
+                <a href="{{ route('dashboard') }}" title="Dashboard" aria-label="Dashboard"><span>▦</span><span class="application-nav-label">Dashboard</span></a>
+                <a href="{{ route('jobs.index') }}" title="Find jobs" aria-label="Find jobs"><span>⌕</span><span class="application-nav-label">Find Jobs</span></a>
                 <a class="active" href="{{ route('applications.mine') }}" title="My applications"
-                    aria-label="My applications">▤</a>
+                    aria-label="My applications"><span>▤</span><span class="application-nav-label">My Applications</span></a>
             </nav>
         </aside>
 
@@ -289,6 +291,7 @@
             </main>
         </div>
     </div>
+    @include('components.footer')
 </body>
 
 </html>

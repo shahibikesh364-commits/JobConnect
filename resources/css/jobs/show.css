@@ -264,10 +264,10 @@ textarea:focus-visible {
 
 .job-hero {
     display: flex;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 32px;
-    margin-bottom: 26px;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 24px;
+    margin-bottom: 18px;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -275,16 +275,16 @@ textarea:focus-visible {
 }
 
 .company-avatar {
-    width: 76px;
-    height: 76px;
+    width: 64px;
+    height: 64px;
     flex-shrink: 0;
     display: grid;
     place-items: center;
     border: 1px solid #dbeafe;
-    border-radius: 16px;
+    border-radius: 14px;
     background: linear-gradient(135deg, #eff6ff, #dbeafe);
     color: #1d4ed8;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 800;
 }
 
@@ -293,13 +293,46 @@ textarea:focus-visible {
     flex: 1;
 }
 
+.job-hero-summary {
+    display: grid;
+    flex: 0 0 250px;
+    gap: 13px;
+    padding: 5px 0 5px 22px;
+    border-left: 1px solid var(--border);
+}
+
+.hero-summary-item {
+    display: grid;
+    gap: 2px;
+}
+
+.hero-summary-label {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 650;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.hero-summary-item strong {
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 750;
+}
+
+.hero-summary-item small {
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 500;
+}
+
 .job-heading-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .eyebrow {
@@ -311,15 +344,15 @@ textarea:focus-visible {
 
 .job-hero h1 {
     color: #111827;
-    font-size: clamp(25px, 3vw, 34px);
-    line-height: 1.25;
+    font-size: clamp(24px, 2.6vw, 32px);
+    line-height: 1.2;
     font-weight: 800;
     letter-spacing: -1px;
     overflow-wrap: anywhere;
 }
 
 .company-name {
-    margin-top: 8px;
+    margin-top: 2px;
     color: #475569;
     font-size: 16px;
     font-weight: 650;
@@ -361,7 +394,7 @@ textarea:focus-visible {
     align-items: center;
     flex-wrap: wrap;
     gap: 10px 22px;
-    margin-top: 20px;
+    margin-top: 8px;
     color: var(--text-secondary);
     font-size: 12px;
 }
@@ -789,6 +822,84 @@ textarea:focus-visible {
     line-height: 1.8;
 }
 
+.application-tips-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.application-tips-icon {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    place-items: center;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: var(--primary);
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.application-tips-heading h2 {
+    margin: 0;
+    color: #172033;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.application-tips-heading p {
+    margin-top: 3px;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.application-tips-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.application-tips-list li {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 72px;
+    padding: 14px;
+    border: 1px solid #e5eaf2;
+    border-radius: 10px;
+    background: #f8faff;
+    color: var(--text-secondary);
+    font-size: 12px;
+    line-height: 1.65;
+}
+
+.application-tips-list li::before {
+    display: grid;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: #e8f1ff;
+    color: var(--primary);
+    content: "✓";
+    font-size: 10px;
+    font-weight: 800;
+}
+
+@media (max-width: 760px) {
+    .application-tips-list {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* =========================================
    SIDEBAR HELP CARD
 ========================================= */
@@ -883,6 +994,10 @@ textarea:focus-visible {
         padding: 23px;
     }
 
+    .job-hero {
+        padding: 18px 22px;
+    }
+
     .header-inner,
     .details-container {
         width: min(100% - 36px, 1200px);
@@ -917,7 +1032,18 @@ textarea:focus-visible {
     }
 
     .job-hero {
-        padding: 25px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        padding: 18px;
+    }
+
+    .job-hero-summary {
+        flex: 1 1 calc(100% - 82px);
+        margin-left: 82px;
+        padding: 13px 0 0;
+        border-top: 1px solid var(--border);
+        border-left: 0;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
@@ -978,15 +1104,21 @@ textarea:focus-visible {
     .job-hero {
         flex-direction: column;
         gap: 17px;
-        padding: 21px 18px;
+        padding: 18px 16px;
         margin-bottom: 18px;
     }
 
+    .job-hero-summary {
+        width: 100%;
+        flex: 0 0 auto;
+        margin-left: 0;
+    }
+
     .company-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 13px;
-        font-size: 24px;
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        font-size: 21px;
     }
 
     .job-hero h1 {
