@@ -31,13 +31,10 @@
                 <span class="job-seeker-nav-icon" aria-hidden="true">☆</span>
                 <span class="job-seeker-nav-label">Saved Jobs</span>
             </a>
-            <a href="{{ route('job-seeker.features.show', 'companies') }}" @class([
-                'job-seeker-nav-placeholder',
-                'active' => $active === 'companies',
-            ])
+            <a href="{{ route('job-seeker.features.show', 'companies') }}" @class(['active' => $active === 'companies'])
                 @if ($active === 'companies') aria-current="page" @endif>
                 <span class="job-seeker-nav-icon" aria-hidden="true">▣</span>
-                <span class="job-seeker-placeholder-copy"><span>Companies</span><small>Coming soon</small></span>
+                <span class="job-seeker-nav-label">Companies</span>
             </a>
             <a href="{{ route('job-seeker.features.show', 'interviews') }}" @class([
                 'job-seeker-nav-placeholder',

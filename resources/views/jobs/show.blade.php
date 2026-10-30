@@ -55,14 +55,7 @@
             <span aria-current="page">{{ $job->title }}</span>
         </nav>
 
-        {{-- Feedback messages --}}
-        @if (session('success'))
-            <div class="alert alert-success" role="status">
-                <span class="alert-icon" aria-hidden="true">✓</span>
-                {{ session('success') }}
-            </div>
-        @endif
-
+        {{-- Validation feedback --}}
         @if ($errors->any())
             <div class="alert alert-error" role="alert">
                 <strong>Please check the following:</strong>

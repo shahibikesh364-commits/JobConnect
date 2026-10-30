@@ -86,10 +86,6 @@
                     </form>
                 </div>
 
-                @if (session('success'))
-                    <p class="success-message">{{ session('success') }}</p>
-                @endif
-
                 {{-- Search results summary --}}
                 @if (!empty($search) || !empty($location) || !empty($jobType) || ($sort ?? 'newest') !== 'newest')
                     <div class="results-summary">

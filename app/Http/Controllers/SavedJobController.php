@@ -37,14 +37,14 @@ class SavedJobController extends Controller
         if ($savedJob) {
             $savedJob->delete();
 
-            return back()->with('success', 'Job removed from your saved jobs.');
+            return back();
         }
 
         $request->user()->savedJobs()->firstOrCreate([
             'job_listing_id' => $job->id,
         ]);
 
-        return back()->with('success', 'Job saved successfully.');
+        return back();
     }
 
     /**
@@ -59,6 +59,6 @@ class SavedJobController extends Controller
 
         $savedJob->delete();
 
-        return back()->with('success', 'Saved job removed successfully.');
+        return back();
     }
 }

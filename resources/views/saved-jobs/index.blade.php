@@ -27,10 +27,6 @@
             </header>
 
             <main class="jobs-dashboard">
-                @if (session('success'))
-                    <p class="success-message">{{ session('success') }}</p>
-                @endif
-
                 @if ($savedJobs->count())
                     <section class="job-grid" aria-label="Saved jobs">
                         @foreach ($savedJobs as $savedJob)

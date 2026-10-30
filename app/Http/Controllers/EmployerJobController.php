@@ -36,9 +36,9 @@ class EmployerJobController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $job = $request->user()->jobListings()->create($this->validatedJob($request) + ['status' => 'open']);
+        $request->user()->jobListings()->create($this->validatedJob($request) + ['status' => 'open']);
 
-        return redirect()->route('employer.jobs.index')->with('success', 'Job published successfully.');
+        return redirect()->route('employer.jobs.index');
     }
 
     public function edit(Request $request, JobListing $job): View
@@ -53,7 +53,7 @@ class EmployerJobController extends Controller
         $this->authorizeOwner($request, $job);
         $job->update($this->validatedJob($request));
 
-        return redirect()->route('employer.jobs.index')->with('success', 'Job listing updated.');
+        return redirect()->route('employer.jobs.index');
     }
 
     public function destroy(Request $request, JobListing $job): RedirectResponse
@@ -61,7 +61,7 @@ class EmployerJobController extends Controller
         $this->authorizeOwner($request, $job);
         $job->delete();
 
-        return redirect()->route('employer.jobs.index')->with('success', 'Job listing deleted.');
+        return redirect()->route('employer.jobs.index');
     }
 
     public function applicants(Request $request, JobListing $job): View
@@ -92,7 +92,7 @@ class EmployerJobController extends Controller
             $application->applicant->notify(new ApplicationStatusChanged($application, $validated['status']));
         }
 
-        return back()->with('success', 'Application status updated.');
+        return back();
     }
 
     private function validatedJob(Request $request): array

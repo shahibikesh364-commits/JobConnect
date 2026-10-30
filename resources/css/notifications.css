@@ -57,6 +57,11 @@
 .notification-dropdown-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 17px 12px; border-bottom: 1px solid var(--notice-line); }
 .notification-dropdown-heading strong { color: var(--notice-ink); font-size: 14px; }
 .notification-dropdown-heading span { color: var(--notice-muted); font-size: 11px; }
+.notification-dropdown-heading-actions { display: flex; align-items: center; gap: 10px; }
+.notification-dropdown-heading-actions form { margin: 0; }
+.notification-dropdown-heading-actions button { padding: 0; border: 0; background: transparent; color: var(--notice-primary); font: inherit; font-size: 10px; font-weight: 700; white-space: nowrap; cursor: pointer; }
+.notification-dropdown-heading-actions button:hover { text-decoration: underline; }
+.notification-dropdown-heading-actions button:focus-visible { border-radius: 3px; outline: 2px solid var(--notice-primary); outline-offset: 3px; }
 .notification-dropdown-item { display: flex; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--notice-line); color: inherit; text-decoration: none; transition: background .15s ease; }
 .notification-dropdown-item:hover { background: #f8f9fc; }
 .notification-dropdown-item.is-unread { background: #f5f6ff; }
@@ -71,7 +76,7 @@
 .notification-dropdown-footer:hover { background: var(--notice-primary-soft); }
 
 .notifications-page { min-width: 320px; min-height: 100vh; margin: 0; padding: 36px 20px 60px; background: var(--notice-canvas); color: var(--notice-ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
-.notifications-container { width: min(100%, 1000px); margin: 0 auto; }
+.notifications-container { width: min(100%, 1440px); margin: 0 auto; }
 .notifications-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
 .notifications-eyebrow { margin: 0 0 7px; color: #7f8796; font-size: 10px; font-weight: 750; letter-spacing: .13em; }
 .notifications-header h1 { margin: 0; color: var(--notice-ink); font-size: clamp(25px, 4vw, 34px); letter-spacing: -.035em; }
@@ -112,6 +117,47 @@
 .notifications-pagination nav a,
 .notifications-pagination nav span { color: inherit; }
 
+/* Notification center summary and browsing controls */
+.notifications-overview { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0 0 18px; }
+.notifications-stat-card { display: flex; min-width: 0; align-items: center; gap: 13px; padding: 17px 18px; border: 1px solid var(--notice-line); border-radius: 12px; background: var(--notice-surface); box-shadow: 0 3px 14px rgba(25, 35, 55, .025); }
+.notifications-stat-icon { display: grid; width: 40px; height: 40px; flex: 0 0 40px; place-items: center; border-radius: 11px; background: var(--notice-primary-soft); color: var(--notice-primary); font-size: 19px; font-weight: 750; }
+.notifications-stat-card > div { display: grid; min-width: 0; gap: 2px; }
+.notifications-stat-card p { margin: 0; color: var(--notice-muted); font-size: 11px; font-weight: 650; }
+.notifications-stat-card strong { overflow: hidden; color: var(--notice-ink); font-size: 19px; font-weight: 750; line-height: 1.25; text-overflow: ellipsis; white-space: nowrap; }
+.notifications-stat-card > div > span { overflow: hidden; color: var(--notice-muted); font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.notifications-stat-card.has-unread .notifications-stat-icon { background: #fff0e6; color: #bd5b16; }
+.notifications-panel-heading { align-items: center; padding-block: 20px; }
+.notifications-panel-heading h2 { font-size: 17px; letter-spacing: -.01em; }
+.notifications-panel-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+.notifications-filters { display: inline-flex; align-items: center; gap: 3px; padding: 3px; border: 1px solid var(--notice-line); border-radius: 9px; background: var(--notice-canvas); }
+.notifications-filters a { display: inline-flex; min-height: 30px; align-items: center; gap: 6px; padding: 0 9px; border-radius: 6px; color: var(--notice-muted); font-size: 11px; font-weight: 650; text-decoration: none; }
+.notifications-filters a:hover { color: var(--notice-primary); }
+.notifications-filters a.is-active { background: var(--notice-surface); color: var(--notice-ink); box-shadow: 0 1px 3px rgba(25, 35, 55, .1); }
+.notifications-filters a span { color: inherit; opacity: .7; font-variant-numeric: tabular-nums; }
+.notification-row { padding-block: 22px; transition: background-color .15s ease; }
+.notification-row.is-unread { box-shadow: inset 3px 0 0 var(--notice-primary); }
+.notification-row-icon { width: 40px; height: 40px; flex-basis: 40px; border-radius: 12px; font-size: 17px; }
+.notification-row-title { flex-wrap: wrap; }
+.notification-row-title h3 { font-size: 14px; font-weight: 720; }
+.notification-status-tag { display: inline-flex; align-items: center; padding: 3px 8px; border: 1px solid var(--notice-line); border-radius: 99px; background: var(--notice-canvas); color: var(--notice-muted); font-size: 10px; font-weight: 650; }
+.notification-status-tag.status-submitted { border-color: #c7d2fe; background: #eef2ff; color: #4338ca; }
+.notification-status-tag.status-reviewing { border-color: #bae6fd; background: #ecfeff; color: #0e7490; }
+.notification-status-tag.status-shortlisted { border-color: #fde68a; background: #fffbeb; color: #a16207; }
+.notification-status-tag.status-rejected { border-color: #fecaca; background: #fef2f2; color: #b91c1c; }
+.notification-row-content > time { display: inline-flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.notification-row-actions a,
+.notification-row-actions button { font-size: 12px; }
+.notification-row-actions a { display: inline-flex; min-height: 32px; align-items: center; padding: 0 10px; border-radius: 7px; background: var(--notice-primary-soft); }
+.notification-row-actions a:hover { background: var(--notice-primary); color: #fff; text-decoration: none; }
+.notification-row-actions button { min-height: 32px; }
+html[data-theme="dark"] .notifications-stat-card.has-unread .notifications-stat-icon { background: #49372f; color: #ffc28f; }
+html[data-theme="dark"] .notification-status-tag { border-color: var(--notice-line); background: #1b2230; color: var(--notice-muted); }
+html[data-theme="dark"] .notification-status-tag.status-submitted { border-color: #454177; background: #303052; color: #c4c2ff; }
+html[data-theme="dark"] .notification-status-tag.status-reviewing { border-color: #28515c; background: #1e3d47; color: #9be4f1; }
+html[data-theme="dark"] .notification-status-tag.status-shortlisted { border-color: #6a5830; background: #443a27; color: #f7d980; }
+html[data-theme="dark"] .notification-status-tag.status-rejected { border-color: #693a44; background: #442b35; color: #ffb4bd; }
+html[data-theme="dark"] .notifications-filters a.is-active { background: #30334f; }
+
 .notifications-page .theme-toggle { display: inline-flex; min-height: 40px; align-items: center; gap: 7px; padding: 0 11px; border: 1px solid var(--notice-line); border-radius: 8px; background: var(--notice-surface); color: var(--notice-ink); font: inherit; font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer; }
 
 html[data-theme="dark"] {
@@ -149,6 +195,10 @@ html[data-theme="dark"] .notifications-flash { border-color: #245943; background
     .notifications-header-actions { width: 100%; justify-content: space-between; }
     .notifications-panel-heading,
     .notification-row { padding-inline: 15px; }
+    .notifications-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .notifications-stat-card:last-child { grid-column: 1 / -1; }
+    .notifications-panel-heading { align-items: flex-start; flex-direction: column; }
+    .notifications-panel-tools { width: 100%; justify-content: space-between; }
 }
 
 @media (max-width: 420px) {
@@ -156,4 +206,7 @@ html[data-theme="dark"] .notifications-flash { border-color: #245943; background
     .notifications-header-actions { flex-wrap: wrap; }
     .notification-row { gap: 10px; }
     .notification-row-icon { width: 31px; height: 31px; flex-basis: 31px; }
+    .notifications-overview { grid-template-columns: 1fr; }
+    .notifications-stat-card:last-child { grid-column: auto; }
+    .notifications-panel-tools { align-items: flex-start; flex-direction: column; }
 }

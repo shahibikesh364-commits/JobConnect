@@ -36,7 +36,6 @@
                 </div>
             </header>
             <main class="admin-content">
-                @if (session('success'))<div class="admin-alert success">{{ session('success') }}</div>@endif
                 @if ($errors->any())<div class="admin-alert error">{{ $errors->first() }}</div>@endif
                 @yield('content')
             </main>

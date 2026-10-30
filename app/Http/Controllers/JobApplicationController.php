@@ -33,7 +33,7 @@ class JobApplicationController extends Controller
             $request->user()->notify(new ApplicationStatusChanged($application, 'submitted'));
         }
 
-        return redirect()->route('jobs.show', $job)->with('success', 'Your application has been submitted.');
+        return redirect()->route('jobs.show', $job);
     }
 
 

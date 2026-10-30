@@ -20,7 +20,16 @@
     <div class="notification-dropdown" aria-label="Recent notifications">
         <div class="notification-dropdown-heading">
             <strong>Notifications</strong>
-            <span>{{ $unreadNotificationCount }} unread</span>
+            <div class="notification-dropdown-heading-actions">
+                <span>{{ $unreadNotificationCount }} unread</span>
+                @if ($unreadNotificationCount > 0)
+                    <form method="POST" action="{{ route('notifications.read-all') }}">
+                        @csrf
+                        @method('PATCH')
+                        <button type="submit">Mark all as read</button>
+                    </form>
+                @endif
+            </div>
         </div>
 
         @forelse ($recentNotifications as $notification)

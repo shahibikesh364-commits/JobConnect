@@ -47,7 +47,7 @@ class AdminManagementController extends Controller
         ]);
         $user->update($validated);
 
-        return back()->with('success', 'User role updated.');
+        return back();
     }
 
     public function destroyUser(Request $request, User $user): RedirectResponse
@@ -55,7 +55,7 @@ class AdminManagementController extends Controller
         abort_if($user->id === $request->user()->id || $user->role === 'admin', 403, 'Administrator accounts cannot be deleted here.');
         $user->delete();
 
-        return back()->with('success', 'User account deleted.');
+        return back();
     }
 
     public function jobs(Request $request): View
@@ -83,14 +83,14 @@ class AdminManagementController extends Controller
         ]);
         $job->update($validated);
 
-        return back()->with('success', 'Job listing status updated.');
+        return back();
     }
 
     public function destroyJob(JobListing $job): RedirectResponse
     {
         $job->delete();
 
-        return back()->with('success', 'Job listing deleted.');
+        return back();
     }
 
     public function applications(Request $request): View
@@ -111,6 +111,6 @@ class AdminManagementController extends Controller
         ]);
         $application->update($validated);
 
-        return back()->with('success', 'Application status updated.');
+        return back();
     }
 }

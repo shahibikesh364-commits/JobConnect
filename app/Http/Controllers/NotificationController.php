@@ -11,11 +11,23 @@ class NotificationController extends Controller
 {
     public function index(Request $request): View
     {
-        $notifications = $request->user()->notifications()->latest()->paginate(15);
+        $filter = $request->validate([
+            'filter' => ['nullable', 'in:all,unread'],
+        ])['filter'] ?? 'all';
+
+        $notificationQuery = $request->user()->notifications()->latest();
+
+        if ($filter === 'unread') {
+            $notificationQuery->whereNull('read_at');
+        }
+
+        $notifications = $notificationQuery->paginate(15)->withQueryString();
 
         return view('notifications.index', [
             'notifications' => $notifications,
+            'totalCount' => $request->user()->notifications()->count(),
             'unreadCount' => $request->user()->unreadNotifications()->count(),
+            'filter' => $filter,
         ]);
     }
 
@@ -49,14 +61,14 @@ class NotificationController extends Controller
     {
         $this->ownedNotification($request, $notification)->markAsRead();
 
-        return back()->with('success', 'Notification marked as read.');
+        return back();
     }
 
     public function markAllRead(Request $request): RedirectResponse
     {
         $request->user()->unreadNotifications()->update(['read_at' => now()]);
 
-        return back()->with('success', 'All notifications marked as read.');
+        return back();
     }
 
     private function ownedNotification(Request $request, string $id): DatabaseNotification

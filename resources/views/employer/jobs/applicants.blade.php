@@ -27,12 +27,6 @@
             </div>
         </header>
 
-        @if (session('success'))
-            <div class="alert success-message" role="status">
-                <span aria-hidden="true">✓</span> {{ session('success') }}
-            </div>
-        @endif
-
         @if ($errors->any())
             <div class="alert error-message" role="alert">
                 <strong>Please check the following:</strong>
