@@ -516,6 +516,73 @@ class JobListingSeeder extends Seeder
             ],
         ];
 
+        $additionalJobs = [
+            ['Software Developer', 'CodeCraft Nepal', 'Kathmandu', 'PHP, Laravel, JavaScript, and SQL.', 45000, 75000],
+            ['Frontend Engineer', 'PixelRoute Digital', 'Lalitpur', 'React, accessible interfaces, CSS, and API integration.', 50000, 85000],
+            ['Backend Engineer', 'DataBridge Systems', 'Kathmandu', 'REST APIs, PHP or Node.js, SQL, and secure coding.', 55000, 90000],
+            ['DevOps Associate', 'CloudPeak Solutions', 'Remote', 'Linux, CI/CD, cloud fundamentals, and scripting.', 50000, 80000],
+            ['Cybersecurity Analyst', 'SecureNet Nepal', 'Kathmandu', 'Security monitoring, incident reporting, and network fundamentals.', 50000, 85000],
+            ['Database Administrator', 'Himalayan Data Services', 'Lalitpur', 'SQL, backups, performance monitoring, and careful documentation.', 45000, 75000],
+            ['IT Support Technician', 'Reliable Tech Care', 'Bhaktapur', 'Windows support, troubleshooting, and clear customer communication.', 25000, 40000],
+            ['Business Analyst', 'InsightWorks Nepal', 'Kathmandu', 'Requirements gathering, process mapping, and spreadsheet analysis.', 40000, 65000],
+            ['Project Coordinator', 'Summit Project Partners', 'Pokhara', 'Scheduling, meeting notes, follow-up, and strong organization.', 30000, 48000],
+            ['Product Designer', 'Northstar Product Studio', 'Remote', 'Figma, user research, prototyping, and interaction design.', 45000, 75000],
+            ['SEO Executive', 'SearchWise Media', 'Kathmandu', 'Keyword research, technical SEO basics, and performance reporting.', 28000, 45000],
+            ['Social Media Manager', 'Katha Creative Agency', 'Lalitpur', 'Content planning, community management, and analytics.', 30000, 50000],
+            ['Content Editor', 'ReadMore Nepal', 'Remote', 'Editing, fact checking, and a strong command of written English.', 28000, 45000],
+            ['Video Editor', 'FrameOne Productions', 'Kathmandu', 'Video editing, motion graphics basics, and deadline management.', 30000, 50000],
+            ['Photographer', 'Lightbox Media House', 'Pokhara', 'Digital photography, editing, and a portfolio of prior work.', 25000, 42000],
+            ['Sales Executive', 'Horizon Business Supplies', 'Biratnagar', 'Client outreach, negotiation, and accurate sales records.', 28000, 48000],
+            ['Account Manager', 'CustomerFirst Nepal', 'Kathmandu', 'Relationship management, presentations, and account planning.', 40000, 65000],
+            ['Procurement Officer', 'GreenPath Trading', 'Chitwan', 'Supplier coordination, purchase records, and negotiation skills.', 30000, 48000],
+            ['Logistics Coordinator', 'FastTrack Distribution', 'Birgunj', 'Shipment tracking, inventory coordination, and problem solving.', 28000, 45000],
+            ['Warehouse Associate', 'Everest Supply Network', 'Bharatpur', 'Stock handling, inventory records, and safe lifting practices.', 20000, 30000],
+            ['Restaurant Chef', 'Lakeside Table', 'Pokhara', 'Kitchen experience, food safety, and consistent meal preparation.', 30000, 50000],
+            ['Barista', 'Hearth Coffee House', 'Kathmandu', 'Coffee preparation, customer service, and clean work habits.', 18000, 28000],
+            ['Hotel Operations Manager', 'Himalayan Stay Group', 'Nagarkot', 'Hospitality leadership, staff scheduling, and guest service.', 50000, 80000],
+            ['Tour Guide', 'Mountain Trail Adventures', 'Pokhara', 'Local destination knowledge, guest care, and conversational English.', 22000, 38000],
+            ['Event Coordinator', 'Gather Nepal Events', 'Kathmandu', 'Vendor coordination, event schedules, and calm communication.', 28000, 45000],
+            ['Registered Nurse', 'Community Care Hospital', 'Dharan', 'Nursing qualification, patient care, and accurate clinical records.', 35000, 55000],
+            ['Medical Laboratory Technician', 'Pathway Diagnostics', 'Lalitpur', 'Laboratory training, sample handling, and attention to safety.', 30000, 48000],
+            ['Public Health Assistant', 'Healthy Communities Nepal', 'Janakpur', 'Community outreach, health education, and field reporting.', 28000, 45000],
+            ['Physiotherapy Assistant', 'ActiveLife Rehabilitation', 'Kathmandu', 'Relevant training, patient support, and clear record keeping.', 25000, 40000],
+            ['Pharmacist', 'Central Health Pharmacy', 'Pokhara', 'Pharmacy qualification, dispensing accuracy, and patient guidance.', 35000, 55000],
+            ['Secondary Mathematics Teacher', 'Valley View Academy', 'Lalitpur', 'Mathematics qualification, lesson planning, and classroom skills.', 32000, 52000],
+            ['School Counselor', 'New Horizons School', 'Kathmandu', 'Counseling training, student support, and professional discretion.', 35000, 55000],
+            ['Education Program Officer', 'Learning for All Nepal', 'Butwal', 'Program coordination, education reporting, and partner communication.', 35000, 55000],
+            ['Agriculture Extension Officer', 'HarvestLink Cooperative', 'Chitwan', 'Agriculture knowledge, farmer engagement, and field travel.', 30000, 50000],
+            ['Food Quality Inspector', 'FreshFields Foods', 'Biratnagar', 'Food safety standards, inspection records, and careful observation.', 28000, 45000],
+            ['Environmental Officer', 'Clean Rivers Initiative', 'Pokhara', 'Environmental fieldwork, data collection, and report writing.', 32000, 52000],
+            ['Construction Site Supervisor', 'BuildWell Contractors', 'Butwal', 'Site coordination, safety awareness, and construction experience.', 40000, 65000],
+            ['Quantity Surveyor', 'Measured Cost Consultants', 'Kathmandu', 'Construction cost estimation, documentation, and spreadsheet skills.', 45000, 70000],
+            ['Mechanical Technician', 'Precision Engineering Nepal', 'Hetauda', 'Mechanical maintenance, equipment troubleshooting, and safety.', 30000, 50000],
+            ['Solar Installation Technician', 'BrightSun Renewables', 'Dhangadhi', 'Electrical basics, solar installation, and field readiness.', 28000, 45000],
+            ['Customer Success Specialist', 'Sajilo Software', 'Remote', 'Customer onboarding, product support, and clear written communication.', 30000, 50000],
+            ['Call Center Representative', 'VoiceConnect Services', 'Kathmandu', 'Friendly phone manner, accurate data entry, and patience.', 20000, 32000],
+            ['Office Administrator', 'CivicWorks Nepal', 'Dhulikhel', 'Scheduling, office records, and confident use of office software.', 25000, 40000],
+            ['Legal Assistant', 'Justice Path Associates', 'Kathmandu', 'Legal document preparation, research, and confidentiality.', 30000, 48000],
+            ['Banking Service Associate', 'Community Finance Nepal', 'Itahari', 'Customer service, basic financial records, and attention to detail.', 28000, 45000],
+            ['Microfinance Field Officer', 'Rural Growth Finance', 'Nepalgunj', 'Community engagement, field visits, and accurate financial records.', 28000, 45000],
+            ['Research Enumerator', 'People and Places Research', 'Contract', 'Interview skills, accurate data collection, and local travel.', 22000, 35000],
+            ['Nonprofit Program Assistant', 'Open Hands Foundation', 'Remote', 'Program administration, partner communication, and reporting.', 28000, 45000],
+            ['Delivery Operations Associate', 'LocalLoop Logistics', 'Lalitpur', 'Dispatch coordination, customer updates, and reliable record keeping.', 22000, 35000],
+            ['Business Intelligence Analyst', 'ClearView Analytics', 'Kathmandu', 'SQL, dashboard development, and explaining business trends clearly.', 45000, 75000],
+            ['Recruitment Specialist', 'TalentBridge Nepal', 'Pokhara', 'Candidate sourcing, interview coordination, and thoughtful communication.', 32000, 52000],
+        ];
+
+        foreach ($additionalJobs as [$title, $company, $city, $requirements, $salaryMin, $salaryMax]) {
+            $jobs[] = [
+                'title' => $title,
+                'company_name' => $company,
+                'location' => $city === 'Remote' || $city === 'Contract' ? $city . ', Nepal' : $city . ', Nepal',
+                'job_type' => $city === 'Remote' ? 'Remote' : ($city === 'Contract' ? 'Contract' : 'Full-time'),
+                'description' => 'Join ' . $company . ' and contribute to meaningful work with a supportive team.',
+                'requirements' => $requirements,
+                'salary_min' => $salaryMin,
+                'salary_max' => $salaryMax,
+            ];
+        }
+
         foreach ($jobs as $job) {
             JobListing::updateOrCreate(
                 [
