@@ -1,6 +1,27 @@
+@import "./job-seeker-sidebar.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.job-seeker-profile-shell {
+    display: flex;
+    min-height: 100vh;
+    background: #f2f3f8;
+}
+
+.job-seeker-profile-main {
+    min-width: 0;
+    flex: 1;
+}
+
+.job-seeker-profile-header {
+    min-height: 66px;
+    padding: 18px clamp(18px, 3vw, 42px);
+    border-bottom: 1px solid #e3e7ed;
+    background: #fff;
+    color: #20283a;
+}
 
 .password-field {
     position: relative;

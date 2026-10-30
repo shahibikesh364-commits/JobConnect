@@ -1,3 +1,5 @@
+@import "../job-seeker-sidebar.css";
+
 /* =========================================
    JOBCONNECT — PROFESSIONAL JOB DETAILS
    File: resources/css/jobs/show.css
@@ -46,6 +48,16 @@ body {
     font-size: 14px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
+}
+
+.job-show-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.job-show-main {
+    min-width: 0;
+    flex: 1;
 }
 
 a {

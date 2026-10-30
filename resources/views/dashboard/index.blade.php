@@ -11,40 +11,7 @@
 <body>
     <div class="dashboard">
 
-        <aside class="sidebar">
-            <a href="{{ route('dashboard') }}" class="brand">
-                <x-jobconnect-logo class="brand-mark-logo" />
-                <span class="brand-label">JobConnect</span>
-            </a>
-
-            <nav class="navigation">
-                <a href="{{ route('dashboard') }}" class="nav-link active" title="Dashboard" aria-label="Dashboard">
-                    <span class="nav-icon">▦</span><span class="nav-label">Dashboard</span>
-                </a>
-                <a href="{{ route('jobs.index') }}" class="nav-link" title="Find jobs" aria-label="Find jobs">
-                    <span class="nav-icon">⌕</span><span class="nav-label">Find Jobs</span>
-                </a>
-                <a href="{{ route('applications.mine') }}" class="nav-link" title="My applications" aria-label="My applications">
-                    <span class="nav-icon">▤</span><span class="nav-label">My Applications</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-bottom">
-                <div class="profile-avatar">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                </div>
-                <div class="profile-info">
-                    <strong>{{ auth()->user()->name }}</strong>
-                    <span>Job Seeker</span>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="logout-button" type="submit" title="Logout" aria-label="Logout">
-                        ↗
-                    </button>
-                </form>
-            </div>
-        </aside>
+        <x-job-seeker-sidebar active="dashboard" />
 
         <main class="main-content">
             <header class="topbar">

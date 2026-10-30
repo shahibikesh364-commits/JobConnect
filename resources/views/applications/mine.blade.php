@@ -10,19 +10,7 @@
 
 <body class="application-page">
     <div class="application-shell">
-        <aside class="application-sidebar" aria-label="Main navigation">
-            <a class="application-brand-mark" href="{{ route('jobs.index') }}" aria-label="JobConnect home">
-                <x-jobconnect-logo class="application-brand-logo" />
-                <span class="application-brand-label">JobConnect</span>
-            </a>
-
-            <nav class="application-nav">
-                <a href="{{ route('dashboard') }}" title="Dashboard" aria-label="Dashboard"><span>▦</span><span class="application-nav-label">Dashboard</span></a>
-                <a href="{{ route('jobs.index') }}" title="Find jobs" aria-label="Find jobs"><span>⌕</span><span class="application-nav-label">Find Jobs</span></a>
-                <a class="active" href="{{ route('applications.mine') }}" title="My applications"
-                    aria-label="My applications"><span>▤</span><span class="application-nav-label">My Applications</span></a>
-            </nav>
-        </aside>
+        <x-job-seeker-sidebar active="applications" />
 
         <div class="application-main">
             <header class="application-topbar">
@@ -34,20 +22,6 @@
                     </span>
                 </div>
 
-                <div class="application-user">
-                    <span class="user-avatar">
-                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                    </span>
-                    <span>
-                        <strong>{{ auth()->user()->name }}</strong>
-                        <small>Job Seeker</small>
-                    </span>
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
-                </div>
             </header>
 
             <main class="application-content">

@@ -17,24 +17,41 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+    @if (auth()->user()?->isJobSeeker())
+        <div class="job-seeker-profile-shell">
+            <x-job-seeker-sidebar active="profile" />
+            <div class="job-seeker-profile-main">
+                @isset($header)
+                    <header class="job-seeker-profile-header">
+                        {{ $header }}
+                    </header>
+                @endisset
 
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+                <main>
+                    {{ $slot }}
+                </main>
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
-    @include('components.footer')
+                @include('components.footer')
+            </div>
+        </div>
+    @else
+        <div class="min-h-screen bg-gray-100">
+            @include('layouts.navigation')
+
+            @isset($header)
+                <header class="bg-white shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
+
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+        @include('components.footer')
+    @endif
 </body>
 
 </html>

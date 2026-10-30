@@ -65,6 +65,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the jobs saved by this user.
+     */
+    public function savedJobs(): HasMany
+    {
+        return $this->hasMany(SavedJob::class);
+    }
+
+    /**
      * Check whether the user is an employer.
      */
     public function isEmployer(): bool

@@ -3,10 +3,14 @@
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobSeekerDashboardController;
+use App\Http\Controllers\JobSeekerFeatureController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminManagementController;
+use App\Http\Controllers\SavedJobController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return redirect()->route('jobs.index');
@@ -19,10 +23,19 @@ Route::get('/jobs', [JobListingController::class, 'index'])
 Route::get('/jobs/{job}', [JobListingController::class, 'show'])
     ->name('jobs.show');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 // Job seeker routes
 Route::middleware(['auth', 'role:job_seeker'])->group(function () {
     Route::get('/dashboard', [JobSeekerDashboardController::class, 'index'])
         ->name('dashboard');
+    Route::get('/features/{feature}', [JobSeekerFeatureController::class, 'show'])
+        ->whereIn('feature', ['notifications', 'saved-jobs', 'companies', 'interviews', 'messages', 'settings', 'help-desk'])
+        ->name('job-seeker.features.show');
     Route::get('/jobs/{job}/apply', [JobApplicationController::class, 'start'])
         ->name('jobs.apply.start');
 
@@ -31,6 +44,15 @@ Route::middleware(['auth', 'role:job_seeker'])->group(function () {
 
     Route::get('/my-applications', [JobApplicationController::class, 'mine'])
         ->name('applications.mine');
+
+    Route::get('/saved-jobs', [SavedJobController::class, 'index'])
+        ->name('saved-jobs.index');
+
+    Route::post('/jobs/{job}/save', [SavedJobController::class, 'store'])
+        ->name('jobs.save');
+
+    Route::delete('/saved-jobs/{savedJob}', [SavedJobController::class, 'destroy'])
+        ->name('saved-jobs.destroy');
 });
 
 // Employer routes

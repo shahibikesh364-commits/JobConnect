@@ -10,80 +10,19 @@
 
 <body>
     <div class="dashboard-shell">
-        <aside class="sidebar" aria-label="Main navigation">
-            <a class="brand-mark" href="{{ route('jobs.index') }}" aria-label="JobConnect home">
-                <x-jobconnect-logo class="brand-mark-logo" />
-                <span class="brand-label">JobConnect</span>
-            </a>
-
-            <nav class="side-nav">
-                @auth
-                    @if (auth()->user()->isJobSeeker())
-                        <a class="side-link" href="{{ route('dashboard') }}" title="Dashboard" aria-label="Dashboard">
-                            <span class="side-icon">▦</span><span class="side-label">Dashboard</span>
-                        </a>
-                    @endif
-                @endauth
-
-                <a class="side-link active" href="{{ route('jobs.index') }}" title="Find jobs" aria-label="Find jobs">
-                    <span class="side-icon">⌕</span><span class="side-label">Find Jobs</span>
-                </a>
-
-                @auth
-                    @if (auth()->user()->isJobSeeker())
-                        <a class="side-link" href="{{ route('applications.mine') }}" title="My applications"
-                            aria-label="My applications">
-                            <span class="side-icon">▤</span><span class="side-label">My Applications</span>
-                        </a>
-                    @else
-                        <a class="side-link" href="{{ route('employer.jobs.index') }}" title="Manage jobs"
-                            aria-label="Manage jobs">
-                            <span class="side-icon">▣</span><span class="side-label">Manage Jobs</span>
-                        </a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div class="sidebar-bottom">
-                @guest
-                    <a class="side-link" href="{{ route('login') }}" title="Log in" aria-label="Log in">
-                        <span class="side-icon">⇥</span><span class="side-label">Log in</span>
-                    </a>
-                @endguest
-            </div>
-        </aside>
+        <x-job-seeker-sidebar active="jobs" />
 
         <div class="dashboard-main">
             <header class="topbar">
                 <div class="opportunity-summary" aria-live="polite">
                     <span class="opportunity-summary-icon" aria-hidden="true">▤</span>
                     <span class="opportunity-summary-copy">
-                        <strong>{{ $jobs->total() }} {{ \Illuminate\Support\Str::plural('open role', $jobs->total()) }} found</strong>
+                        <strong>
+                            {{ $jobs->total() }}
+                            {{ \Illuminate\Support\Str::plural('open role', $jobs->total()) }} found
+                        </strong>
                         <small>Use the filters below to find the right fit</small>
                     </span>
-                </div>
-
-                <div class="account-area">
-                    @auth
-                        <div class="account-chip">
-                            <span class="account-avatar">
-                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                            </span>
-
-                            <span class="account-copy">
-                                <strong>{{ auth()->user()->name }}</strong>
-                                <small>{{ auth()->user()->isEmployer() ? 'Employer' : 'Job Seeker' }}</small>
-                            </span>
-                        </div>
-
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="logout-button" type="submit">Logout</button>
-                        </form>
-                    @else
-                        <a class="login-button" href="{{ route('login') }}">Login</a>
-                        <a class="register-button" href="{{ route('register') }}">Register</a>
-                    @endauth
                 </div>
             </header>
 
@@ -92,7 +31,9 @@
                     <div>
                         <p class="eyebrow">JOBCONNECT</p>
                         <h1>Finding Job</h1>
-                        <p class="heading-subtitle">Explore open roles and find your next opportunity.</p>
+                        <p class="heading-subtitle">
+                            Explore open roles and find your next opportunity.
+                        </p>
                     </div>
 
                     {{-- Location, job type, and sorting filters --}}
@@ -147,8 +88,7 @@
                     <div class="results-summary">
                         <span>
                             {{ $jobs->total() }}
-                            {{ \Illuminate\Support\Str::plural('job', $jobs->total()) }}
-                            found
+                            {{ \Illuminate\Support\Str::plural('job', $jobs->total()) }} found
                         </span>
 
                         <a href="{{ route('jobs.index') }}">Clear filters</a>
@@ -209,10 +149,27 @@
                                 </time>
                             </div>
 
+                            {{-- Job actions --}}
                             <div class="card-actions">
                                 <a class="details-button" href="{{ route('jobs.show', $job) }}">
                                     View Details
                                 </a>
+
+                                @auth
+                                    @if (auth()->user()->isJobSeeker())
+                                        <form method="POST" action="{{ route('jobs.save', $job) }}">
+                                            @csrf
+
+                                            <button type="submit" class="save-job-button">
+                                                ☆ Save Job
+                                            </button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <a class="save-job-button" href="{{ route('login') }}">
+                                        ☆ Save Job
+                                    </a>
+                                @endauth
 
                                 @if ($job->status === 'open')
                                     @auth
@@ -290,6 +247,7 @@
             </main>
         </div>
     </div>
+
     @include('components.footer')
 </body>
 

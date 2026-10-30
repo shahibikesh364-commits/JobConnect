@@ -1,0 +1,237 @@
+.job-seeker-sidebar {
+    position: sticky;
+    top: 0;
+    display: flex;
+    width: 210px;
+    height: 100vh;
+    flex: 0 0 210px;
+    flex-direction: column;
+    padding: 20px 14px;
+    overflow-y: auto;
+    border-right: 1px solid #e3e7ed;
+    background: #fff;
+}
+
+.job-seeker-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 7px;
+    color: #27324a;
+    font-size: 16px;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.job-seeker-brand-logo {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+}
+
+.job-seeker-nav {
+    display: grid;
+    gap: 5px;
+    margin-top: 34px;
+}
+
+.job-seeker-nav a,
+.job-seeker-login {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 11px;
+    padding: 0 11px;
+    border-radius: 8px;
+    color: #687386;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .15s ease, color .15s ease;
+}
+
+.job-seeker-nav a:hover,
+.job-seeker-nav a.active,
+.job-seeker-login:hover {
+    background: #eef0ff;
+    color: #4f46e5;
+}
+
+.job-seeker-nav-icon {
+    display: grid;
+    width: 22px;
+    flex: 0 0 22px;
+    place-items: center;
+    font-size: 19px;
+}
+
+.job-seeker-nav-divider {
+    height: 1px;
+    margin: 11px 7px 5px;
+    background: #e3e7ed;
+}
+
+.job-seeker-nav-section {
+    margin: 14px 11px 3px;
+    color: #939cab;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.job-seeker-nav-section:first-child {
+    margin-top: 0;
+}
+
+.job-seeker-nav-placeholder {
+    display: flex;
+    min-height: 42px;
+    align-items: center;
+    gap: 11px;
+    padding: 0 11px;
+    border-radius: 8px;
+    color: #8a93a3;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.job-seeker-nav-placeholder:hover,
+.job-seeker-nav-placeholder.active {
+    background: #eef0ff;
+    color: #4f46e5;
+}
+
+.job-seeker-placeholder-copy {
+    display: grid;
+    min-width: 0;
+    gap: 1px;
+    font-size: 12px;
+    line-height: 1.3;
+}
+
+.job-seeker-placeholder-copy small {
+    color: #a0a7b3;
+    font-size: 9px;
+}
+
+.job-seeker-new-badge {
+    display: inline-block;
+    margin-left: 4px;
+    padding: 2px 5px;
+    border-radius: 99px;
+    background: #eef0ff;
+    color: #4f46e5 !important;
+    font-size: 8px !important;
+    font-weight: 750;
+    line-height: 1.2;
+    vertical-align: 1px;
+}
+
+.job-seeker-sidebar-account {
+    display: flex;
+    min-width: 0;
+    align-items: center;
+    gap: 9px;
+    margin-top: auto;
+    padding: 12px 2px 0;
+    border-top: 1px solid #e3e7ed;
+}
+
+.job-seeker-avatar {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    place-items: center;
+    border-radius: 9px;
+    background: #dfe7ff;
+    color: #3730a3;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.job-seeker-account-copy {
+    display: grid;
+    min-width: 0;
+    flex: 1;
+    gap: 2px;
+}
+
+.job-seeker-account-copy strong {
+    overflow: hidden;
+    color: #30394b;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.job-seeker-account-copy small {
+    color: #687386;
+    font-size: 10px;
+}
+
+.job-seeker-sidebar-account form {
+    margin: 0;
+}
+
+.job-seeker-sidebar-account button {
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    color: #687386;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.job-seeker-sidebar-account button:hover {
+    color: #4f46e5;
+}
+
+@media (max-width: 760px) {
+    .job-seeker-sidebar {
+        width: 54px;
+        flex-basis: 54px;
+        align-items: center;
+        padding: 15px 6px;
+    }
+
+    .job-seeker-brand {
+        padding: 0;
+    }
+
+    .job-seeker-brand > span,
+    .job-seeker-nav-label,
+    .job-seeker-nav-section,
+    .job-seeker-placeholder-copy,
+    .job-seeker-nav-divider,
+    .job-seeker-account-copy,
+    .job-seeker-sidebar-account form,
+    .job-seeker-login .job-seeker-nav-label {
+        display: none;
+    }
+
+    .job-seeker-nav {
+        width: 100%;
+        justify-items: center;
+    }
+
+    .job-seeker-nav a,
+    .job-seeker-login {
+        width: 42px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .job-seeker-nav-placeholder {
+        width: 42px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .job-seeker-sidebar-account {
+        justify-content: center;
+        padding-right: 0;
+        padding-left: 0;
+    }
+}

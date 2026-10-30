@@ -1,0 +1,188 @@
+@import "./jobs/index.css";
+
+/* Saved jobs uses the same dashboard shell and job cards as the jobs list. */
+.topbar > div > p {
+    margin: 0 0 3px;
+    color: #8b91a0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.topbar h1 {
+    margin: 0;
+    color: #20283a;
+    font-size: 25px;
+    letter-spacing: -.03em;
+    line-height: 1.25;
+}
+
+.topbar small {
+    display: block;
+    margin-top: 4px;
+    color: #687386;
+    font-size: 13px;
+}
+
+.topbar > a {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    border: 1px solid #d9dee7;
+    border-radius: 8px;
+    color: #4f46e5;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.topbar > a:hover {
+    border-color: #c7c8f8;
+    background: #f5f6ff;
+}
+
+.jobs-dashboard {
+    max-width: 1280px;
+}
+
+.job-card {
+    min-height: 250px;
+}
+
+.card-actions {
+    align-items: stretch;
+}
+
+.card-actions form {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    margin: 0;
+}
+
+.card-actions .details-button,
+.card-actions .apply-button {
+    width: 100%;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 10px;
+    border: 1px solid #d9dee7;
+    border-radius: 7px;
+    background: #fff;
+    color: #364154;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-actions .details-button:hover {
+    background: #f5f6fa;
+}
+
+.card-actions .apply-button {
+    border-color: #fecaca;
+    background: #fff;
+    color: #b91c1c;
+}
+
+.card-actions .apply-button:hover {
+    border-color: #fca5a5;
+    background: #fff1f2;
+}
+
+.empty-message {
+    padding: 42px 24px;
+}
+
+.empty-message h2 {
+    margin: 0;
+    color: #20283a;
+    font-size: 21px;
+}
+
+.empty-message p {
+    margin: 8px 0 20px;
+    font-size: 14px;
+}
+
+.empty-message .details-button {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    border-radius: 8px;
+    background: #4f46e5;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.empty-message .details-button:hover {
+    background: #4338ca;
+}
+
+.pagination-bar nav {
+    width: 100%;
+}
+
+.pagination-bar nav > div:first-child {
+    margin-bottom: 10px;
+    color: #687386;
+    font-size: 13px;
+}
+
+.pagination-bar nav > div:last-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.pagination-bar nav a,
+.pagination-bar nav span[aria-current="page"] span,
+.pagination-bar nav span[aria-disabled="true"] span {
+    display: inline-flex;
+    min-width: 36px;
+    min-height: 36px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border: 1px solid #e1e5eb;
+    border-radius: 7px;
+    background: #fff;
+    color: #475467;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.pagination-bar nav span[aria-current="page"] span {
+    border-color: #4f46e5;
+    background: #4f46e5;
+    color: #fff;
+}
+
+@media (max-width: 680px) {
+    .topbar > a {
+        align-self: flex-start;
+    }
+
+    .card-actions {
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 400px) {
+    .card-actions {
+        flex-direction: column;
+    }
+}

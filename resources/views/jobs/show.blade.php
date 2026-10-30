@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <div class="job-show-shell">
+        <x-job-seeker-sidebar active="jobs" />
+        <div class="job-show-main">
 
     {{-- Header --}}
     <header class="page-header">
@@ -26,34 +29,13 @@
                 </span>
             </a>
 
-            <nav class="header-actions" aria-label="Account navigation">
-                <a href="{{ route('jobs.index') }}" class="header-link">
-                    Find Jobs
-                </a>
-
-                @auth
-                    @if (auth()->user()->isEmployer())
-                        <a class="header-button" href="{{ route('employer.jobs.index') }}">
-                            Manage Jobs
-                        </a>
-                    @else
-                        @if (auth()->user()->isJobSeeker())
-                            <a class="header-link" href="{{ route('dashboard') }}">Dashboard</a>
-                        @endif
-                        <a class="header-button" href="{{ route('applications.mine') }}">
-                            My Applications
-                        </a>
-                    @endif
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="logout-button" type="submit">Logout</button>
-                    </form>
-                @else
+            @guest
+                <nav class="header-actions" aria-label="Account navigation">
+                    <a href="{{ route('jobs.index') }}" class="header-link">Find Jobs</a>
                     <a class="header-link" href="{{ route('login') }}">Log in</a>
                     <a class="header-button" href="{{ route('register') }}">Create Account</a>
-                @endauth
-            </nav>
+                </nav>
+            @endguest
         </div>
     </header>
 
@@ -422,6 +404,9 @@
     </main>
 
     @include('components.footer')
+
+        </div>
+    </div>
 
 </body>
 
