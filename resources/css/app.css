@@ -1,4 +1,5 @@
 @import "./job-seeker-sidebar.css";
+@import "./notifications.css";
 
 @tailwind base;
 @tailwind components;
@@ -15,8 +16,31 @@
     flex: 1;
 }
 
+html[data-theme="dark"] .job-seeker-profile-shell { background: #171d29; }
+html[data-theme="dark"] .job-seeker-profile-header { background: #222938; color: #edf0f8; }
+html[data-theme="dark"] .job-seeker-profile-main > main { color: #edf0f8; }
+html[data-theme="dark"] .job-seeker-profile-main > main > div,
+html[data-theme="dark"] .job-seeker-profile-main > main section { border-color: #343b4b; background-color: #222938; color: #edf0f8; }
+html[data-theme="dark"] .job-seeker-profile-main input,
+html[data-theme="dark"] .job-seeker-profile-main select,
+html[data-theme="dark"] .job-seeker-profile-main textarea { border-color: #465064; background: #1b2230; color: #edf0f8; }
+html[data-theme="dark"] .job-seeker-profile-main label { color: #d7dce7; }
+html[data-theme="dark"] .job-seeker-profile-main h1,
+html[data-theme="dark"] .job-seeker-profile-main h2,
+html[data-theme="dark"] .job-seeker-profile-main h3,
+html[data-theme="dark"] .job-seeker-profile-main p { color: #edf0f8; }
+html[data-theme="dark"] .guest-theme-toggle { border-color: #343b4b; background: #222938; color: #edf0f8; }
+.guest-theme-control { position: fixed; z-index: 20; top: 18px; right: 20px; }
+html[data-theme="dark"] body:has(.guest-theme-toggle) { background: #171d29; color: #edf0f8; }
+html[data-theme="dark"] body:has(.guest-theme-toggle) .bg-white { background-color: #222938; color: #edf0f8; }
+html[data-theme="dark"] body:has(.guest-theme-toggle) input { border-color: #465064; background-color: #1b2230; color: #edf0f8; }
+
 .job-seeker-profile-header {
+    display: flex;
     min-height: 66px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
     padding: 18px clamp(18px, 3vw, 42px);
     border-bottom: 1px solid #e3e7ed;
     background: #fff;

@@ -24,6 +24,11 @@
                 @isset($header)
                     <header class="job-seeker-profile-header">
                         {{ $header }}
+                        <div class="profile-header-actions">
+                            <x-notification-bell />
+                            <x-theme-toggle />
+                            <x-job-seeker-profile-menu />
+                        </div>
                     </header>
                 @endisset
 
@@ -31,9 +36,9 @@
                     {{ $slot }}
                 </main>
 
-                @include('components.footer')
             </div>
         </div>
+        @include('components.footer')
     @else
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')

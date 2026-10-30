@@ -945,7 +945,7 @@ summary:focus-visible {
     width: 100%;
     max-width: none;
     margin: 0;
-    padding: 32px clamp(24px, 3vw, 48px) 48px;
+    padding: 32px clamp(24px, 3vw, 48px) 12px;
 }
 
 .application-heading {
@@ -1608,7 +1608,7 @@ summary:focus-visible {
 
 @media (max-width: 760px) {
     .application-content {
-        padding: 24px 22px 36px;
+        padding: 24px 22px 8px;
     }
 
     .application-card-bottom {
@@ -1771,7 +1771,7 @@ summary:focus-visible {
     }
 
     .application-content {
-        padding: 20px 14px 32px;
+        padding: 20px 14px 8px;
     }
 
     .application-heading {
@@ -2263,6 +2263,73 @@ summary:focus-visible {
     font-size: 11px;
 }
 
+/* Dark theme for job seeker application tracking and management screens. */
+html[data-theme="dark"] .application-content { color: #edf0f8; }
+html[data-theme="dark"] .application-heading h1,
+html[data-theme="dark"] .application-list-heading h2,
+html[data-theme="dark"] .application-user strong,
+html[data-theme="dark"] .application-job-title,
+html[data-theme="dark"] .management-header h1,
+html[data-theme="dark"] .management-header h2,
+html[data-theme="dark"] .job-editor-intro h2 { color: #edf0f8; }
+html[data-theme="dark"] .application-heading p:not(.page-eyebrow),
+html[data-theme="dark"] .application-list-heading p,
+html[data-theme="dark"] .application-stats .stat-card > div span,
+html[data-theme="dark"] .application-user small { color: #a4aec0; }
+html[data-theme="dark"] .application-stats .stat-card,
+html[data-theme="dark"] .application-stats a.stat-card.active,
+html[data-theme="dark"] .application-stats a.stat-reviewing.active,
+html[data-theme="dark"] .application-stats a.stat-shortlisted.active,
+html[data-theme="dark"] .application-stats a.stat-rejected.active,
+html[data-theme="dark"] .application-filters,
+html[data-theme="dark"] .application-card,
+html[data-theme="dark"] .management-card,
+html[data-theme="dark"] .job-editor-card,
+html[data-theme="dark"] .management-container > section { border-color: #343b4b; background: #222938; color: #edf0f8; }
+html[data-theme="dark"] .application-filters label { color: #c2cada; }
+html[data-theme="dark"] .application-filters input,
+html[data-theme="dark"] .application-filters select,
+html[data-theme="dark"] .job-form-field input,
+html[data-theme="dark"] .job-form-field select,
+html[data-theme="dark"] .job-form-field textarea { border-color: #465064; background: #1b2230; color: #edf0f8; color-scheme: dark; }
+html[data-theme="dark"] .filter-reset { color: #c2cada; }
+html[data-theme="dark"] .application-card-bottom,
+html[data-theme="dark"] .application-progress { border-color: #465064; }
+html[data-theme="dark"] .application-status { filter: brightness(.85) saturate(.9); }
+html[data-theme="dark"] .application-empty-state { color: #edf0f8; }
+html[data-theme="dark"] .application-empty-state p { color: #a4aec0; }
+html[data-theme="dark"] .management-header .header-title h1,
+html[data-theme="dark"] .management-header .header-title p,
+html[data-theme="dark"] .employer-brand,
+html[data-theme="dark"] .employer-account-copy strong,
+html[data-theme="dark"] .employer-stat strong,
+html[data-theme="dark"] .job-editor-intro h2,
+html[data-theme="dark"] .job-form-field label { color: #edf0f8; }
+html[data-theme="dark"] .employer-topbar,
+html[data-theme="dark"] .employer-stat,
+html[data-theme="dark"] .applicant-card,
+html[data-theme="dark"] .job-editor-card,
+html[data-theme="dark"] .job-editor-intro,
+html[data-theme="dark"] .employer-empty-state,
+html[data-theme="dark"] .management-panel,
+html[data-theme="dark"] .applicant-row { border-color: #343b4b; background: #222938; color: #edf0f8; }
+html[data-theme="dark"] .employer-nav a { color: #c2cada; }
+html[data-theme="dark"] .employer-nav a:hover { background: #30334f; color: #b5b2ff; }
+html[data-theme="dark"] .employer-account form button { border-color: #465064; background: #1b2230; color: #c2cada; }
+html[data-theme="dark"] .employer-stat p,
+html[data-theme="dark"] .employer-stat small,
+html[data-theme="dark"] .job-editor-intro p { color: #a4aec0; }
+html[data-theme="dark"] .management-container table th { background: #1b2230; color: #c2cada; }
+html[data-theme="dark"] .management-container table td { border-color: #343b4b; color: #d7dce7; }
+html[data-theme="dark"] .management-container table tr { border-color: #343b4b; }
+html[data-theme="dark"] .pagination-wrapper,
+html[data-theme="dark"] .application-pagination { color: #c2cada; }
+html[data-theme="dark"] .pagination-wrapper a,
+html[data-theme="dark"] .pagination-wrapper span,
+html[data-theme="dark"] .application-pagination a,
+html[data-theme="dark"] .application-pagination span { border-color: #465064; background: #1b2230; color: #d7dce7; }
+html[data-theme="dark"] .pagination-wrapper span[aria-current="page"] span { border-color: var(--indigo); background: var(--indigo); color: #fff; }
+
 .employer-empty-state {
     display: grid;
     min-height: 280px;
@@ -2375,12 +2442,13 @@ summary:focus-visible {
 /*Copyright Footer */
 .site-footer {
     width: 100%;
-    padding: 20px;
-    margin-top: 40px;
+    padding: 16px 24px;
+    margin-top: 8px;
     text-align: center;
     background-color: #111827;
     color: #d1d5db;
-    font-size: 14ps;
+    font-size: 14px;
+    line-height: 1.5;
     border-top: 1px solid #374151;
 }
 

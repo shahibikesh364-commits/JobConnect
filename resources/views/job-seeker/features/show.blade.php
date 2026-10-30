@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $feature['title'] }} - JobConnect</title>
-    @vite('resources/css/job-seeker-features.css')
+    @vite(['resources/css/job-seeker-features.css', 'resources/css/notifications.css'])
 </head>
 
 <body class="job-feature-page">
@@ -18,7 +18,12 @@
                     <p>JOB SEEKER PORTAL</p>
                     <span>More features</span>
                 </div>
-                <a href="{{ route('dashboard') }}">Back to dashboard</a>
+                <div class="job-feature-topbar-actions">
+                    <a href="{{ route('dashboard') }}">Back to dashboard</a>
+                    <x-notification-bell />
+                    <x-theme-toggle />
+                    <x-job-seeker-profile-menu />
+                </div>
             </header>
 
             <div class="job-feature-content">
@@ -37,9 +42,9 @@
                 </section>
             </div>
 
-            @include('components.footer')
         </main>
     </div>
+    @include('components.footer')
 </body>
 
 </html>

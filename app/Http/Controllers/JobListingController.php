@@ -60,12 +60,20 @@ class JobListingController extends Controller
             ->paginate(9)
             ->withQueryString();
 
+        $savedJobIds = Auth::check()
+            ? \App\Models\SavedJob::where('user_id', Auth::id())
+            ->pluck('job_listing_id')
+            ->toArray()
+            : [];
+
+
         return view('jobs.index', compact(
             'jobs',
             'search',
             'location',
             'jobType',
-            'sort'
+            'sort',
+            'savedJobIds'
         ));
     }
 

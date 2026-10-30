@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use App\Notifications\ApplicationStatusChanged;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -23,10 +24,14 @@ class JobApplicationController extends Controller
             'cover_letter' => ['nullable', 'string', 'max:5000'],
         ]);
 
-        JobApplication::firstOrCreate(
+        $application = JobApplication::firstOrCreate(
             ['job_listing_id' => $job->id, 'user_id' => $request->user()->id],
             ['cover_letter' => $request->input('cover_letter')],
         );
+
+        if ($application->wasRecentlyCreated) {
+            $request->user()->notify(new ApplicationStatusChanged($application, 'submitted'));
+        }
 
         return redirect()->route('jobs.show', $job)->with('success', 'Your application has been submitted.');
     }

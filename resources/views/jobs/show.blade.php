@@ -10,7 +10,7 @@
 
     <title>{{ $job->title }} - JobConnect</title>
 
-    @vite('resources/css/jobs/show.css')
+    @vite(['resources/css/jobs/show.css', 'resources/css/notifications.css'])
 </head>
 
 <body>
@@ -34,7 +34,14 @@
                     <a href="{{ route('jobs.index') }}" class="header-link">Find Jobs</a>
                     <a class="header-link" href="{{ route('login') }}">Log in</a>
                     <a class="header-button" href="{{ route('register') }}">Create Account</a>
+                    <x-theme-toggle />
                 </nav>
+            @else
+                <div class="header-actions">
+                    <x-notification-bell />
+                    <x-theme-toggle />
+                    <x-job-seeker-profile-menu />
+                </div>
             @endguest
         </div>
     </header>
@@ -403,10 +410,9 @@
         </div>
     </main>
 
-    @include('components.footer')
-
         </div>
     </div>
+    @include('components.footer')
 
 </body>
 

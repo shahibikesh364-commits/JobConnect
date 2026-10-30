@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use App\Notifications\ApplicationStatusChanged;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -83,7 +84,13 @@ class EmployerJobController extends Controller
         $validated = $request->validate([
             'status' => ['required', 'in:reviewing,shortlisted,rejected'],
         ]);
+        $statusChanged = $application->status !== $validated['status'];
+
         $application->update($validated);
+
+        if ($statusChanged) {
+            $application->applicant->notify(new ApplicationStatusChanged($application, $validated['status']));
+        }
 
         return back()->with('success', 'Application status updated.');
     }

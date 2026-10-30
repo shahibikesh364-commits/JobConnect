@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Admin') | JobConnect</title>
-    @vite('resources/css/admin.css')
+    @vite(['resources/css/admin.css', 'resources/css/notifications.css'])
+    @vite('resources/js/app.js')
 </head>
 <body class="admin-page">
     <div class="admin-shell">
@@ -27,6 +28,8 @@
             <header class="admin-topbar">
                 <div><p class="topbar-label">JOBCONNECT ADMIN</p><h1>@yield('page_title', 'Overview')</h1></div>
                 <div class="admin-user">
+                    <x-notification-bell />
+                    <x-theme-toggle />
                     <span class="admin-avatar">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
                     <span><strong>{{ auth()->user()->name }}</strong><small>Administrator</small></span>
                     <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit">Log out</button></form>

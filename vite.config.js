@@ -14,6 +14,7 @@ export default defineConfig({
                 'resources/css/jobs/management.css',
                 'resources/css/saved-jobs.css',
                 'resources/css/jobs/show.css',
+                'resources/css/notifications.css',
             ],
             refresh: true,
         }),

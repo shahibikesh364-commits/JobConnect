@@ -13,6 +13,8 @@
     </nav>
 
     <div class="employer-account">
+        <x-notification-bell />
+        <x-theme-toggle />
         <span class="employer-avatar" aria-hidden="true">{{ strtoupper(substr(auth()->user()->name, 0, 1)) }}</span>
         <span class="employer-account-copy">
             <strong>{{ auth()->user()->name }}</strong>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>My Applications - JobConnect</title>
-    @vite('resources/css/jobs/management.css')
+    @vite(['resources/css/jobs/management.css', 'resources/css/notifications.css', 'resources/js/app.js'])
 </head>
 
 <body class="application-page">
@@ -21,7 +21,11 @@
                         <small>Follow your progress with each employer</small>
                     </span>
                 </div>
-
+                <div class="topbar-actions">
+                    <x-notification-bell />
+                    <x-theme-toggle />
+                    <x-job-seeker-profile-menu />
+                </div>
             </header>
 
             <main class="application-content">

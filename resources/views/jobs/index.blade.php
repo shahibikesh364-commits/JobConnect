@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobConnect - Find Jobs</title>
-    @vite('resources/css/jobs/index.css')
+    @vite(['resources/css/jobs/index.css', 'resources/css/notifications.css'])
 </head>
 
-<body>
+<body class="jobs-list-page">
     <div class="dashboard-shell">
         <x-job-seeker-sidebar active="jobs" />
 
@@ -23,6 +23,13 @@
                         </strong>
                         <small>Use the filters below to find the right fit</small>
                     </span>
+                </div>
+                <div class="topbar-actions">
+                    @auth
+                        <x-notification-bell />
+                    @endauth
+                    <x-theme-toggle />
+                    <x-job-seeker-profile-menu />
                 </div>
             </header>
 
@@ -160,9 +167,17 @@
                                         <form method="POST" action="{{ route('jobs.save', $job) }}">
                                             @csrf
 
-                                            <button type="submit" class="save-job-button">
-                                                ☆ Save Job
-                                            </button>
+                                            @if (in_array($job->id, $savedJobIds))
+                                                <button type="submit" class="save-job-button is-saved"
+                                                    aria-pressed="true" aria-label="Unsave {{ $job->title }}">
+                                                    ★ Saved
+                                                </button>
+                                            @else
+                                                <button type="submit" class="save-job-button" aria-pressed="false"
+                                                    aria-label="Save {{ $job->title }}">
+                                                    ☆ Save Job
+                                                </button>
+                                            @endif
                                         </form>
                                     @endif
                                 @else

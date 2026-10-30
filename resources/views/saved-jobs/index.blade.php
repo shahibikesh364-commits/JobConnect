@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saved Jobs - JobConnect</title>
-    @vite('resources/css/saved-jobs.css')
+    @vite(['resources/css/saved-jobs.css', 'resources/css/notifications.css'])
 </head>
 
 <body>
@@ -19,8 +19,11 @@
                     <h1>Saved Jobs</h1>
                     <small>Keep track of opportunities you want to explore.</small>
                 </div>
-
-                <a href="{{ route('jobs.index') }}">Browse jobs</a>
+                <div class="topbar-actions">
+                    <x-notification-bell />
+                    <x-theme-toggle />
+                    <x-job-seeker-profile-menu />
+                </div>
             </header>
 
             <main class="jobs-dashboard">

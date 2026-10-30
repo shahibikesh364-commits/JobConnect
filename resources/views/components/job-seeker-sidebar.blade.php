@@ -58,18 +58,6 @@
                 <span class="job-seeker-nav-icon" aria-hidden="true">✉</span>
                 <span class="job-seeker-placeholder-copy"><span>Messages</span><small>Coming soon</small></span>
             </a>
-            <a href="{{ route('job-seeker.features.show', 'notifications') }}" @class([
-                'job-seeker-nav-placeholder',
-                'active' => $active === 'notifications',
-            ])
-                @if ($active === 'notifications') aria-current="page" @endif>
-                <span class="job-seeker-nav-icon" aria-hidden="true">◉</span>
-                <span class="job-seeker-placeholder-copy">
-                    <span>Notifications <small class="job-seeker-new-badge">New</small></span>
-                    <small>Coming soon</small>
-                </span>
-            </a>
-
             <p class="job-seeker-nav-section">Account</p>
 
             <a href="{{ route('profile.edit') }}" @class(['active' => $active === 'profile'])
@@ -110,22 +98,5 @@
         @endif
     </nav>
 
-    <div class="job-seeker-sidebar-account">
-        @if ($user)
-            <span class="job-seeker-avatar" aria-hidden="true">{{ strtoupper(substr($user->name, 0, 1)) }}</span>
-            <span class="job-seeker-account-copy">
-                <strong>{{ $user->name }}</strong>
-                <small>{{ $user->isJobSeeker() ? 'Job Seeker' : 'Employer' }}</small>
-            </span>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" title="Log out" aria-label="Log out">↗</button>
-            </form>
-        @else
-            <a class="job-seeker-login" href="{{ route('login') }}">
-                <span class="job-seeker-nav-icon" aria-hidden="true">⇥</span>
-                <span class="job-seeker-nav-label">Log in</span>
-            </a>
-        @endif
-    </div>
 </aside>
+@vite('resources/js/app.js')

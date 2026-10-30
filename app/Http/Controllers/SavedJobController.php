@@ -19,16 +19,27 @@ class SavedJobController extends Controller
             ->savedJobs()
             ->with('job')
             ->latest()
-            ->paginate(10);
+            ->paginate(9);
 
         return view('saved-jobs.index', compact('savedJobs'));
     }
 
     /**
-     * Save a job for the authenticated user.
+     * Toggle whether the authenticated user has saved a job.
      */
     public function store(Request $request, JobListing $job): RedirectResponse
     {
+        $savedJob = $request->user()
+            ->savedJobs()
+            ->where('job_listing_id', $job->id)
+            ->first();
+
+        if ($savedJob) {
+            $savedJob->delete();
+
+            return back()->with('success', 'Job removed from your saved jobs.');
+        }
+
         $request->user()->savedJobs()->firstOrCreate([
             'job_listing_id' => $job->id,
         ]);
