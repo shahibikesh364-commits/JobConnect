@@ -4,13 +4,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-favicon />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Notifications | JobConnect</title>
     @vite(['resources/css/notifications.css', 'resources/js/app.js'])
+    @if (auth()->user()->isEmployer())
+        @vite(['resources/css/employer/sidebar.css', 'resources/css/employer/workspace.css'])
+    @endif
 </head>
 
-<body class="notifications-page">
+<body class="notifications-page {{ auth()->user()->isEmployer() ? 'employer-workspace' : '' }}">
     <main class="notifications-container">
+        @if (auth()->user()->isEmployer())
+            <x-employer-workspace-toolbar />
+        @endif
         <header class="notifications-header">
             <div>
                 <p class="notifications-eyebrow">JOBCONNECT UPDATES</p>
@@ -18,8 +25,10 @@
                 <p class="notifications-intro">Track application decisions and important account activity in one place.</p>
             </div>
             <div class="notifications-header-actions">
-                <x-notification-bell />
-                <x-theme-toggle />
+                @unless (auth()->user()->isEmployer())
+                    <x-notification-bell />
+                    <x-theme-toggle />
+                @endunless
                 <a class="notifications-back-link" href="{{ auth()->user()->isEmployer() ? route('employer.jobs.index') : (auth()->user()->isAdmin() ? route('admin.dashboard') : route('dashboard')) }}">Back to dashboard</a>
             </div>
         </header>
@@ -62,7 +71,7 @@
 
             @forelse ($notifications as $notification)
                 @php($status = data_get($notification->data, 'status'))
-                <article class="notification-row {{ $notification->read_at ? 'is-read' : 'is-unread' }}">
+                <article class="notification-row notification-status-{{ $status ?? 'general' }} {{ $notification->read_at ? 'is-read' : 'is-unread' }}">
                     <span class="notification-row-icon" aria-hidden="true">{{ match ($status) { 'submitted' => '↗', 'reviewing' => '◷', 'shortlisted' => '★', 'rejected' => '–', default => ($notification->read_at ? '✓' : '•') } }}</span>
                     <div class="notification-row-content">
                         <div class="notification-row-title">
@@ -82,7 +91,7 @@
                                 <form method="POST" action="{{ route('notifications.read', $notification->id) }}">
                                     @csrf
                                     @method('PATCH')
-                                    <button type="submit">Mark as read</button>
+                                    <button type="submit" aria-label="Mark {{ data_get($notification->data, 'title', 'notification') }} as read">Mark as read</button>
                                 </form>
                             @endunless
                         </div>
