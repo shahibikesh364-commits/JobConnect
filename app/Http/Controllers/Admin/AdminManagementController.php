@@ -39,6 +39,24 @@ class AdminManagementController extends Controller
         return view('admin.employers', compact('employers'));
     }
 
+    public function jobSeekers(Request $request): View {
+        $jobSeekers = User::where('role', 'job_seeker')
+        ->withCount('applications')
+        ->when($request->filled('search'), function ($query) use ($request) {
+            $search = $request->string('search')->toString();
+
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        })
+        ->latest()
+        ->paginate(15)
+        ->withQueryString();    
+
+        return view('admin.job-seekers', compact('jobSeekers'));
+    }
+
     public function updateUserRole(Request $request, User $user): RedirectResponse
     {
         abort_if($user->role === 'admin', 403, 'Administrator roles cannot be changed here.');
