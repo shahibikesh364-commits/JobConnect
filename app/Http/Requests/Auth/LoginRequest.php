@@ -30,6 +30,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'role' => ['nullable', 'in:job_seeker,employer'],
         ];
     }
 
@@ -51,6 +52,26 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        $user = Auth::user();
+        if ($user && !$user->is_active) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'This account is deactivated. Contact JobConnect support to restore access.',
+            ]);
+        }
+        $selectedRole = $this->input('role');
+        $isAdminWithoutPublicRoleSelection = $user?->isAdmin() && $selectedRole === null;
+
+        if (! $isAdminWithoutPublicRoleSelection && $user?->role !== $selectedRole) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'role' => $selectedRole === null
+                    ? 'Select Job Seeker or Employer before signing in.'
+                    : 'The selected account type does not match this account. Choose the correct account type and try again.',
+            ]);
+        }
     }
 
     /**
@@ -82,5 +103,12 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+    }
+
+    public function messages(): array
+    {
+        return [
+            'role.in' => 'Choose either Job Seeker or Employer.',
+        ];
     }
 }
