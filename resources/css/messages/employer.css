@@ -1,0 +1,608 @@
+/* Employer recruitment messaging identity, isolated from Job Seeker pages. */
+.employer-messages-page {
+    --messages-primary: #2563eb;
+    --messages-soft: #edf2ff;
+}
+.employer-messages-page .messages-hero {
+    border-color: #26354a;
+    background:
+        radial-gradient(
+            ellipse at 83% 20%,
+            rgb(37 99 235 / 24%),
+            transparent 33%
+        ),
+        linear-gradient(112deg, #101b2d 0%, #17263c 58%, #233956 100%);
+    box-shadow:
+        0 14px 34px rgb(24 43 72 / 12%),
+        inset 0 1px rgb(255 255 255 / 12%);
+}
+.employer-messages-page .messages-hero-eyebrow {
+    color: #d8e2f2;
+}
+.employer-messages-page .messages-hero-eyebrow span {
+    color: #b9caff;
+}
+.employer-messages-page .messages-hero h1 {
+    max-width: 650px;
+    color: #fff;
+}
+.employer-messages-page .messages-hero-subtitle {
+    color: #e1e9f7;
+    font-weight: 500;
+}
+.employer-messages-page .messages-hero-decoration {
+    border-color: rgb(219 230 255 / 35%);
+    background: linear-gradient(
+        145deg,
+        rgb(255 255 255 / 11%),
+        rgb(167 193 244 / 8%)
+    );
+    box-shadow:
+        0 0 0 15px rgb(207 222 255 / 5%),
+        0 14px 34px rgb(9 23 43 / 18%);
+}
+.employer-messages-page .messages-hero-decoration span {
+    color: #c5d2ff;
+}
+.employer-messages-page .messages-heading h1,
+.employer-messages-page .messages-panel-heading h2 {
+    color: #1c2d49;
+}
+.employer-messages-page .conversation-card {
+    border-radius: 12px;
+}
+.employer-messages-page .conversation-card.has-unread {
+    border-color: #cbd8f1;
+    background: #f8faff;
+}
+html[data-theme="dark"] .employer-messages-page .conversation-card.has-unread {
+    border-color: #3a4c67;
+    background: #202c40;
+    box-shadow: inset 3px 0 0 #7d9eff;
+}
+.employer-messages-page .conversation-profile-detail {
+    display: block;
+    overflow: hidden;
+    color: #687893;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.employer-messages-page .conversation-company {
+    color: #506486;
+    font-size: 11px;
+    font-weight: 650;
+}
+.employer-messages-page .chat-header {
+    border-bottom-color: #dfe5ef;
+}
+.employer-messages-page .chat-user-info h2 {
+    color: #1c2d49;
+}
+.employer-messages-page .chat-profile-detail {
+    margin-top: 4px;
+    color: #687893;
+    font-size: 12px;
+}
+.employer-messages-page .chat-message.sent .message-bubble {
+    background: #2563eb;
+}
+.employer-messages-page .chat-form textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 13%);
+}
+.messages-application-status {
+    display: inline-flex;
+    width: max-content;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #f0f2f6;
+    color: #596579;
+    font-size: 10px;
+    font-weight: 750;
+    line-height: 1.2;
+}
+.messages-application-status.status-submitted {
+    background: #edf2ff;
+    color: #2563eb;
+}
+.messages-application-status.status-reviewing {
+    background: #fff4df;
+    color: #9c6508;
+}
+.messages-application-status.status-shortlisted {
+    background: #edf2ff;
+    color: #2563eb;
+}
+.messages-application-status.status-rejected {
+    background: #fff0f0;
+    color: #a84242;
+}
+html[data-theme="dark"] .employer-messages-page .messages-hero {
+    border-color: #26354a;
+    background:
+        radial-gradient(
+            ellipse at 83% 20%,
+            rgb(37 99 235 / 24%),
+            transparent 33%
+        ),
+        linear-gradient(112deg, #101b2d 0%, #17263c 58%, #233956 100%);
+}
+html[data-theme="dark"] .employer-messages-page .messages-hero h1,
+html[data-theme="dark"] .employer-messages-page .messages-heading h1,
+html[data-theme="dark"] .employer-messages-page .messages-panel-heading h2,
+html[data-theme="dark"] .employer-messages-page .chat-user-info h2 {
+    color: #e7ecf5;
+}
+html[data-theme="dark"] .employer-messages-page .conversation-profile-detail,
+html[data-theme="dark"] .employer-messages-page .chat-profile-detail {
+    color: #aab5c8;
+}
+html[data-theme="dark"] .employer-messages-page .conversation-company {
+    color: #b4c5df;
+}
+html[data-theme="dark"]
+    .employer-messages-page
+    .messages-application-status.status-submitted {
+    background: #203958;
+    color: #c9ddfa;
+}
+html[data-theme="dark"]
+    .employer-messages-page
+    .messages-application-status.status-reviewing {
+    background: #4a3b21;
+    color: #f5d08a;
+}
+html[data-theme="dark"]
+    .employer-messages-page
+    .messages-application-status.status-shortlisted {
+    background: #203958;
+    color: #c9ddfa;
+}
+html[data-theme="dark"]
+    .employer-messages-page
+    .messages-application-status.status-rejected {
+    background: #492c32;
+    color: #f0aab1;
+}
+
+/* =========================================
+   NEW CONVERSATION - CANDIDATE DIRECTORY
+========================================= */
+
+.new-conversation-page {
+    display: grid;
+    gap: 22px;
+    padding-bottom: 35px;
+}
+
+/* Hero */
+
+.new-conversation-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 24px 28px;
+    border: 1px solid var(--employer-border);
+    border-radius: 14px;
+    background: var(--employer-white);
+    box-shadow: var(--employer-shadow);
+}
+
+.new-conversation-hero h1 {
+    margin: 7px 0;
+    color: var(--employer-midnight);
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.new-conversation-hero p {
+    margin: 0;
+    color: var(--employer-steel);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.new-conversation-back {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--employer-border);
+    border-radius: 8px;
+    background: var(--employer-white);
+    color: var(--employer-midnight);
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.new-conversation-back:hover {
+    border-color: var(--employer-blue);
+    color: var(--employer-blue);
+}
+
+/* Search panel */
+
+.new-conversation-search-panel,
+.new-conversation-results {
+    padding: 22px;
+    border: 1px solid var(--employer-border);
+    border-radius: 13px;
+    background: var(--employer-white);
+    box-shadow: var(--employer-shadow);
+}
+
+.new-conversation-panel-heading,
+.new-conversation-results-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.new-conversation-eyebrow {
+    color: var(--employer-blue);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.new-conversation-panel-heading h2,
+.new-conversation-results-heading h2 {
+    margin: 5px 0;
+    color: var(--employer-midnight);
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.new-conversation-panel-heading p,
+.new-conversation-results-heading p {
+    margin: 0;
+    color: var(--employer-steel);
+    font-size: 12px;
+}
+
+.new-conversation-count {
+    flex: 0 0 auto;
+    padding: 7px 11px;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 750;
+}
+
+/* Search input */
+
+.new-conversation-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 7px 9px 7px 13px;
+    border: 1px solid var(--employer-border);
+    border-radius: 9px;
+    background: var(--employer-white);
+}
+
+.new-conversation-search > span {
+    color: var(--employer-steel);
+    font-size: 23px;
+}
+
+.new-conversation-search input {
+    flex: 1;
+    min-width: 0;
+    height: 38px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--employer-midnight);
+    font: inherit;
+    font-size: 13px;
+}
+
+.new-conversation-search button {
+    min-height: 37px;
+    padding: 0 17px;
+    border: 0;
+    border-radius: 7px;
+    background: var(--employer-blue);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.new-conversation-search a {
+    padding: 0 7px;
+    color: var(--employer-steel);
+    font-size: 11px;
+    text-decoration: none;
+}
+
+/* Results heading */
+
+.new-conversation-results-heading {
+    padding-bottom: 17px;
+    border-bottom: 1px solid var(--employer-border);
+    margin-bottom: 4px;
+}
+
+.new-conversation-results-heading > a {
+    color: var(--employer-blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Candidate list */
+
+.new-conversation-candidate {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px 5px;
+    border-bottom: 1px solid var(--employer-border);
+}
+
+.new-conversation-candidate:last-child {
+    border-bottom: 0;
+}
+
+.new-candidate-avatar {
+    display: grid;
+    width: 49px;
+    height: 49px;
+    flex: 0 0 49px;
+    overflow: hidden;
+    place-items: center;
+    border: 1px solid var(--employer-border);
+    border-radius: 50%;
+    background: #eff6ff;
+    color: var(--employer-blue);
+    font-size: 18px;
+    font-weight: 750;
+}
+
+.new-candidate-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.new-candidate-information {
+    display: grid;
+    flex: 1;
+    min-width: 0;
+    gap: 4px;
+}
+
+.new-candidate-information h3 {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: var(--employer-midnight);
+    font-size: 14px;
+    font-weight: 750;
+}
+
+.new-candidate-information p,
+.new-candidate-information > span,
+.new-candidate-information small {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: var(--employer-steel);
+    font-size: 11px;
+}
+
+.new-candidate-information small {
+    margin-top: 2px;
+}
+
+.new-candidate-action form {
+    margin: 0;
+}
+
+.new-candidate-action button {
+    display: inline-flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 13px;
+    border: 1px solid var(--employer-blue);
+    border-radius: 8px;
+    background: var(--employer-blue);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.16s ease;
+}
+
+.new-candidate-action button:hover {
+    background: #1d4ed8;
+}
+
+/* Empty state */
+
+.new-conversation-empty {
+    display: grid;
+    justify-items: center;
+    gap: 9px;
+    padding: 50px 15px;
+    text-align: center;
+}
+
+.new-conversation-empty > span {
+    color: var(--employer-blue);
+    font-size: 34px;
+}
+
+.new-conversation-empty h3 {
+    margin: 0;
+    color: var(--employer-midnight);
+    font-size: 16px;
+}
+
+.new-conversation-empty p {
+    max-width: 390px;
+    margin: 0;
+    color: var(--employer-steel);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.new-conversation-empty a {
+    margin-top: 8px;
+    color: var(--employer-blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+/* Pagination and footer note */
+
+.new-conversation-pagination {
+    padding-top: 18px;
+}
+
+.new-conversation-footer-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--employer-steel);
+    font-size: 11px;
+}
+
+/* Dark mode */
+
+html[data-theme="dark"] body.employer-messages-page .new-conversation-hero,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .new-conversation-search-panel,
+html[data-theme="dark"] body.employer-messages-page .new-conversation-results {
+    border-color: var(--employer-border);
+    background: var(--employer-white);
+    box-shadow: none;
+}
+
+html[data-theme="dark"] body.employer-messages-page .new-conversation-count,
+html[data-theme="dark"] body.employer-messages-page .new-candidate-avatar {
+    border-color: #34445d;
+    background: #203958;
+    color: #93b4ff;
+}
+
+html[data-theme="dark"] body.employer-messages-page .new-conversation-search {
+    border-color: var(--employer-border);
+}
+
+html[data-theme="dark"]
+    body.employer-messages-page
+    .new-conversation-search
+    input {
+    color: var(--employer-midnight);
+}
+
+/* Responsive */
+
+@media (max-width: 700px) {
+    .new-conversation-hero {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .new-conversation-panel-heading,
+    .new-conversation-results-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .new-conversation-candidate {
+        flex-wrap: wrap;
+    }
+
+    .new-candidate-action {
+        width: 100%;
+        padding-left: 64px;
+    }
+
+    .new-candidate-action button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .new-conversation-search-panel,
+    .new-conversation-results {
+        padding: 15px;
+    }
+
+    .new-conversation-search {
+        flex-wrap: wrap;
+    }
+
+    .new-conversation-search input {
+        flex-basis: calc(100% - 40px);
+    }
+
+    .new-conversation-search button {
+        flex: 1;
+    }
+
+    .new-conversation-search a {
+        padding: 8px;
+    }
+}
+/* New Conversation button */
+.messages-heading-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.new-conversation-main-button {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 15px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background 0.16s ease,
+        transform 0.16s ease;
+}
+
+.new-conversation-main-button:hover {
+    background: #1d4ed8;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.new-conversation-main-button:focus-visible {
+    outline: 3px solid rgb(37 99 235 / 25%);
+    outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+    .messages-heading-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+}
