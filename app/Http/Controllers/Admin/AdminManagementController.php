@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use App\Notifications\EmployerSettingsNotification;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -60,6 +61,13 @@ class AdminManagementController extends Controller
 
     public function jobs(Request $request): View
     {
+        $jobSummary = [
+            'total' => JobListing::count(),
+            'open' => JobListing::where('status', 'open')->count(),
+            'closed' => JobListing::where('status', 'closed')->count(),
+            'applications' => JobApplication::count(),
+        ];
+
         $jobs = JobListing::with('employer')
             ->withCount('applications')
             ->when($request->filled('search'), function ($query) use ($request) {
@@ -73,7 +81,7 @@ class AdminManagementController extends Controller
             ->paginate(15)
             ->withQueryString();
 
-        return view('admin.jobs', compact('jobs'));
+        return view('admin.jobs', compact('jobs', 'jobSummary'));
     }
 
     public function updateJobStatus(Request $request, JobListing $job): RedirectResponse
@@ -82,6 +90,12 @@ class AdminManagementController extends Controller
             'status' => ['required', 'in:open,closed'],
         ]);
         $job->update($validated);
+        $job->employer?->notify(new EmployerSettingsNotification(
+            'job_moderation',
+            'Job listing status updated',
+            "{$job->title} is now marked {$validated['status']}.",
+            ['job_id' => $job->id, 'status' => $validated['status']],
+        ));
 
         return back();
     }
