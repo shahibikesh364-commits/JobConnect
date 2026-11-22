@@ -40,4 +40,14 @@ class JobListing extends Model
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function savedJobs(): HasMany
+    {
+        return $this->hasMany(SavedJob::class);
+    }
+
+    public function views(): HasMany
+    {
+        return $this->hasMany(JobListingView::class);
+    }
 }
