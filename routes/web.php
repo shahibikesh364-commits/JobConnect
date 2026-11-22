@@ -229,6 +229,10 @@ Route::middleware(['auth', 'admin'])
 
         Route::get('/applications', [AdminManagementController::class, 'applications'])->name('applications.index');
         Route::patch('/applications/{application}/status', [AdminManagementController::class, 'updateApplicationStatus'])->name('applications.status');
+
+        Route::get('/job-seekers', [AdminManagementController::class, 'jobSeekers'])
+            ->name('job-seekers.index');
+
     });
 
 // Breeze authentication routes
