@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-favicon />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Applicants - {{ $job->title }} | JobConnect</title>
-    @vite(['resources/css/jobs/management.css', 'resources/css/notifications.css', 'resources/js/app.js'])
+    @vite(['resources/css/jobs/management.css', 'resources/css/employer/sidebar.css', 'resources/css/employer/workspace.css', 'resources/css/notifications.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="employer-workspace">
     <main class="management-container">
-        @include('employer.partials.topbar')
+        <x-employer-sidebar />
+        <x-employer-workspace-toolbar :subtitle="$job->title . ' · ' . $job->company_name" />
 
         <header class="management-header">
             <div class="header-title">
@@ -21,8 +23,8 @@
             </div>
 
             <div class="header-actions">
-                <a class="button secondary" href="{{ route('employer.jobs.index') }}">
-                    &larr; Back to listings
+                    <a class="button secondary" href="{{ route('employer.applicants.index') }}">
+                    &larr; All applicants
                 </a>
             </div>
         </header>
@@ -42,6 +44,10 @@
             <article class="employer-stat">
                 <span class="employer-stat-icon blue" aria-hidden="true">▤</span>
                 <div><p>Total applications</p><strong>{{ $statusCounts->sum() }}</strong><small>For this listing</small></div>
+            </article>
+            <article class="employer-stat">
+                <span class="employer-stat-icon violet" aria-hidden="true">✦</span>
+                <div><p>New</p><strong>{{ $statusCounts->get('submitted', 0) }}</strong><small>Awaiting first review</small></div>
             </article>
             <article class="employer-stat">
                 <span class="employer-stat-icon amber" aria-hidden="true">◷</span>
@@ -100,7 +106,7 @@
 
                     <div class="application-management">
                         <span class="current-status status-{{ strtolower($application->status) }}">
-                            {{ ucfirst($application->status) }}
+                            {{ $application->status === 'submitted' ? 'New' : ucfirst($application->status) }}
                         </span>
 
                         <form method="POST" action="{{ route('employer.applications.update', [$job, $application]) }}"
@@ -111,6 +117,9 @@
                             <label for="status-{{ $application->id }}">Update status</label>
                             <div class="status-controls">
                                 <select id="status-{{ $application->id }}" name="status" required>
+                                    @if ($application->status === 'submitted')
+                                        <option value="submitted" selected disabled>New (submitted)</option>
+                                    @endif
                                     @foreach (['reviewing', 'shortlisted', 'rejected'] as $status)
                                         <option value="{{ $status }}" @selected($application->status === $status)>
                                             {{ ucfirst($status) }}
@@ -120,6 +129,9 @@
                                 <button class="button" type="submit">Save status</button>
                             </div>
                         </form>
+                        <a class="message-applicant-link" href="{{ route('employer.messages.start-for-applicant', [$job, $application->applicant]) }}">
+                            Message applicant <span aria-hidden="true">→</span>
+                        </a>
                     </div>
                 </article>
             @empty
@@ -128,7 +140,7 @@
                     <h3>No applications yet</h3>
                     <p>There are no applications for this job at the moment. Candidates' applications will appear here
                         when submitted.</p>
-                    <a href="{{ route('employer.jobs.index') }}" class="button secondary">Back to listings</a>
+                    <a href="{{ route('employer.applicants.index') }}" class="button secondary">All applicants</a>
                 </div>
             @endforelse
 
@@ -139,8 +151,8 @@
             @endif
         </section>
 
-        @include('components.footer')
     </main>
+    @include('components.footer')
 </body>
 
 </html>
