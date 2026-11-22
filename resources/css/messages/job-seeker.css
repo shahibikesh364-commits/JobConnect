@@ -1,0 +1,162 @@
+/* Job Seeker message identity, layered over the shared messaging components. */
+.job-seeker-messages-page .messages-hero h1 { max-width:620px; }
+.job-seeker-messages-page .messages-heading h1 { color:#252b43; }
+.job-seeker-messages-page .conversation-card { border-radius:14px; }
+.job-seeker-messages-page .conversation-card .conversation-company { color:#5147d9; font-weight:650; }
+.job-seeker-messages-page .chat-header { border-bottom-color:#e5e8f2; }
+.job-seeker-messages-page .chat-message.sent .message-bubble { background:#5147d9; }
+.job-seeker-messages-page .chat-form textarea:focus { border-color:#7168ed; box-shadow:0 0 0 3px rgb(81 71 217 / 12%); }
+.job-seeker-messages-page .messages-application-status { display:inline-flex; width:max-content; align-items:center; padding:4px 8px; border-radius:999px; background:#f0f2f6; color:#596579; font-size:10px; font-weight:750; line-height:1.2; }
+.job-seeker-messages-page .messages-application-status.status-submitted { background:#f1edff; color:#5a48c6; }
+.job-seeker-messages-page .messages-application-status.status-reviewing { background:#fff4df; color:#9c6508; }
+.job-seeker-messages-page .messages-application-status.status-shortlisted { background:#e7f7ef; color:#18774a; }
+.job-seeker-messages-page .messages-application-status.status-rejected { background:#fff0f0; color:#a84242; }
+html[data-theme="dark"] .job-seeker-messages-page .messages-application-status { background:#303849; color:#d2d9e6; }
+html[data-theme="dark"] .job-seeker-messages-page .messages-application-status.status-submitted { background:#302d50; color:#d2ceff; }
+html[data-theme="dark"] .job-seeker-messages-page .messages-application-status.status-reviewing { background:#4a3b21; color:#f5d08a; }
+html[data-theme="dark"] .job-seeker-messages-page .messages-application-status.status-shortlisted { background:#1f4234; color:#9be0bc; }
+html[data-theme="dark"] .job-seeker-messages-page .messages-application-status.status-rejected { background:#492c32; color:#f0aab1; }
+
+/* Job seeker employer directory */
+.job-seeker-messages-page.messages-page,
+.job-seeker-messages-page .messages-shell,
+.job-seeker-messages-page .messages-main {
+    min-height: calc(100vh - 40px);
+}
+.job-seeker-messages-page .messages-shell > .job-seeker-sidebar {
+    position: sticky;
+    z-index: 20;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    max-height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+}
+.job-seeker-messages-page .messages-shell > .messages-main {
+    margin-left: 0;
+}
+.job-seeker-messages-page > .site-footer { width: 100%; }
+.messages-directory-container {
+    width: min(1100px, calc(100% - 64px));
+    margin: 38px auto;
+}
+.messages-page-heading,
+.messages-directory-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.messages-page-heading { margin-bottom: 26px; }
+.messages-page-heading h1 {
+    margin: 6px 0;
+    color: var(--messages-ink);
+    font-size: clamp(25px, 3vw, 34px);
+}
+.messages-page-heading p,
+.messages-directory-heading p {
+    margin: 0;
+    color: var(--messages-muted);
+}
+.messages-eyebrow {
+    color: var(--messages-primary);
+    font-size: 11px;
+    font-weight: 750;
+    letter-spacing: .12em;
+}
+.messages-context-link {
+    flex: 0 0 auto;
+    color: var(--messages-primary);
+    font-weight: 650;
+    text-decoration: none;
+}
+.messages-directory {
+    display: grid;
+    gap: 18px;
+}
+.messages-directory-search {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    border: 1px solid var(--messages-line);
+    border-radius: 12px;
+    background: var(--messages-surface);
+}
+.messages-directory-search input {
+    min-width: 0;
+    flex: 1;
+    padding: 11px 13px;
+    border: 1px solid var(--messages-line);
+    border-radius: 8px;
+    font: inherit;
+}
+.messages-directory-search button,
+.messages-employer-action button {
+    padding: 10px 15px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--messages-primary);
+    color: white;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+}
+.messages-directory-search a { align-self: center; color: var(--messages-primary); }
+.messages-directory-heading h2 { margin: 0 0 5px; font-size: 20px; }
+.messages-directory-heading > span { color: var(--messages-muted); font-size: 13px; }
+.messages-employer-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px;
+    border: 1px solid var(--messages-line);
+    border-radius: 12px;
+    background: var(--messages-surface);
+}
+.messages-employer-avatar {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 46px;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--messages-soft);
+    color: var(--messages-primary);
+    font-size: 19px;
+    font-weight: 750;
+}
+.messages-employer-info { min-width: 0; flex: 1; }
+.messages-employer-info h3 { margin: 0 0 4px; }
+.messages-employer-info p,
+.messages-employer-info span { margin: 0; color: var(--messages-muted); font-size: 13px; }
+.messages-employer-info span { font-size: 12px; }
+.messages-employer-action { display: grid; justify-items: end; gap: 7px; }
+.messages-existing-label { color: var(--messages-muted); font-size: 11px; }
+.messages-directory-empty {
+    padding: 40px 20px;
+    border: 1px dashed var(--messages-line);
+    border-radius: 12px;
+    background: var(--messages-surface);
+    text-align: center;
+}
+.messages-directory-empty p { color: var(--messages-muted); }
+.messages-directory-pagination { margin-top: 8px; }
+html[data-theme="dark"] .messages-directory-search,
+html[data-theme="dark"] .messages-employer-card,
+html[data-theme="dark"] .messages-directory-empty { border-color: var(--messages-line); background: var(--messages-surface); }
+@media (max-width: 700px) {
+    .job-seeker-messages-page .messages-shell > .job-seeker-sidebar {
+        position: sticky;
+        inset: auto;
+        height: auto;
+    }
+    .job-seeker-messages-page .messages-shell > .messages-main { margin-left: 0; }
+    .messages-directory-container { width: calc(100% - 32px); margin: 24px auto; }
+    .messages-page-heading { align-items: flex-start; flex-direction: column; }
+    .messages-directory-search { flex-wrap: wrap; }
+    .messages-directory-search input { flex-basis: 100%; }
+    .messages-employer-card { align-items: flex-start; flex-wrap: wrap; }
+    .messages-employer-action { width: 100%; justify-items: stretch; }
+    .messages-employer-action button { width: 100%; }
+}
