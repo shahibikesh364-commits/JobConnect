@@ -233,6 +233,12 @@ Route::middleware(['auth', 'admin'])
         Route::get('/job-seekers', [AdminManagementController::class, 'jobSeekers'])
             ->name('job-seekers.index');
 
+        Route::get('/profile', [ProfileController::class, 'edit'])
+            ->name('profile');
+
+        Route::get('/settings', [ProfileController::class, 'settings'])
+            ->name('settings');
+
     });
 
 // Breeze authentication routes
