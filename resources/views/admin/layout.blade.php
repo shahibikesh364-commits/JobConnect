@@ -56,17 +56,37 @@
                         <x-theme-toggle />
                     </div>
 
-                    {{-- Admin Profile Info --}}
-                    <div class="admin-user-profile">
-                        <div class="admin-avatar-circle">
-                            {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                        </div>
-                        <div class="admin-user-meta">
-                            <strong class="admin-user-name">{{ auth()->user()->name }}</strong>
-                            <span class="admin-user-title">Administrator</span>
+                    {{-- Admin Account Dropdown --}}
+                    <div class="admin-account-menu" x-data="{ open: false }">
+                        <button type="button" class="admin-user-profile" @click="open = !open"
+                            @click.outside="open = false" :aria-expanded="open"
+                            aria-label="Open administrator account menu">
+
+                            <div class="admin-avatar-circle">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
+
+                            <div class="admin-user-meta">
+                                <strong class="admin-user-name">{{ auth()->user()->name }}</strong>
+                                <span class="admin-user-title">Administrator</span>
+                            </div>
+
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div class="admin-account-dropdown" x-show="open" x-cloak x-transition>
+                            <a href="{{ route('admin.profile') }}">
+                                <span>My Profile</span>
+                            </a>
+
+                            <a href="{{ route('admin.settings') }}">
+                                <span>Account Settings</span>
+                            </a>
                         </div>
                     </div>
-
                     {{-- Logout Form --}}
                     <form method="POST" action="{{ route('logout') }}" class="admin-logout-form">
                         @csrf
