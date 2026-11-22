@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <x-favicon />
     <title>JobConnect - Find Jobs</title>
-    @vite(['resources/css/jobs/index.css', 'resources/css/notifications.css'])
+    @vite(['resources/css/jobs/index.css', 'resources/css/notifications.css', 'resources/js/app.js'])
 </head>
 
 <body class="jobs-list-page">
@@ -36,16 +37,25 @@
             <main class="jobs-dashboard">
                 <div class="dashboard-heading">
                     <div>
-                        <p class="eyebrow">JOBCONNECT</p>
-                        <h1>Finding Job</h1>
-                        <p class="heading-subtitle">
-                            Explore open roles and find your next opportunity.
-                        </p>
-                    </div>
+                        <p class="eyebrow"><span aria-hidden="true">✦</span> YOUR JOB SEARCH</p>
+                        <h1>Find your next opportunity</h1>
 
-                    {{-- Location, job type, and sorting filters --}}
-                    <form class="filter-form" method="GET" action="{{ route('jobs.index') }}">
-                        <input type="hidden" name="search" value="{{ $search ?? '' }}">
+                        <p class="heading-subtitle">
+                            Find roles that fit your skills and goals.
+                        </p>
+                        <a class="jobs-hero-button" href="#job-search">Explore jobs <span
+                                aria-hidden="true">↓</span></a>
+                    </div>
+                </div>
+                <div id="job-results">
+
+                    {{-- Position, company, location, job type, and sorting filters --}}
+                    <form class="filter-form" id="job-search" method="GET" action="{{ route('jobs.index') }}">
+                        <div class="filter-field">
+                            <label for="search">Position or company</label>
+                            <input type="search" id="search" name="search" value="{{ $search ?? '' }}"
+                                placeholder="e.g. Designer or Acme">
+                        </div>
 
                         <div class="filter-field">
                             <label for="location">Location</label>
@@ -84,177 +94,178 @@
                             <a href="{{ route('jobs.index') }}">Clear filters</a>
                         </div>
                     </form>
-                </div>
 
-                {{-- Search results summary --}}
-                @if (!empty($search) || !empty($location) || !empty($jobType) || ($sort ?? 'newest') !== 'newest')
-                    <div class="results-summary">
-                        <span>
-                            {{ $jobs->total() }}
-                            {{ \Illuminate\Support\Str::plural('job', $jobs->total()) }} found
-                        </span>
+                    {{-- Search results summary --}}
+                    @if (!empty($search) || !empty($location) || !empty($jobType) || ($sort ?? 'newest') !== 'newest')
+                        <div class="results-summary">
+                            <span>
+                                {{ $jobs->total() }}
+                                {{ \Illuminate\Support\Str::plural('job', $jobs->total()) }} found
+                            </span>
 
-                        <a href="{{ route('jobs.index') }}">Clear filters</a>
-                    </div>
-                @endif
+                            <a href="{{ route('jobs.index') }}">Clear filters</a>
+                        </div>
+                    @endif
 
-                {{-- Job cards --}}
-                <section class="job-grid" aria-label="Open jobs">
-                    @forelse ($jobs as $job)
-                        @php
-                            $avatarColors = ['#dbeafe', '#ede9fe', '#ecfccb', '#cffafe', '#fee2e2', '#ffedd5'];
+                    {{-- Job cards --}}
+                    <section class="job-grid" aria-label="Open jobs">
+                        @forelse ($jobs as $job)
+                            @php
+                                $avatarColors = ['#dbeafe', '#ede9fe', '#ecfccb', '#cffafe', '#fee2e2', '#ffedd5'];
 
-                            $avatarColor = $avatarColors[$loop->index % count($avatarColors)];
-                        @endphp
+                                $avatarColor = $avatarColors[$loop->index % count($avatarColors)];
+                            @endphp
 
-                        <article class="job-card">
-                            <div class="card-heading">
-                                <span class="company-avatar" style="--avatar-color: {{ $avatarColor }}">
-                                    {{ strtoupper(substr($job->company_name ?? 'J', 0, 1)) }}
-                                </span>
+                            <article class="job-card">
+                                <div class="card-heading">
+                                    <span class="company-avatar" style="--avatar-color: {{ $avatarColor }}">
+                                        {{ strtoupper(substr($job->company_name ?? 'J', 0, 1)) }}
+                                    </span>
 
-                                <div class="card-title-block">
-                                    <h2>{{ $job->title }}</h2>
-                                    <p class="company-name">{{ $job->company_name }}</p>
+                                    <div class="card-title-block">
+                                        <h2>{{ $job->title }}</h2>
+                                        <p class="company-name">{{ $job->company_name }}</p>
+                                    </div>
+
+                                    <span class="job-status">Open</span>
                                 </div>
 
-                                <span class="job-status">Open</span>
-                            </div>
+                                <div class="job-tags">
+                                    <span>
+                                        {{ $job->job_type === 'Remote' || str_contains(strtolower($job->location ?? ''), 'remote') ? 'Remote' : 'On-Site' }}
+                                    </span>
 
-                            <div class="job-tags">
-                                <span>
-                                    {{ $job->job_type === 'Remote' || str_contains(strtolower($job->location ?? ''), 'remote') ? 'Remote' : 'On-Site' }}
-                                </span>
+                                    <span class="type-tag">{{ $job->job_type }}</span>
+                                    <span class="open-tag">Open</span>
+                                </div>
 
-                                <span class="type-tag">{{ $job->job_type }}</span>
-                                <span class="open-tag">Open</span>
-                            </div>
+                                <p class="job-description">
+                                    {{ \Illuminate\Support\Str::limit($job->description ?? '', 125) }}
+                                </p>
 
-                            <p class="job-description">
-                                {{ \Illuminate\Support\Str::limit($job->description ?? '', 125) }}
-                            </p>
+                                <div class="card-meta">
+                                    <strong>
+                                        @if ($job->salary_min !== null || $job->salary_max !== null)
+                                            Rs.
+                                            {{ $job->salary_min !== null ? number_format((float) $job->salary_min) : '—' }}
+                                            –
+                                            {{ $job->salary_max !== null ? number_format((float) $job->salary_max) : '—' }}
+                                            <small>/ month</small>
+                                        @else
+                                            Salary not specified
+                                        @endif
+                                    </strong>
 
-                            <div class="card-meta">
-                                <strong>
-                                    @if ($job->salary_min !== null || $job->salary_max !== null)
-                                        NPR
-                                        {{ $job->salary_min !== null ? number_format((float) $job->salary_min) : '—' }}
-                                        –
-                                        {{ $job->salary_max !== null ? number_format((float) $job->salary_max) : '—' }}
-                                        <small>/ month</small>
-                                    @else
-                                        Salary not specified
-                                    @endif
-                                </strong>
+                                    <time datetime="{{ $job->created_at?->toIso8601String() }}">
+                                        {{ $job->created_at?->diffForHumans() ?? 'Recently' }}
+                                    </time>
+                                </div>
 
-                                <time datetime="{{ $job->created_at?->toIso8601String() }}">
-                                    {{ $job->created_at?->diffForHumans() ?? 'Recently' }}
-                                </time>
-                            </div>
-
-                            {{-- Job actions --}}
-                            <div class="card-actions">
-                                <a class="details-button" href="{{ route('jobs.show', $job) }}">
-                                    View Details
-                                </a>
-
-                                @auth
-                                    @if (auth()->user()->isJobSeeker())
-                                        <form method="POST" action="{{ route('jobs.save', $job) }}">
-                                            @csrf
-
-                                            @if (in_array($job->id, $savedJobIds))
-                                                <button type="submit" class="save-job-button is-saved"
-                                                    aria-pressed="true" aria-label="Unsave {{ $job->title }}">
-                                                    ★ Saved
-                                                </button>
-                                            @else
-                                                <button type="submit" class="save-job-button" aria-pressed="false"
-                                                    aria-label="Save {{ $job->title }}">
-                                                    ☆ Save Job
-                                                </button>
-                                            @endif
-                                        </form>
-                                    @endif
-                                @else
-                                    <a class="save-job-button" href="{{ route('login') }}">
-                                        ☆ Save Job
+                                {{-- Job actions --}}
+                                <div class="card-actions">
+                                    <a class="details-button"
+                                        href="{{ route('jobs.show', $job) }} ?return_to={{ urlencode(url()->full()) }}">
+                                        View Details
                                     </a>
-                                @endauth
 
-                                @if ($job->status === 'open')
                                     @auth
                                         @if (auth()->user()->isJobSeeker())
-                                            <a class="apply-button" href="{{ route('jobs.show', $job) }}#apply">
-                                                Apply Now
-                                            </a>
+                                            <form method="POST" action="{{ route('jobs.save', $job) }}">
+                                                @csrf
+
+                                                @if (in_array($job->id, $savedJobIds))
+                                                    <button type="submit" class="save-job-button is-saved"
+                                                        aria-pressed="true" aria-label="Unsave {{ $job->title }}">
+                                                        ★ Saved
+                                                    </button>
+                                                @else
+                                                    <button type="submit" class="save-job-button" aria-pressed="false"
+                                                        aria-label="Save {{ $job->title }}">
+                                                        ☆ Save Job
+                                                    </button>
+                                                @endif
+                                            </form>
                                         @endif
                                     @else
-                                        <a class="apply-button" href="{{ route('jobs.apply.start', $job) }}">
-                                            Apply Now
+                                        <a class="save-job-button" href="{{ route('login') }}">
+                                            ☆ Save Job
                                         </a>
                                     @endauth
-                                @endif
-                            </div>
-                        </article>
-                    @empty
-                        <p class="empty-message">
-                            No open jobs match your search. Try changing your keywords or filters.
-                        </p>
-                    @endforelse
-                </section>
 
-                {{-- Pagination --}}
-                @if ($jobs->hasPages())
-                    @php
-                        $firstPage = max(1, $jobs->currentPage() - 2);
-                        $lastPage = min($jobs->lastPage(), $jobs->currentPage() + 2);
-                    @endphp
+                                    @if ($job->status === 'open')
+                                        @auth
+                                            @if (auth()->user()->isJobSeeker())
+                                                <a class="apply-button" href="{{ route('jobs.show', $job) }}#apply">
+                                                    Apply Now
+                                                </a>
+                                            @endif
+                                        @else
+                                            <a class="apply-button" href="{{ route('jobs.apply.start', $job) }}">
+                                                Apply Now
+                                            </a>
+                                        @endauth
+                                    @endif
+                                </div>
+                            </article>
+                        @empty
+                            <p class="empty-message">
+                                No open jobs match your search. Try changing your keywords or filters.
+                            </p>
+                        @endforelse
+                    </section>
 
-                    <nav class="pagination-bar" aria-label="Job listing pages">
-                        <p class="pagination-summary">
-                            Showing
-                            <strong>{{ $jobs->firstItem() }}–{{ $jobs->lastItem() }}</strong>
-                            of
-                            <strong>{{ $jobs->total() }}</strong>
-                            jobs
-                        </p>
+                    {{-- Pagination --}}
+                    @if ($jobs->hasPages())
+                        @php
+                            $firstPage = max(1, $jobs->currentPage() - 2);
+                            $lastPage = min($jobs->lastPage(), $jobs->currentPage() + 2);
+                        @endphp
 
-                        <div class="pagination-controls">
-                            @if ($jobs->onFirstPage())
-                                <span class="pagination-control disabled" aria-disabled="true">
-                                    ← <span>Previous</span>
-                                </span>
-                            @else
-                                <a class="pagination-control" href="{{ $jobs->previousPageUrl() }}">
-                                    ← <span>Previous</span>
-                                </a>
-                            @endif
+                        <nav class="pagination-bar" aria-label="Job listing pages">
+                            <p class="pagination-summary">
+                                Showing
+                                <strong>{{ $jobs->firstItem() }}–{{ $jobs->lastItem() }}</strong>
+                                of
+                                <strong>{{ $jobs->total() }}</strong>
+                                jobs
+                            </p>
 
-                            @for ($page = $firstPage; $page <= $lastPage; $page++)
-                                @if ($page === $jobs->currentPage())
-                                    <span class="pagination-page active" aria-current="page">
-                                        {{ $page }}
+                            <div class="pagination-controls">
+                                @if ($jobs->onFirstPage())
+                                    <span class="pagination-control disabled" aria-disabled="true">
+                                        ← <span>Previous</span>
                                     </span>
                                 @else
-                                    <a class="pagination-page" href="{{ $jobs->url($page) }}">
-                                        {{ $page }}
+                                    <a class="pagination-control" href="{{ $jobs->previousPageUrl() }}">
+                                        ← <span>Previous</span>
                                     </a>
                                 @endif
-                            @endfor
 
-                            @if ($jobs->hasMorePages())
-                                <a class="pagination-control" href="{{ $jobs->nextPageUrl() }}">
-                                    <span>Next</span> →
-                                </a>
-                            @else
-                                <span class="pagination-control disabled" aria-disabled="true">
-                                    <span>Next</span> →
-                                </span>
-                            @endif
-                        </div>
-                    </nav>
-                @endif
+                                @for ($page = $firstPage; $page <= $lastPage; $page++)
+                                    @if ($page === $jobs->currentPage())
+                                        <span class="pagination-page active" aria-current="page">
+                                            {{ $page }}
+                                        </span>
+                                    @else
+                                        <a class="pagination-page" href="{{ $jobs->url($page) }}">
+                                            {{ $page }}
+                                        </a>
+                                    @endif
+                                @endfor
+
+                                @if ($jobs->hasMorePages())
+                                    <a class="pagination-control" href="{{ $jobs->nextPageUrl() }}">
+                                        <span>Next</span> →
+                                    </a>
+                                @else
+                                    <span class="pagination-control disabled" aria-disabled="true">
+                                        <span>Next</span> →
+                                    </span>
+                                @endif
+                            </div>
+                        </nav>
+                    @endif
+                </div>
             </main>
         </div>
     </div>
