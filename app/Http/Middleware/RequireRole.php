@@ -15,9 +15,13 @@ class RequireRole
         }
 
         if ($request->user()->role !== $role) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Forbidden.'], 403);
+            }
+
             return match ($request->user()->role) {
                 'admin' => redirect()->route('admin.dashboard'),
-                'employer' => redirect()->route('employer.jobs.index'),
+                'employer' => redirect()->route('employer.dashboard'),
                 default => redirect()->route('jobs.index'),
             };
         }
