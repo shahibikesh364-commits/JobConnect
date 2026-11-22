@@ -1,0 +1,407 @@
+body:has(.registration-form) .min-h-screen {
+    padding: 2.25rem 1rem 3rem;
+    background:
+        radial-gradient(ellipse at 50% 16%, rgb(79 70 229 / 7%), transparent 40%),
+        #f4f6fa;
+}
+
+body:has(.registration-form) .guest-brand-wrap {
+    margin-bottom: 0.25rem;
+}
+
+body:has(.registration-form) .guest-brand {
+    gap: 0.75rem;
+    color: #1e293b;
+    font-size: 1.35rem;
+    letter-spacing: -0.04em;
+}
+
+body:has(.registration-form) .min-h-screen > div:has(.registration-form) {
+    width: min(100%, 54rem);
+    max-width: none;
+    padding: 2.25rem 2.5rem;
+    border: 1px solid #e8ebf2;
+    border-radius: 1.15rem;
+    background: #fff;
+    box-shadow: 0 18px 50px rgb(23 33 58 / 9%), 0 2px 6px rgb(23 33 58 / 4%);
+}
+
+.registration-form {
+    color: #20283a;
+}
+
+.registration-role-section {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+}
+
+.registration-title {
+    padding: 0;
+    color: #20283a;
+    font-size: 1.7rem;
+    font-weight: 750;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+}
+
+.registration-subtitle {
+    margin: 0.45rem 0 1.25rem;
+    color: #687386;
+    font-size: 0.9rem;
+}
+
+.registration-role-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+}
+
+.registration-role-option {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+.registration-role-option input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.registration-role-card {
+    display: flex;
+    min-height: 112px;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem;
+    border: 1px solid #e0e5ee;
+    border-radius: 0.9rem;
+    background: #fff;
+    box-shadow: 0 2px 5px rgb(23 33 58 / 3%);
+    transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.registration-role-option:hover .registration-role-card {
+    transform: translateY(-2px);
+    border-color: #b8b8f5;
+    box-shadow: 0 8px 18px rgb(49 46 129 / 8%);
+}
+
+.registration-role-option input:checked + .registration-role-card {
+    border-color: #6259e8;
+    background: #f7f7ff;
+    box-shadow: 0 0 0 3px rgb(79 70 229 / 11%);
+}
+
+.registration-role-option input:focus-visible + .registration-role-card {
+    outline: 3px solid rgb(79 70 229 / 28%);
+    outline-offset: 3px;
+}
+
+.registration-role-icon {
+    display: grid;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 3rem;
+    place-items: center;
+    border-radius: 0.85rem;
+    background: #ecebff;
+    color: #4f46e5;
+}
+
+.registration-role-icon.employer {
+    background: #e8f4ff;
+    color: #1673bd;
+}
+
+.registration-role-icon svg {
+    width: 1.45rem;
+    height: 1.45rem;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+}
+
+.registration-role-copy {
+    display: grid;
+    min-width: 0;
+    gap: 0.32rem;
+}
+
+.registration-role-copy strong {
+    color: #27324a;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.registration-role-copy small {
+    color: #687386;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.registration-role-check {
+    display: grid;
+    width: 1.3rem;
+    height: 1.3rem;
+    flex: 0 0 1.3rem;
+    place-items: center;
+    margin-left: auto;
+    border: 1px solid #cfd5e1;
+    border-radius: 50%;
+    color: transparent;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.registration-role-option input:checked + .registration-role-card .registration-role-check {
+    border-color: #4f46e5;
+    background: #4f46e5;
+    color: #fff;
+}
+
+.registration-role-error {
+    display: block;
+    margin-top: 0.65rem;
+}
+
+.registration-selection-status {
+    min-height: 1.3rem;
+    margin: 0.8rem 0 0;
+    color: #737e91;
+    font-size: 0.76rem;
+}
+
+.registration-selected {
+    display: none;
+    color: #4f46e5;
+    font-weight: 550;
+}
+
+.registration-form:has(.registration-role-option input:checked) .registration-unselected {
+    display: none;
+}
+
+.registration-form:has(.registration-role-option input:checked) .registration-selected {
+    display: inline;
+}
+
+.registration-fields {
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 1.15rem;
+    padding-top: 1.5rem;
+    margin-top: 1.15rem;
+    border-top: 1px solid #edf0f5;
+    animation: registration-reveal 220ms ease-out both;
+}
+
+.registration-form:has(.registration-role-option input:checked) .registration-fields {
+    display: grid;
+}
+
+@keyframes registration-reveal {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.registration-fields-heading,
+.registration-actions {
+    grid-column: 1 / -1;
+}
+
+.registration-fields-heading {
+    margin-bottom: 0.15rem;
+}
+
+.registration-fields-heading > span {
+    color: #4f46e5;
+    font-size: 0.66rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+}
+
+.registration-fields-heading p {
+    margin: 0.3rem 0 0;
+    color: #687386;
+    font-size: 0.82rem;
+}
+
+.registration-fields > div:not(.registration-fields-heading):not(.registration-actions) {
+    min-width: 0;
+    margin-top: 0;
+}
+
+.registration-fields label {
+    color: #344054;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.registration-fields input[type="text"],
+.registration-fields input[type="email"],
+.registration-fields input[type="password"] {
+    min-height: 44px;
+    border-color: #d8deea;
+    border-radius: 0.65rem;
+    background-color: #fff;
+    color: #1e293b;
+    box-shadow: 0 1px 2px rgb(16 24 40 / 4%);
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.registration-fields input:focus {
+    border-color: #6259e8;
+    outline: 0;
+    box-shadow: 0 0 0 3px rgb(79 70 229 / 13%);
+}
+
+.registration-fields .password-toggle {
+    color: #4f46e5;
+    font-weight: 650;
+}
+
+.registration-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.35rem;
+}
+
+.registration-login-link {
+    color: #687386;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+
+.registration-login-link span {
+    color: #4f46e5;
+    font-weight: 650;
+}
+
+.registration-submit {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.65rem 1.15rem;
+    border-radius: 0.65rem;
+    background: #4f46e5;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgb(79 70 229 / 18%);
+    transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.registration-submit:hover {
+    transform: translateY(-1px);
+    background: #4338ca;
+    box-shadow: 0 6px 14px rgb(79 70 229 / 22%);
+}
+
+html[data-theme="dark"] body:has(.registration-form) .min-h-screen {
+    background: radial-gradient(ellipse at 50% 16%, rgb(99 91 230 / 12%), transparent 42%), #171d29;
+}
+
+html[data-theme="dark"] body:has(.registration-form) .guest-brand {
+    color: #edf0f8;
+}
+
+html[data-theme="dark"] body:has(.registration-form) .min-h-screen > div:has(.registration-form) {
+    border-color: #343b4b;
+    background: #222938;
+    box-shadow: 0 18px 50px rgb(0 0 0 / 25%);
+}
+
+html[data-theme="dark"] .registration-title,
+html[data-theme="dark"] .registration-role-copy strong,
+html[data-theme="dark"] .registration-fields label {
+    color: #edf0f8;
+}
+
+html[data-theme="dark"] .registration-subtitle,
+html[data-theme="dark"] .registration-role-copy small,
+html[data-theme="dark"] .registration-fields-heading p,
+html[data-theme="dark"] .registration-login-link {
+    color: #a4aec0;
+}
+
+html[data-theme="dark"] .registration-role-card {
+    border-color: #343b4b;
+    background: #1b2230;
+}
+
+html[data-theme="dark"] .registration-role-option input:checked + .registration-role-card {
+    border-color: #7770f2;
+    background: #292d45;
+}
+
+html[data-theme="dark"] .registration-fields {
+    border-color: #343b4b;
+}
+
+html[data-theme="dark"] .registration-fields input[type="text"],
+html[data-theme="dark"] .registration-fields input[type="email"],
+html[data-theme="dark"] .registration-fields input[type="password"] {
+    border-color: #465064;
+    background-color: #1b2230;
+    color: #edf0f8;
+}
+
+@media (max-width: 680px) {
+    body:has(.registration-form) .min-h-screen > div:has(.registration-form) {
+        padding: 1.6rem 1.35rem;
+    }
+
+    .registration-role-options {
+        grid-template-columns: 1fr;
+        gap: 0.65rem;
+    }
+
+    .registration-role-card {
+        min-height: 92px;
+    }
+}
+
+@media (max-width: 520px) {
+    body:has(.registration-form) .min-h-screen {
+        padding: 1.5rem 0.85rem 2rem;
+    }
+
+    body:has(.registration-form) .min-h-screen > div:has(.registration-form) {
+        padding: 1.35rem 1rem;
+        border-radius: 0.9rem;
+    }
+
+    .registration-title {
+        font-size: 1.45rem;
+    }
+
+    .registration-fields {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
+
+    .registration-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .registration-login-link {
+        text-align: center;
+    }
+
+    .registration-submit {
+        width: 100%;
+    }
+}
