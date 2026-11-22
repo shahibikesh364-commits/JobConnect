@@ -15,7 +15,7 @@ class JobSeekerDashboardController extends Controller
             ->selectRaw('status, COUNT(*) as aggregate')
             ->groupBy('status')
             ->pluck('aggregate', 'status')
-            ->map(fn ($count) => (int) $count);
+            ->map(fn($count) => (int) $count);
 
         $totalApplications = $user->applications()->count();
 
@@ -35,9 +35,9 @@ class JobSeekerDashboardController extends Controller
         $savedJobs = $user->savedJobs()
             ->with('job')
             ->latest()
-            ->take(3)
+            ->take(4)
             ->get()
-            ->filter(fn ($savedJob) => $savedJob->job !== null)
+            ->filter(fn($savedJob) => $savedJob->job !== null)
             ->values();
 
         $preferenceJobs = $recentApplications->pluck('job')
@@ -64,7 +64,7 @@ class JobSeekerDashboardController extends Controller
 
         $recommendedJobsQuery = JobListing::query()
             ->where('status', 'open')
-            ->whereDoesntHave('applications', fn ($query) => $query->where('user_id', $user->id));
+            ->whereDoesntHave('applications', fn($query) => $query->where('user_id', $user->id));
 
         if ($preferredLocations !== []) {
             $placeholders = implode(', ', array_fill(0, count($preferredLocations), '?'));
@@ -87,10 +87,7 @@ class JobSeekerDashboardController extends Controller
             ->take(3)
             ->get();
 
-        $profileFields = collect([$user->name, $user->email])
-            ->filter(fn ($value) => filled($value))
-            ->count();
-        $profileCompletion = (int) round(($profileFields / 2) * 100);
+        $profileCompletion = $user->profileCompletion();
 
         return view('dashboard.index', compact(
             'user',
