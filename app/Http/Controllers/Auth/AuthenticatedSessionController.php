@@ -37,11 +37,11 @@ class AuthenticatedSessionController extends Controller
 
         // Redirect employers to their job management page.
         if ($user->role === 'employer') {
-            return redirect()->route('employer.jobs.index');
+            return redirect()->route('employer.dashboard');
         }
 
-        // Redirect job seekers to the public jobs page.
-        return redirect()->route('jobs.index');
+        // Redirect job seekers to their dashboard.
+        return redirect()->route('dashboard');
     }
 
     /**
