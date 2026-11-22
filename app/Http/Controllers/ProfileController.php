@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\EmployerTeamMember;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -14,11 +16,27 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request): View|RedirectResponse
     {
+        if ($request->user()->isJobSeeker()) {
+            return redirect()->route('job-seeker.profile.show');
+        }
+
         return view('profile.edit', [
             'user' => $request->user(),
         ]);
+    }
+
+    /**
+     * Display account settings separately from the job seeker's public profile.
+     */
+    public function settings(Request $request): View
+    {
+        $user = $request->user();
+        if ($user->role === 'employer') {
+            return view('employer.settings', compact('user'));
+        }
+        return view('profile.edit', compact('user'));
     }
 
     /**
@@ -34,7 +52,14 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user = $request->user();
+
+        $destination = (
+            $user->isJobSeeker() ||
+            $user->role === 'employer'
+        ) ? 'account.settings' : 'profile.edit';
+
+        return Redirect::route($destination)->with('status', 'profile-updated');
     }
 
     /**
@@ -42,11 +67,17 @@ class ProfileController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
-        $request->validateWithBag('userDeletion', [
+        $rules = [
             'password' => ['required', 'current_password'],
-        ]);
+        ];
+        if ($request->user()->role === 'employer') {
+            $rules['confirmation'] = ['required', Rule::in(['DELETE'])];
+        }
+        $request->validateWithBag('userDeletion', $rules);
 
         $user = $request->user();
+
+        EmployerTeamMember::where('member_user_id', $user->id)->delete();
 
         Auth::logout();
 
