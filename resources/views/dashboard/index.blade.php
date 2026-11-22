@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <x-favicon />
     <title>Dashboard - JobConnect</title>
     @vite(['resources/css/dashboard/index.css', 'resources/css/notifications.css', 'resources/js/app.js'])
 </head>
@@ -34,8 +35,8 @@
             <div class="dashboard-content">
                 <section class="welcome-panel" aria-labelledby="welcome-title">
                     <div class="welcome-copy">
-                        <p class="section-kicker">YOUR NEXT MOVE</p>
-                        <h2 id="welcome-title">Make your next opportunity happen.</h2>
+                        <p class="section-kicker"><span aria-hidden="true">✦</span> YOUR NEXT MOVE</p>
+                        <h2 id="welcome-title">Make your next opportunity<br>happen.</h2>
                         <p>Explore roles that fit your goals, then track every application from one place.</p>
                         <a class="welcome-action" href="{{ route('jobs.index') }}">Explore open jobs <span aria-hidden="true">→</span></a>
                     </div>
@@ -46,16 +47,25 @@
                             <strong>{{ $profileCompletion }}%</strong>
                         </div>
                         <progress max="100" value="{{ $profileCompletion }}">{{ $profileCompletion }}%</progress>
-                        <small>Based on your name and email</small>
-                        <a href="{{ route('profile.edit') }}">Update profile <span aria-hidden="true">→</span></a>
+                        <small>Based on your profile details</small>
+                        <a href="{{ route('job-seeker.profile.show') }}">View profile <span aria-hidden="true">→</span></a>
                     </aside>
+                    <div class="welcome-hero-art" aria-hidden="true">
+                        <span class="welcome-art-orbit orbit-one"></span>
+                        <span class="welcome-art-orbit orbit-two"></span>
+                        <span class="welcome-art-building building-back"><i></i><i></i><i></i><i></i></span>
+                        <span class="welcome-art-building building-front"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                        <span class="welcome-art-spark spark-one">✦</span>
+                        <span class="welcome-art-spark spark-two">✦</span>
+                    </div>
+                    <div class="welcome-hero-footnote"><span></span> Your next role starts with one good application</div>
                 </section>
 
                 <section class="quick-actions" aria-label="Quick actions">
                     <a href="{{ route('jobs.index') }}"><span class="quick-action-icon" aria-hidden="true">⌕</span><span>Browse Jobs</span><span class="quick-action-arrow" aria-hidden="true">→</span></a>
                     <a href="{{ route('applications.mine') }}"><span class="quick-action-icon" aria-hidden="true">▤</span><span>My Applications</span><span class="quick-action-arrow" aria-hidden="true">→</span></a>
                     <a href="{{ route('saved-jobs.index') }}"><span class="quick-action-icon" aria-hidden="true">☆</span><span>Saved Jobs</span><span class="quick-action-arrow" aria-hidden="true">→</span></a>
-                    <a href="{{ route('profile.edit') }}"><span class="quick-action-icon" aria-hidden="true">♙</span><span>Update Profile</span><span class="quick-action-arrow" aria-hidden="true">→</span></a>
+                    <a href="{{ route('job-seeker.profile.show') }}"><span class="quick-action-icon" aria-hidden="true">♙</span><span>Update Profile</span><span class="quick-action-arrow" aria-hidden="true">→</span></a>
                 </section>
 
                 <section class="stats-grid" aria-label="Application statistics">
