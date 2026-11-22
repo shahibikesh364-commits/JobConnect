@@ -1,0 +1,177 @@
+/* =====================================================
+   JOBCONNECT — SHARED FOOTER STYLES
+===================================================== */
+
+.site-footer {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    position: relative;
+    z-index: 45;
+    padding: 24px clamp(22px, 5vw, 72px) 12px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* JOB SEEKER FOOTER */
+.site-footer--job-seeker {
+    background: #22234f;
+    color: #e5e7f2;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* EMPLOYER FOOTER */
+.site-footer--employer {
+    background: #f1f5f9;
+    color: #475569;
+    border-top: 3px solid #2563eb;
+}
+
+/* FOOTER GRID */
+.footer-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 35px);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-brand,
+.footer-column {
+    min-width: 0;
+}
+
+.footer-column a,
+.footer-column p,
+.footer-brand p {
+    overflow-wrap: anywhere;
+}
+
+/* BRAND */
+.footer-brand h2 {
+    margin: 0 0 12px;
+    font-size: 25px;
+    font-weight: 750;
+}
+
+.footer-brand h3,
+.footer-column h3 {
+    margin: 0 0 14px;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.footer-brand p,
+.footer-column p {
+    max-width: 300px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* FOOTER COLUMNS */
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 11px;
+}
+
+.footer-column a {
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* JOB SEEKER COLORS */
+.site-footer--job-seeker .footer-brand h2,
+.site-footer--job-seeker .footer-brand h3,
+.site-footer--job-seeker .footer-column h3 {
+    color: #ffffff;
+}
+
+.site-footer--job-seeker .footer-brand p,
+.site-footer--job-seeker .footer-column p,
+.site-footer--job-seeker .footer-column a {
+    color: #c7cbe0;
+}
+
+.site-footer--job-seeker .footer-column a:hover {
+    color: #ffffff;
+}
+
+/* EMPLOYER COLORS */
+.site-footer--employer .footer-brand h2,
+.site-footer--employer .footer-brand h3,
+.site-footer--employer .footer-column h3 {
+    color: #172b4d;
+}
+
+.site-footer--employer .footer-brand p,
+.site-footer--employer .footer-column p,
+.site-footer--employer .footer-column a {
+    color: #52627a;
+}
+
+.site-footer--employer .footer-column a {
+    color: #2563eb;
+}
+
+.site-footer--employer .footer-column a:hover {
+    color: #1d4ed8;
+}
+
+/* FOOTER BOTTOM */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    max-width: 1400px;
+    margin: 24px auto 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    color: #c7cbe0;
+    font-size: 12px;
+}
+
+.footer-bottom > * {
+    min-width: 0;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+/* EMPLOYER FOOTER BOTTOM */
+.site-footer--employer .footer-bottom {
+    border-top-color: #dbe3ee;
+    color: #64748b;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* MOBILE */
+@media (max-width: 550px) {
+    .site-footer {
+        padding: 32px 22px 16px;
+    }
+
+    .footer-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
