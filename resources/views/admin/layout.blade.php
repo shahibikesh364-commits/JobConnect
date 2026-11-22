@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <x-favicon />
     <title>@yield('title', 'Admin') | JobConnect</title>
     @vite(['resources/css/admin.css', 'resources/css/notifications.css'])
     @vite('resources/js/app.js')
