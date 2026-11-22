@@ -1,9 +1,9 @@
 :root {
-    --admin-ink: #20283a;
-    --admin-muted: #687386;
-    --admin-border: #e3e7ed;
-    --admin-blue: #4f46e5;
-    --admin-bg: #f2f3f8;
+    --admin-ink: #383849;
+    --admin-muted: #707582;
+    --admin-border: #e0e1e8;
+    --admin-blue: #7777b8;
+    --admin-bg: #f5f5f8;
 }
 
 * {
@@ -5546,6 +5546,410 @@ html[data-theme="dark"] .admin-console-footer .acf-left strong {
         gap: 7px;
         font-size: 11px;
     }
+}
+
+/* Comfortable light appearance for the admin navigation bars. */
+.admin-top-header {
+    background: #fff;
+    box-shadow: 0 4px 18px rgba(25, 39, 60, .08);
+}
+
+.admin-header-main {
+    border-bottom-color: #e6ebf1;
+}
+
+.admin-header-left .admin-brand {
+    color: #172033;
+}
+
+.admin-brand-text strong {
+    color: #172033;
+}
+
+.admin-mobile-toggle {
+    border-color: #dce3eb;
+    background: #f8fafc;
+    color: #344054;
+}
+
+.admin-mobile-toggle:hover {
+    background: #eef2f7;
+}
+
+.admin-horizontal-nav {
+    border-bottom-color: #e5eaf0;
+    background: #f8fafc;
+}
+
+.admin-nav-link {
+    color: #5c687a;
+}
+
+.admin-nav-icon {
+    color: #7a8799;
+}
+
+.admin-nav-link:hover {
+    background: #edf1f6;
+    color: #202b3d;
+}
+
+.admin-nav-link:hover .admin-nav-icon {
+    color: #4f46e5;
+}
+
+.admin-nav-link.active {
+    border-color: #d6dafb;
+    background: #eceeff;
+    color: #4338ca;
+    box-shadow: none;
+}
+
+.admin-nav-link.active .admin-nav-icon {
+    color: #4f46e5;
+}
+
+.admin-portal-shortcut {
+    border-color: #dce3eb;
+    color: #5c687a;
+}
+
+.admin-portal-shortcut:hover {
+    border-color: #c7cdf5;
+    background: #eef0ff;
+    color: #4338ca;
+}
+
+.admin-header-right .theme-toggle,
+.admin-header-right .notification-bell > summary {
+    border-color: #dce3eb;
+    background: #fff;
+    color: #344054;
+}
+
+.admin-header-right .theme-toggle:hover,
+.admin-header-right .notification-bell > summary:hover,
+.admin-header-right .notification-bell[open] > summary {
+    border-color: #c7cdf5;
+    background: #f1f2ff;
+    color: #3730a3;
+}
+
+.admin-user-profile {
+    border-color: #e0e6ed;
+    background: #f8fafc;
+}
+
+.admin-user-name {
+    color: #253148;
+}
+
+.admin-user-title {
+    color: #778397;
+}
+
+.admin-logout-button {
+    border-color: #dce3eb;
+    background: #fff;
+    color: #526176;
+}
+
+.admin-logout-button:hover {
+    border-color: #f0c9cf;
+    background: #fff5f6;
+    color: #a53245;
+}
+
+html[data-theme="dark"] .admin-top-header {
+    background: #0b0f19;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+}
+
+html[data-theme="dark"] .admin-header-main {
+    border-bottom-color: rgba(255, 255, 255, .08);
+}
+
+html[data-theme="dark"] .admin-header-left .admin-brand,
+html[data-theme="dark"] .admin-brand-text strong {
+    color: #fff;
+}
+
+html[data-theme="dark"] .admin-mobile-toggle {
+    border-color: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .05);
+    color: #fff;
+}
+
+html[data-theme="dark"] .admin-horizontal-nav {
+    border-bottom-color: rgba(255, 255, 255, .08);
+    background: #111827;
+}
+
+html[data-theme="dark"] .admin-nav-link {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .admin-nav-icon {
+    color: #64748b;
+}
+
+html[data-theme="dark"] .admin-nav-link:hover {
+    background: rgba(255, 255, 255, .06);
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] .admin-nav-link.active {
+    border-color: rgba(99, 102, 241, .4);
+    background: rgba(79, 70, 229, .22);
+    color: #fff;
+}
+
+html[data-theme="dark"] .admin-nav-link.active .admin-nav-icon {
+    color: #818cf8;
+}
+
+html[data-theme="dark"] .admin-portal-shortcut {
+    border-color: rgba(255, 255, 255, .1);
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .admin-portal-shortcut:hover {
+    border-color: rgba(99, 102, 241, .4);
+    background: rgba(255, 255, 255, .05);
+    color: #e2e8f0;
+}
+
+html[data-theme="dark"] .admin-header-right .theme-toggle,
+html[data-theme="dark"] .admin-header-right .notification-bell > summary {
+    border-color: rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .06);
+    color: #e2e8f0;
+}
+
+html[data-theme="dark"] .admin-header-right .theme-toggle:hover,
+html[data-theme="dark"] .admin-header-right .notification-bell > summary:hover,
+html[data-theme="dark"] .admin-header-right .notification-bell[open] > summary {
+    border-color: rgba(165, 180, 252, .5);
+    background: rgba(99, 102, 241, .16);
+    color: #fff;
+}
+
+html[data-theme="dark"] .admin-user-profile {
+    border-color: rgba(255, 255, 255, .1);
+    background: rgba(255, 255, 255, .06);
+}
+
+html[data-theme="dark"] .admin-user-name { color: #f8fafc; }
+html[data-theme="dark"] .admin-user-title { color: #94a3b8; }
+
+html[data-theme="dark"] .admin-logout-button {
+    border-color: rgba(255, 255, 255, .12);
+    background: rgba(255, 255, 255, .05);
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] .admin-logout-button:hover {
+    border-color: rgba(239, 68, 68, .4);
+    background: rgba(239, 68, 68, .18);
+    color: #fca5a5;
+}
+
+/* JobConnect admin palette: slate navy, cloud gray, dusty blue, and lavender. */
+html:not([data-theme="dark"]) body.admin-page {
+    color: #383849;
+    background: #f5f5f8;
+}
+
+html:not([data-theme="dark"]) .admin-top-header,
+html:not([data-theme="dark"]) .admin-horizontal-nav,
+html:not([data-theme="dark"]) .admin-site-footer {
+    background: #292943;
+}
+
+html:not([data-theme="dark"]) .admin-top-header {
+    box-shadow: 0 4px 18px rgba(38, 51, 72, .14);
+}
+
+html:not([data-theme="dark"]) .admin-header-main,
+html:not([data-theme="dark"]) .admin-horizontal-nav {
+    border-color: rgba(255, 255, 255, .12);
+}
+
+html:not([data-theme="dark"]) .admin-header-left .admin-brand,
+html:not([data-theme="dark"]) .admin-brand-text strong {
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-nav-link {
+    color: #e0e1e8;
+}
+
+html:not([data-theme="dark"]) .admin-nav-icon {
+    color: #c4cad5;
+}
+
+html:not([data-theme="dark"]) .admin-nav-link:hover {
+    background: rgba(255, 255, 255, .09);
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-nav-link:hover .admin-nav-icon {
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-nav-link.active {
+    border-color: #dcdcf0;
+    background: #7777b8;
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(20, 30, 46, .14);
+}
+
+html:not([data-theme="dark"]) .admin-nav-link.active .admin-nav-icon {
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-portal-shortcut {
+    border-color: rgba(255, 255, 255, .2);
+    color: #e0e1e8;
+}
+
+html:not([data-theme="dark"]) .admin-portal-shortcut:hover {
+    border-color: rgba(255, 255, 255, .38);
+    background: rgba(255, 255, 255, .09);
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-header-right .theme-toggle,
+html:not([data-theme="dark"]) .admin-header-right .notification-bell > summary,
+html:not([data-theme="dark"]) .admin-logout-button {
+    border-color: rgba(255, 255, 255, .2);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-header-right .theme-toggle:hover,
+html:not([data-theme="dark"]) .admin-header-right .notification-bell > summary:hover,
+html:not([data-theme="dark"]) .admin-header-right .notification-bell[open] > summary,
+html:not([data-theme="dark"]) .admin-logout-button:hover {
+    border-color: rgba(255, 255, 255, .4);
+    background: rgba(255, 255, 255, .15);
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-user-profile {
+    border-color: rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .08);
+}
+
+html:not([data-theme="dark"]) .admin-user-name { color: #fff; }
+html:not([data-theme="dark"]) .admin-user-title { color: #d0d5df; }
+
+html:not([data-theme="dark"]) .admin-content h1,
+html:not([data-theme="dark"]) .admin-content h2,
+html:not([data-theme="dark"]) .admin-content h3,
+html:not([data-theme="dark"]) .admin-content strong,
+html:not([data-theme="dark"]) .admin-content label {
+    color: #383849;
+}
+
+html:not([data-theme="dark"]) .admin-content p,
+html:not([data-theme="dark"]) .admin-content small,
+html:not([data-theme="dark"]) .admin-content .panel-desc,
+html:not([data-theme="dark"]) .admin-content .section-heading p {
+    color: #707582;
+}
+
+html:not([data-theme="dark"]) .admin-stat,
+html:not([data-theme="dark"]) .kpi-card,
+html:not([data-theme="dark"]) .admin-panel,
+html:not([data-theme="dark"]) .table-card,
+html:not([data-theme="dark"]) .admin-content .admin-card {
+    border-color: #e0e1e8;
+    background: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-button,
+html:not([data-theme="dark"]) .ahb-btn.primary {
+    border-color: #7777b8;
+    background: #7777b8;
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-button:hover,
+html:not([data-theme="dark"]) .ahb-btn.primary:hover {
+    border-color: #66669f;
+    background: #66669f;
+}
+
+html:not([data-theme="dark"]) .table-link,
+html:not([data-theme="dark"]) .panel-action-btn,
+html:not([data-theme="dark"]) .panel-action-link,
+html:not([data-theme="dark"]) .reset-link {
+    color: #7777b8;
+}
+
+html:not([data-theme="dark"]) .admin-filters input,
+html:not([data-theme="dark"]) .admin-filters select,
+html:not([data-theme="dark"]) .row-actions select,
+html:not([data-theme="dark"]) .inline-status-form select {
+    border-color: #e0e1e8;
+    background: #fff;
+}
+
+html:not([data-theme="dark"]) .segment-item,
+html:not([data-theme="dark"]) .infra-item,
+html:not([data-theme="dark"]) .activity-feed-item,
+html:not([data-theme="dark"]) .command-card {
+    border-color: #e0e1e8;
+}
+
+html:not([data-theme="dark"]) .admin-hero-banner {
+    background: linear-gradient(120deg, #292943 0%, #383849 100%);
+}
+
+html:not([data-theme="dark"]) .admin-content .admin-hero-banner .ahb-title {
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-content .admin-hero-banner .ahb-subtitle {
+    color: #dcdcf0;
+}
+
+html:not([data-theme="dark"]) .admin-hero-banner .ahb-btn.primary {
+    background: #7777b8;
+    border-color: #9898ca;
+}
+
+html:not([data-theme="dark"]) .admin-hero-banner .ahb-btn.secondary {
+    border-color: rgba(255, 255, 255, .25);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+}
+
+html:not([data-theme="dark"]) .admin-console-footer {
+    border-color: #e0e1e8;
+    background: #fff;
+    color: #707582;
+}
+
+html:not([data-theme="dark"]) .ahb-pill,
+html:not([data-theme="dark"]) .panel-badge {
+    border-color: #dcdcf0;
+    background: #dcdcf0;
+    color: #383849;
+}
+
+html:not([data-theme="dark"]) .admin-button.secondary:hover {
+    border-color: #dcdcf0;
+    background: #f4f3fa;
+}
+
+html:not([data-theme="dark"]) .admin-filters input:focus,
+html:not([data-theme="dark"]) .admin-filters select:focus,
+html:not([data-theme="dark"]) .row-actions select:focus,
+html:not([data-theme="dark"]) .inline-status-form select:focus {
+    border-color: #7777b8;
+    outline: 3px solid rgba(119, 119, 184, .16);
 }
 
 /* ==========================================
