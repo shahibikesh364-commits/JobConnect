@@ -583,6 +583,136 @@ class JobListingSeeder extends Seeder
             ];
         }
 
+        $expansionGroups = [
+            [
+                'industry' => 'software products', 'city' => 'Kathmandu',
+                'companies' => ['Aster Software Labs', 'BluePeak Digital'],
+                'roles' => [
+                    ['Software Engineer', 'PHP or JavaScript, SQL, and experience building reliable web applications.', 50000, 85000, 'Full-time'],
+                    ['Frontend Developer', 'JavaScript, responsive layouts, accessibility, and a modern UI framework.', 42000, 70000, 'Full-time'],
+                    ['Quality Assurance Analyst', 'Test planning, clear bug reports, and careful web application testing.', 35000, 58000, 'Full-time'],
+                    ['Technical Support Associate', 'Troubleshooting, customer communication, and basic web technology knowledge.', 26000, 42000, 'Full-time'],
+                    ['Product Design Intern', 'Figma, interface fundamentals, curiosity, and a small design portfolio.', 15000, 24000, 'Internship'],
+                ],
+            ],
+            [
+                'industry' => 'financial services', 'city' => 'Lalitpur',
+                'companies' => ['Cedar Finance Group', 'Evergreen Capital Nepal'],
+                'roles' => [
+                    ['Accounts Officer', 'Accounting fundamentals, spreadsheet skills, and accurate financial records.', 32000, 52000, 'Full-time'],
+                    ['Credit Analyst', 'Financial analysis, credit documentation, and careful risk assessment.', 38000, 62000, 'Full-time'],
+                    ['Client Service Officer', 'Professional customer service, clear communication, and reliable follow-through.', 28000, 44000, 'Full-time'],
+                    ['Compliance Associate', 'Policy awareness, document review, discretion, and close attention to detail.', 35000, 56000, 'Full-time'],
+                    ['Finance Operations Intern', 'Basic accounting knowledge, spreadsheet confidence, and willingness to learn.', 14000, 22000, 'Internship'],
+                ],
+            ],
+            [
+                'industry' => 'hospitality and travel', 'city' => 'Pokhara',
+                'companies' => ['Silverline Hospitality', 'Suntrail Travel Company'],
+                'roles' => [
+                    ['Guest Experience Associate', 'Warm guest service, confident communication, and a helpful approach.', 22000, 36000, 'Full-time'],
+                    ['Front Office Supervisor', 'Hotel reception experience, shift coordination, and guest issue resolution.', 30000, 48000, 'Full-time'],
+                    ['Restaurant Cook', 'Kitchen experience, food safety, and consistent meal preparation.', 24000, 40000, 'Full-time'],
+                    ['Travel Booking Consultant', 'Customer service, booking accuracy, and local destination knowledge.', 25000, 42000, 'Full-time'],
+                    ['Events Assistant', 'Event setup, vendor coordination, organization, and teamwork.', 18000, 28000, 'Part-time'],
+                ],
+            ],
+            [
+                'industry' => 'healthcare services', 'city' => 'Bharatpur',
+                'companies' => ['Bluebell Medical Centre', 'CureWell Diagnostics'],
+                'roles' => [
+                    ['Staff Nurse', 'Recognized nursing qualification, patient care experience, and accurate records.', 36000, 58000, 'Full-time'],
+                    ['Laboratory Assistant', 'Laboratory training, safe sample handling, and careful documentation.', 26000, 42000, 'Full-time'],
+                    ['Clinic Receptionist', 'Professional patient communication, appointment scheduling, and privacy awareness.', 22000, 35000, 'Full-time'],
+                    ['Medical Records Officer', 'Accurate data entry, records management, and respect for confidentiality.', 25000, 40000, 'Full-time'],
+                    ['Health Outreach Assistant', 'Community engagement, health education, and readiness for local field visits.', 24000, 39000, 'Full-time'],
+                ],
+            ],
+            [
+                'industry' => 'education and learning', 'city' => 'Kathmandu',
+                'companies' => ['Crestview Learning Academy', 'Discovery Education Nepal'],
+                'roles' => [
+                    ['Primary Teacher', 'Teaching qualification, lesson planning, and supportive classroom skills.', 30000, 48000, 'Full-time'],
+                    ['Admissions Coordinator', 'Clear family communication, organized records, and student-focused service.', 26000, 42000, 'Full-time'],
+                    ['Curriculum Assistant', 'Strong writing, education research, and careful learning material preparation.', 28000, 45000, 'Full-time'],
+                    ['Student Support Officer', 'Counseling or education experience, empathy, and professional discretion.', 32000, 52000, 'Full-time'],
+                    ['Learning Centre Tutor', 'Subject confidence, engaging teaching, and reliable part-time availability.', 18000, 30000, 'Part-time'],
+                ],
+            ],
+            [
+                'industry' => 'retail and commerce', 'city' => 'Biratnagar',
+                'companies' => ['Daylight Retail Nepal', 'Maple Market Group'],
+                'roles' => [
+                    ['Retail Sales Associate', 'Customer service, product knowledge, and dependable store operations.', 20000, 32000, 'Full-time'],
+                    ['Inventory Controller', 'Stock reconciliation, spreadsheet skills, and organized record keeping.', 26000, 42000, 'Full-time'],
+                    ['E-commerce Coordinator', 'Online order management, product listings, and customer communication.', 30000, 48000, 'Full-time'],
+                    ['Visual Merchandiser', 'A strong visual eye, display planning, and retail presentation skills.', 24000, 40000, 'Full-time'],
+                    ['Customer Care Representative', 'Patient communication, accurate order support, and problem solving.', 22000, 36000, 'Full-time'],
+                ],
+            ],
+            [
+                'industry' => 'manufacturing and production', 'city' => 'Hetauda',
+                'companies' => ['Ironwood Manufacturing', 'Northstar Consumer Products'],
+                'roles' => [
+                    ['Production Supervisor', 'Production planning, team coordination, and workplace safety awareness.', 38000, 62000, 'Full-time'],
+                    ['Quality Control Technician', 'Inspection methods, accurate reports, and consistent quality standards.', 28000, 46000, 'Full-time'],
+                    ['Maintenance Technician', 'Equipment troubleshooting, practical mechanical skills, and safe work habits.', 30000, 50000, 'Full-time'],
+                    ['Supply Chain Assistant', 'Purchase and delivery tracking, organized records, and vendor coordination.', 26000, 42000, 'Full-time'],
+                    ['Workplace Safety Officer', 'Safety training, incident documentation, and clear staff communication.', 32000, 52000, 'Full-time'],
+                ],
+            ],
+            [
+                'industry' => 'construction and engineering', 'city' => 'Butwal',
+                'companies' => ['Pinnacle Infrastructure', 'Stonebridge Engineering Nepal'],
+                'roles' => [
+                    ['Civil Engineer', 'Civil engineering qualification, site coordination, and design documentation.', 42000, 70000, 'Full-time'],
+                    ['Site Coordinator', 'Construction site experience, scheduling, and safety-conscious teamwork.', 32000, 52000, 'Full-time'],
+                    ['CAD Technician', 'AutoCAD or equivalent drafting skills and accurate technical drawings.', 30000, 50000, 'Full-time'],
+                    ['Cost Estimation Assistant', 'Construction measurement, spreadsheet confidence, and attention to detail.', 30000, 48000, 'Full-time'],
+                    ['Project Documentation Officer', 'Organized project records, clear writing, and document control experience.', 28000, 45000, 'Full-time'],
+                ],
+            ],
+            [
+                'industry' => 'agriculture and food production', 'city' => 'Chitwan',
+                'companies' => ['Golden Harvest Foods', 'Terai Agro Cooperative'],
+                'roles' => [
+                    ['Agriculture Field Officer', 'Agriculture knowledge, farmer engagement, and willingness to travel locally.', 30000, 50000, 'Full-time'],
+                    ['Food Production Coordinator', 'Production scheduling, food safety, and reliable operational records.', 30000, 48000, 'Full-time'],
+                    ['Farm Operations Assistant', 'Practical agriculture experience, teamwork, and careful daily reporting.', 22000, 36000, 'Full-time'],
+                    ['Food Safety Technician', 'Food hygiene standards, inspection routines, and detailed documentation.', 28000, 45000, 'Full-time'],
+                    ['Agriculture Sales Representative', 'Customer relationships, product guidance, and regional travel readiness.', 26000, 44000, 'Full-time'],
+                ],
+            ],
+            [
+                'industry' => 'community development', 'city' => 'Dhangadhi',
+                'companies' => ['OpenRoads Development Network', 'Kindred Community Foundation'],
+                'roles' => [
+                    ['Program Officer', 'Community program coordination, partner communication, and clear reporting.', 33000, 54000, 'Full-time'],
+                    ['Field Coordinator', 'Field team coordination, local engagement, and accurate activity records.', 30000, 50000, 'Full-time'],
+                    ['Monitoring and Evaluation Assistant', 'Data collection, spreadsheet skills, and concise analytical writing.', 32000, 52000, 'Full-time'],
+                    ['Community Communications Associate', 'Strong writing, outreach planning, and respectful community engagement.', 28000, 46000, 'Full-time'],
+                    ['Program Administration Assistant', 'Scheduling, organized records, and dependable administrative support.', 24000, 39000, 'Full-time'],
+                ],
+            ],
+        ];
+
+        foreach ($expansionGroups as $group) {
+            foreach ($group['companies'] as $company) {
+                foreach ($group['roles'] as [$title, $requirements, $salaryMin, $salaryMax, $jobType]) {
+                    $jobs[] = [
+                        'title' => $title,
+                        'company_name' => $company,
+                        'location' => $group['city'] . ', Nepal',
+                        'job_type' => $jobType,
+                        'description' => 'Join ' . $company . ' and contribute to meaningful work in ' . $group['industry'] . '. Collaborate with a supportive team and help deliver dependable results.',
+                        'requirements' => $requirements,
+                        'salary_min' => $salaryMin,
+                        'salary_max' => $salaryMax,
+                    ];
+                }
+            }
+        }
+
         foreach ($jobs as $job) {
             JobListing::updateOrCreate(
                 [
