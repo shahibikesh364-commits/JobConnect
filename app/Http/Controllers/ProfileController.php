@@ -21,6 +21,11 @@ class ProfileController extends Controller
         if ($request->user()->isJobSeeker()) {
             return redirect()->route('job-seeker.profile.show');
         }
+        if ($request->user()->isAdmin()) {
+            return view('admin.profile', [
+                'user' => $request->user(),
+            ]);
+        }
 
         return view('profile.edit', [
             'user' => $request->user(),
@@ -36,6 +41,10 @@ class ProfileController extends Controller
         if ($user->role === 'employer') {
             return view('employer.settings', compact('user'));
         }
+        if ($user->isAdmin()) {
+            return view('admin.settings', compact('user'));
+        }
+
         return view('profile.edit', compact('user'));
     }
 
