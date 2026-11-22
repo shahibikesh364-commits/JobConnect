@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobListing;
+use App\Models\JobListingView;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class JobListingController extends Controller
 {
     // Display and filter open jobs
     public function index(Request $request)
     {
+        if ($request->user()?->isEmployer()) {
+            return redirect()->route('employer.jobs.index');
+        }
+
         $validated = $request->validate([
             'search' => ['nullable', 'string', 'max:100'],
             'location' => ['nullable', 'string', 'max:100'],
@@ -78,20 +84,38 @@ class JobListingController extends Controller
     }
 
     // Display the details of a single job.
-    public function show(JobListing $job)
+    public function show(Request $request, JobListing $job)
     {
+        $deadlinePassed = $job->application_deadline?->lt(today()) ?? false;
+        $acceptingApplications = $job->status === 'open' && !$deadlinePassed;
         $hasApplied = Auth::check()
             && $job->applications()
             ->where('user_id', Auth::id())
             ->exists();
 
         $isOwner = Auth::check()
-            && $job->employer_id === Auth::id();
+            && (int) $job->employer_id === Auth::user()->employerWorkspaceId();
+
+        if (!$isOwner && !($request->user()?->isAdmin() ?? false)) {
+            $visitorToken = $request->session()->get('job_listing_view_visitor_token');
+
+            if (!is_string($visitorToken) || $visitorToken === '') {
+                $visitorToken = Str::random(48);
+                $request->session()->put('job_listing_view_visitor_token', $visitorToken);
+            }
+
+            JobListingView::query()->firstOrCreate([
+                'job_listing_id' => $job->id,
+                'visitor_hash' => hash_hmac('sha256', $visitorToken, (string) config('app.key')),
+            ]);
+        }
 
         return view('jobs.show', compact(
             'job',
             'hasApplied',
-            'isOwner'
+            'isOwner',
+            'deadlinePassed',
+            'acceptingApplications',
         ));
     }
 }
