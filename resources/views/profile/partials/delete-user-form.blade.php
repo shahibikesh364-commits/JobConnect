@@ -1,3 +1,8 @@
+@php
+    $settingsApi = $settingsApi ?? false;
+    $requiresDeleteConfirmation = $requiresDeleteConfirmation ?? (isset($user) && $user->role === 'employer');
+@endphp
+
 <section class="space-y-6">
     <header>
         <h2 class="text-lg font-medium text-gray-900">
@@ -15,7 +20,8 @@
     >{{ __('Delete Account') }}</x-danger-button>
 
     <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
+        <form method="post" action="{{ route('profile.destroy') }}" class="p-6"
+            @if ($settingsApi) data-delete-form @endif>
             @csrf
             @method('delete')
 
@@ -40,6 +46,14 @@
 
                 <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
+
+            @if ($requiresDeleteConfirmation)
+                <div class="mt-6 settings-delete-confirmation">
+                    <x-input-label for="delete-confirmation" value="Type DELETE to confirm" />
+                    <x-text-input id="delete-confirmation" name="confirmation" type="text" autocomplete="off" required />
+                    <x-input-error :messages="$errors->userDeletion->get('confirmation')" class="mt-2" />
+                </div>
+            @endif
 
             <div class="mt-6 flex justify-end">
                 <x-secondary-button x-on:click="$dispatch('close')">
