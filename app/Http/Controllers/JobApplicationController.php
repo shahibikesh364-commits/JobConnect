@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use App\Models\EmployerSetting;
+use App\Models\EmployerTeamMember;
+use App\Models\User;
 use App\Notifications\ApplicationStatusChanged;
+use App\Notifications\EmployerSettingsNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,7 +22,8 @@ class JobApplicationController extends Controller
 
     public function store(Request $request, JobListing $job): RedirectResponse
     {
-        abort_unless($job->status === 'open', 404);
+        $deadlinePassed = $job->application_deadline?->lt(today()) ?? false;
+        abort_unless($job->status === 'open' && !$deadlinePassed, 404);
 
         $request->validate([
             'cover_letter' => ['nullable', 'string', 'max:5000'],
@@ -31,6 +36,43 @@ class JobApplicationController extends Controller
 
         if ($application->wasRecentlyCreated) {
             $request->user()->notify(new ApplicationStatusChanged($application, 'submitted'));
+            $workspaceUserIds = EmployerTeamMember::query()
+                ->where('employer_id', $job->employer_id)
+                ->where('status', 'active')
+                ->whereIn('role', ['admin', 'recruiter'])
+                ->whereNotNull('member_user_id')
+                ->pluck('member_user_id');
+            $employers = User::query()
+                ->where('role', 'employer')
+                ->where(function ($query) use ($job, $workspaceUserIds) {
+                    $query->whereKey($job->employer_id)
+                        ->orWhereIn('id', $workspaceUserIds);
+                })
+                ->get();
+
+            foreach ($employers as $employer) {
+                if ($employer->employerWorkspaceId() !== (int) $job->employer_id) continue;
+
+                $employer->notify(new EmployerSettingsNotification(
+                    'new_application',
+                    'New application received',
+                    "A candidate applied for {$job->title}.",
+                    ['application_id' => $application->id, 'job_id' => $job->id],
+                ));
+            }
+
+            $threshold = EmployerSetting::where('employer_id', $job->employer_id)->value('application_alert_threshold');
+            if ($threshold && $job->applications()->count() === (int) $threshold) {
+                foreach ($employers as $employer) {
+                    if ($employer->employerWorkspaceId() !== (int) $job->employer_id) continue;
+                    $employer->notify(new EmployerSettingsNotification(
+                        'new_application',
+                        'Application milestone reached',
+                        "{$job->title} has reached {$threshold} applications.",
+                        ['job_id' => $job->id, 'application_count' => (int) $threshold],
+                    ));
+                }
+            }
         }
 
         return redirect()->route('jobs.show', $job);
