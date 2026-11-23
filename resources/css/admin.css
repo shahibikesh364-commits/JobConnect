@@ -1479,7 +1479,8 @@ html[data-theme="dark"] .jobs-summary-card.is-active.active-applications {
 
 #jobs-results[aria-busy="true"],
 #users-results[aria-busy="true"],
-#job-seekers-results[aria-busy="true"] {
+#job-seekers-results[aria-busy="true"],
+#applications-results[aria-busy="true"] {
     opacity: 0.6;
     pointer-events: none;
     transition: opacity 0.15s ease;
@@ -6038,11 +6039,6 @@ html:not([data-theme="dark"]) .panel-badge {
     border-color: #dcdcf0;
     background: #dcdcf0;
     color: #383849;
-}
-
-html:not([data-theme="dark"]) .admin-button.secondary:hover {
-    border-color: #dcdcf0;
-    background: #f4f3fa;
 }
 
 html:not([data-theme="dark"]) .admin-filters input:focus,
