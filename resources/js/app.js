@@ -562,3 +562,250 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         loadJobSeekers(url.toString(), false);
     });
 })();
+
+/* Admin Jobs - AJAX summary cards, filtering, pagination and actions */
+(() => {
+    const results = document.querySelector("#jobs-results");
+    const summarySection = document.querySelector(".jobs-summary");
+    const filterForm = document.querySelector(".jobs-filter-panel");
+
+    if (!results || !summarySection) return;
+
+    const summaryCards = summarySection.querySelectorAll(".jobs-summary-card");
+    const searchInput = filterForm?.querySelector('[name="search"]');
+    const statusSelect = filterForm?.querySelector('[name="status"]');
+    const resultCount = document.querySelector(".jobs-result-count");
+
+    let debounceTimer;
+    let activeController;
+
+    const updateActiveCard = (status) => {
+        summaryCards.forEach((card) => {
+            card.classList.remove(
+                "is-active",
+                "active-open",
+                "active-closed",
+                "active-applications",
+            );
+            const cardStatus = card.dataset.status ?? "";
+
+            if (cardStatus === (status ?? "")) {
+                card.classList.add("is-active");
+                if (cardStatus === "open") card.classList.add("active-open");
+                else if (cardStatus === "closed")
+                    card.classList.add("active-closed");
+                else if (cardStatus === "applications")
+                    card.classList.add("active-applications");
+            }
+        });
+    };
+
+    const loadJobs = async (url, updateHistory = true) => {
+        activeController?.abort();
+        activeController = new AbortController();
+
+        results.setAttribute("aria-busy", "true");
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json, text/html",
+                },
+                credentials: "same-origin",
+                signal: activeController.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            const contentType = response.headers.get("content-type") || "";
+            if (contentType.includes("application/json")) {
+                const data = await response.json();
+                results.innerHTML = data.html;
+                if (resultCount && data.total_formatted) {
+                    resultCount.textContent = data.total_formatted;
+                }
+                if (data.status !== undefined) {
+                    updateActiveCard(data.status);
+                    if (statusSelect) statusSelect.value = data.status;
+                }
+            } else {
+                const html = await response.text();
+                results.innerHTML = html;
+            }
+
+            if (updateHistory) {
+                window.history.pushState({}, "", url);
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Admin jobs AJAX error:", error);
+                window.alert("Unable to load jobs. Please try again.");
+            }
+        } finally {
+            if (activeController?.signal.aborted === false) {
+                results.removeAttribute("aria-busy");
+            }
+        }
+    };
+
+    const buildFilterUrl = (overrideStatus = null) => {
+        const baseUrl = filterForm?.action || window.location.pathname;
+        const url = new URL(baseUrl, window.location.href);
+
+        const search = searchInput?.value.trim();
+        if (search) {
+            url.searchParams.set("search", search);
+        } else {
+            url.searchParams.delete("search");
+        }
+
+        const employerInput = filterForm?.querySelector('[name="employer"]');
+        if (employerInput?.value) {
+            url.searchParams.set("employer", employerInput.value);
+        }
+
+        const status =
+            overrideStatus !== null ? overrideStatus : statusSelect?.value;
+        if (status) {
+            url.searchParams.set("status", status);
+        } else {
+            url.searchParams.delete("status");
+        }
+
+        return url;
+    };
+
+    // 1. Click on any of the 4 summary cards: filter without page reload
+    summarySection.addEventListener("click", (event) => {
+        const card = event.target.closest(".jobs-summary-card");
+        if (!card) return;
+
+        event.preventDefault();
+
+        const targetStatus = card.dataset.status ?? "";
+        updateActiveCard(targetStatus);
+
+        if (statusSelect) {
+            statusSelect.value = targetStatus;
+        }
+
+        clearTimeout(debounceTimer);
+        const url = buildFilterUrl(targetStatus);
+        loadJobs(url.toString());
+    });
+
+    // 2. Filter form events
+    if (filterForm) {
+        filterForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            clearTimeout(debounceTimer);
+            const status = statusSelect?.value ?? "";
+            updateActiveCard(status);
+            loadJobs(buildFilterUrl().toString());
+        });
+
+        // Live search with debounce
+        searchInput?.addEventListener("input", () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                loadJobs(buildFilterUrl().toString());
+            }, 400);
+        });
+
+        // Status select dropdown change
+        statusSelect?.addEventListener("change", () => {
+            clearTimeout(debounceTimer);
+            const status = statusSelect.value;
+            updateActiveCard(status);
+            loadJobs(buildFilterUrl().toString());
+        });
+
+        // Reset link click
+        filterForm.addEventListener("click", (event) => {
+            const resetLink = event.target.closest(".reset-link");
+            if (!resetLink) return;
+
+            event.preventDefault();
+            if (searchInput) searchInput.value = "";
+            if (statusSelect) statusSelect.value = "";
+            updateActiveCard("");
+            loadJobs(resetLink.href);
+        });
+    }
+
+    // 3. Pagination clicks
+    results.addEventListener("click", (event) => {
+        const link = event.target.closest(".admin-pagination a");
+        if (!link) return;
+
+        event.preventDefault();
+        loadJobs(link.href);
+    });
+
+    // 4. Job action forms (Save status / Delete) via AJAX
+    results.addEventListener("submit", async (event) => {
+        const form = event.target;
+        if (
+            !form.matches(".job-status-form") &&
+            !form.matches(".job-delete-form")
+        ) {
+            return;
+        }
+
+        event.preventDefault();
+
+        if (form.matches(".job-delete-form")) {
+            if (!confirm("Delete this listing and its applications?")) {
+                return;
+            }
+        }
+
+        const button = form.querySelector('button[type="submit"]');
+        if (button) button.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json",
+                },
+                credentials: "same-origin",
+                body: new FormData(form),
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Action failed.");
+            }
+
+            if (data.message) {
+                alert(data.message);
+            }
+
+            // Refresh table while preserving current URL state
+            await loadJobs(window.location.href, false);
+        } catch (error) {
+            console.error("Job action error:", error);
+            alert(error.message || "Unable to complete action.");
+            if (button) button.disabled = false;
+        }
+    });
+
+    // 5. Browser Back and Forward buttons
+    window.addEventListener("popstate", () => {
+        const url = new URL(window.location.href);
+        const search = url.searchParams.get("search") || "";
+        const status = url.searchParams.get("status") || "";
+
+        if (searchInput) searchInput.value = search;
+        if (statusSelect) statusSelect.value = status;
+        updateActiveCard(status);
+
+        loadJobs(url.toString(), false);
+    });
+})();
+
