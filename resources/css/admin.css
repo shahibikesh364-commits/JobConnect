@@ -1218,6 +1218,12 @@ td small {
     box-shadow: 0 0 0 1.5px #64748b, 0 4px 12px rgba(100, 116, 139, 0.08);
 }
 
+.jobs-summary-card.is-active.active-applications {
+    border-color: #0284c7;
+    background: #f0f9ff;
+    box-shadow: 0 0 0 1.5px #0284c7, 0 4px 12px rgba(2, 132, 199, 0.12);
+}
+
 .jobs-summary-card.card-applications:hover {
     border-color: #0284c7;
     box-shadow: 0 8px 20px rgba(2, 132, 199, 0.12);
@@ -1463,6 +1469,20 @@ html[data-theme="dark"] .jobs-summary-card.is-active.active-closed {
     border-color: #94a3b8;
     background: #232c3d;
     box-shadow: 0 0 0 1.5px #94a3b8, 0 4px 14px rgba(148, 163, 184, 0.2);
+}
+
+html[data-theme="dark"] .jobs-summary-card.is-active.active-applications {
+    border-color: #38bdf8;
+    background: #172535;
+    box-shadow: 0 0 0 1.5px #38bdf8, 0 4px 14px rgba(56, 189, 248, 0.25);
+}
+
+#jobs-results[aria-busy="true"],
+#users-results[aria-busy="true"],
+#job-seekers-results[aria-busy="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
 }
 
 html[data-theme="dark"] .jobs-summary-card.card-applications:hover {
