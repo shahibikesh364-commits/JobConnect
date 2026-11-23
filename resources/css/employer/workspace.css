@@ -2300,8 +2300,8 @@ body.employer-messages-page .employer-workspace-toolbar-slot {
     position: static;
     display: block;
     box-sizing: border-box;
-    height: 150px;
-    flex: 0 0 150px;
+    height: 116px;
+    flex: 0 0 116px;
     padding: 0;
 }
 
@@ -2372,8 +2372,8 @@ html[data-theme="dark"] body.employer-messages-page .employer-workspace-toolbar 
 /* Keep the messages toolbar outside the page stacking context while it overlays scroll content. */
 body.employer-messages-page > .employer-workspace-toolbar-slot {
     position: static;
-    height: 150px;
-    flex: 0 0 150px;
+    height: 116px;
+    flex: 0 0 116px;
     padding: 0;
 }
 
