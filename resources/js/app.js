@@ -405,3 +405,160 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         loadUsers(url.toString(), false);
     });
 })();
+
+/* Admin Job Seekers - AJAX search, clear, pagination and delete */
+(() => {
+    const results = document.querySelector("#job-seekers-results");
+    const filterForm = document.querySelector("#job-seekers-filter-form");
+
+    if (!results || !filterForm) return;
+
+    const searchInput = filterForm.querySelector('[name="search"]');
+    const clearButton = document.querySelector("#clear-job-seeker-search");
+
+    let debounceTimer;
+
+    const loadJobSeekers = async (url, updateHistory = true) => {
+        results.setAttribute("aria-busy", "true");
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json",
+                },
+                credentials: "same-origin",
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || "Unable to load job seekers.");
+            }
+
+            results.innerHTML = data.html;
+
+            if (updateHistory) {
+                window.history.pushState({}, "", url);
+            }
+        } catch (error) {
+            console.error("Job seekers AJAX error:", error);
+            alert(
+                error.message ||
+                    "Unable to load job seekers. Please try again.",
+            );
+        } finally {
+            results.removeAttribute("aria-busy");
+        }
+    };
+
+    const buildSearchUrl = () => {
+        const url = new URL(filterForm.action, window.location.href);
+        const search = searchInput?.value.trim();
+
+        if (search) {
+            url.searchParams.set("search", search);
+        }
+
+        return url;
+    };
+
+    // Search without reloading the page.
+    filterForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        clearTimeout(debounceTimer);
+
+        loadJobSeekers(buildSearchUrl().toString());
+    });
+
+    // Automatically search while typing.
+    searchInput?.addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+
+        debounceTimer = setTimeout(() => {
+            loadJobSeekers(buildSearchUrl().toString());
+        }, 400);
+    });
+
+    // Clear the search.
+    clearButton?.addEventListener("click", () => {
+        if (searchInput) {
+            searchInput.value = "";
+        }
+
+        clearTimeout(debounceTimer);
+        loadJobSeekers(filterForm.action);
+    });
+
+    // Handle account deletion without reloading the page.
+    results.addEventListener("submit", async (event) => {
+        const form = event.target.closest(".job-seeker-delete-form");
+
+        if (!form) return;
+
+        event.preventDefault();
+
+        if (
+            !confirm(
+                "Are you sure you want to delete this job seeker account and its associated data?",
+            )
+        ) {
+            return;
+        }
+
+        const button = form.querySelector('button[type="submit"]');
+
+        if (button) button.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json",
+                },
+                credentials: "same-origin",
+                body: new FormData(form),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || "Unable to delete this account.",
+                );
+            }
+
+            alert(data.message || "Job seeker account deleted successfully.");
+
+            // Refresh the table while preserving the current search.
+            await loadJobSeekers(window.location.href, false);
+        } catch (error) {
+            console.error("Job seeker deletion error:", error);
+            alert(error.message || "Unable to delete this account.");
+
+            if (button) button.disabled = false;
+        }
+    });
+
+    // Handle pagination without reloading the page.
+    results.addEventListener("click", (event) => {
+        const link = event.target.closest(".admin-pagination a");
+
+        if (!link) return;
+
+        event.preventDefault();
+        loadJobSeekers(link.href);
+    });
+
+    // Support browser Back and Forward buttons.
+    window.addEventListener("popstate", () => {
+        const url = new URL(window.location.href);
+
+        if (searchInput) {
+            searchInput.value = url.searchParams.get("search") || "";
+        }
+
+        loadJobSeekers(url.toString(), false);
+    });
+})();
