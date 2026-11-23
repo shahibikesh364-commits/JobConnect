@@ -13,18 +13,27 @@ use Illuminate\View\View;
 
 class AdminManagementController extends Controller
 {
-    public function users(Request $request): View
+    public function users(Request $request): View|string
     {
         $users = User::query()
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
-                $query->where(fn ($q) => $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%"));
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
             })
-            ->when($request->filled('role'), fn ($query) => $query->where('role', $request->input('role')))
+            ->when($request->filled('role'), function ($query) use ($request) {
+                $query->where('role', $request->input('role'));
+            })
             ->latest()
             ->paginate(15)
             ->withQueryString();
+
+        if ($request->ajax()) {
+            return view('admin.partials._users-table', compact('users'))->render();
+        }
 
         return view('admin.users', compact('users'));
     }
@@ -39,20 +48,21 @@ class AdminManagementController extends Controller
         return view('admin.employers', compact('employers'));
     }
 
-    public function jobSeekers(Request $request): View {
+    public function jobSeekers(Request $request): View
+    {
         $jobSeekers = User::where('role', 'job_seeker')
-        ->withCount('applications')
-        ->when($request->filled('search'), function ($query) use ($request) {
-            $search = $request->string('search')->toString();
+            ->withCount('applications')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->string('search')->toString();
 
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                    ->orWhere('email', 'like', "%{$search}%");
-            });
-        })
-        ->latest()
-        ->paginate(15)
-        ->withQueryString();    
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->paginate(15)
+            ->withQueryString();
 
         return view('admin.job-seekers', compact('jobSeekers'));
     }
@@ -90,11 +100,11 @@ class AdminManagementController extends Controller
             ->withCount('applications')
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
-                $query->where(fn ($q) => $q->where('title', 'like', "%{$search}%")
+                $query->where(fn($q) => $q->where('title', 'like', "%{$search}%")
                     ->orWhere('company_name', 'like', "%{$search}%"));
             })
-            ->when($request->filled('employer'), fn ($query) => $query->where('employer_id', $request->integer('employer')))
-            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->input('status')))
+            ->when($request->filled('employer'), fn($query) => $query->where('employer_id', $request->integer('employer')))
+            ->when($request->filled('status'), fn($query) => $query->where('status', $request->input('status')))
             ->latest()
             ->paginate(15)
             ->withQueryString();
@@ -128,7 +138,7 @@ class AdminManagementController extends Controller
     public function applications(Request $request): View
     {
         $applications = JobApplication::with(['job.employer', 'applicant'])
-            ->when($request->filled('status'), fn ($query) => $query->where('status', $request->input('status')))
+            ->when($request->filled('status'), fn($query) => $query->where('status', $request->input('status')))
             ->latest()
             ->paginate(15)
             ->withQueryString();
