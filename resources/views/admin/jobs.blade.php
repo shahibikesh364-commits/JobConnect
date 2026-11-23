@@ -18,6 +18,7 @@
 
     <section class="jobs-summary" aria-label="Job listing summary">
         <a href="{{ route('admin.jobs.index', $baseParams) }}"
+           data-status=""
            class="jobs-summary-card {{ empty($currentStatus) ? 'is-active' : '' }}"
            title="Show all listings">
             <span class="jobs-summary-icon">▤</span>
@@ -29,6 +30,7 @@
         </a>
 
         <a href="{{ route('admin.jobs.index', array_merge($baseParams, ['status' => 'open'])) }}"
+           data-status="open"
            class="jobs-summary-card {{ $currentStatus === 'open' ? 'is-active active-open' : '' }}"
            title="Filter by open listings">
             <span class="jobs-summary-icon open">●</span>
@@ -40,6 +42,7 @@
         </a>
 
         <a href="{{ route('admin.jobs.index', array_merge($baseParams, ['status' => 'closed'])) }}"
+           data-status="closed"
            class="jobs-summary-card {{ $currentStatus === 'closed' ? 'is-active active-closed' : '' }}"
            title="Filter by closed listings">
             <span class="jobs-summary-icon closed">◷</span>
@@ -50,9 +53,10 @@
             </div>
         </a>
 
-        <a href="{{ route('admin.applications.index') }}"
-           class="jobs-summary-card card-applications"
-           title="View all applications">
+        <a href="{{ route('admin.jobs.index', array_merge($baseParams, ['status' => 'applications'])) }}"
+           data-status="applications"
+           class="jobs-summary-card card-applications {{ $currentStatus === 'applications' ? 'is-active active-applications' : '' }}"
+           title="Show listings with applications">
             <span class="jobs-summary-icon applications">✓</span>
             <div>
                 <p>Total applications</p>
@@ -69,31 +73,19 @@
     <form class="admin-filters jobs-filter-panel" method="GET" action="{{ route('admin.jobs.index') }}">
         <label class="jobs-search-field"><span>Search listings</span><input type="search" name="search" value="{{ request('search') }}" placeholder="Job title or company" aria-label="Search by job title or company"></label>
         @if (request()->filled('employer'))<input type="hidden" name="employer" value="{{ request('employer') }}">@endif
-        <label class="jobs-status-field"><span>Listing status</span><select name="status"><option value="">All statuses</option><option value="open" @selected(request('status') === 'open')>Open</option><option value="closed" @selected(request('status') === 'closed')>Closed</option></select></label>
+        <label class="jobs-status-field">
+            <span>Listing status</span>
+            <select name="status">
+                <option value="">All statuses</option>
+                <option value="open" @selected(request('status') === 'open')>Open</option>
+                <option value="closed" @selected(request('status') === 'closed')>Closed</option>
+                <option value="applications" @selected(request('status') === 'applications')>With applications</option>
+            </select>
+        </label>
         <button class="admin-button" type="submit">Apply filters</button>
         @if (request()->filled('search') || request()->filled('status'))<a class="reset-link" href="{{ route('admin.jobs.index', request()->filled('employer') ? ['employer' => request('employer')] : []) }}">Reset</a>@endif
     </form>
-    <div class="table-card"><div class="table-scroll"><table>
-        <thead><tr><th>Job listing</th><th>Employer</th><th>Applications</th><th>Status</th><th>Listing controls</th></tr></thead>
-        <tbody>
-            @forelse ($jobs as $job)
-                <tr>
-                    <td><strong><a class="table-link" href="{{ route('jobs.show', $job) }}">{{ $job->title }}</a></strong><small>{{ $job->company_name }} · {{ $job->location }}</small><small class="jobs-meta-line">{{ str($job->job_type)->replace('_', ' ')->title() }} · Posted {{ $job->created_at->format('M j, Y') }}</small></td>
-                    <td><span class="jobs-employer-name">{{ $job->employer?->name ?? 'Account removed' }}</span>@if($job->employer)<small>{{ $job->employer->email }}</small>@endif</td>
-                    <td><span class="count-pill">{{ number_format($job->applications_count) }}</span><small>applications</small></td>
-                    <td><span class="role-badge status-{{ $job->status }}"><span class="status-indicator"></span>{{ ucfirst($job->status) }}</span></td>
-                    <td><div class="row-actions">
-                        <form method="POST" action="{{ route('admin.jobs.status', $job) }}">@csrf @method('PATCH')
-                            <select name="status" aria-label="Status for {{ $job->title }}"><option value="open" @selected($job->status === 'open')>Open</option><option value="closed" @selected($job->status === 'closed')>Closed</option></select>
-                            <button class="small-button" type="submit">Save</button>
-                        </form>
-                        <form method="POST" action="{{ route('admin.jobs.destroy', $job) }}" onsubmit="return confirm('Delete this listing and its applications?')">@csrf @method('DELETE')<button class="small-button danger" type="submit">Delete</button></form>
-                    </div></td>
-                </tr>
-            @empty
-                <tr><td colspan="5" class="table-empty"><span class="jobs-empty-icon">⌕</span><strong>No listings found</strong><small>Try changing the search term or status filter.</small></td></tr>
-            @endforelse
-        </tbody>
-    </table></div></div>
-    @include('admin.pagination', ['paginator' => $jobs])
+    <div id="jobs-results">
+        @include('admin.partials._jobs-table', ['jobs' => $jobs])
+    </div>
 @endsection
