@@ -199,7 +199,7 @@ class AdminManagementController extends Controller
         return back();
     }
 
-    public function applications(Request $request): View
+    public function applications(Request $request): View|JsonResponse|string
     {
         $applications = JobApplication::with(['job.employer', 'applicant'])
             ->when($request->filled('status'), fn($query) => $query->where('status', $request->input('status')))
@@ -207,15 +207,35 @@ class AdminManagementController extends Controller
             ->paginate(15)
             ->withQueryString();
 
+        if ($request->ajax()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'html' => view('admin.partials._applications-table', compact('applications'))->render(),
+                    'total' => $applications->total(),
+                    'status' => $request->input('status', ''),
+                ]);
+            }
+
+            return view('admin.partials._applications-table', compact('applications'))->render();
+        }
+
         return view('admin.applications', compact('applications'));
     }
 
-    public function updateApplicationStatus(Request $request, JobApplication $application): RedirectResponse
+    public function updateApplicationStatus(Request $request, JobApplication $application): RedirectResponse|JsonResponse
     {
         $validated = $request->validate([
             'status' => ['required', 'in:submitted,reviewing,shortlisted,rejected'],
         ]);
         $application->update($validated);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Application review status updated.',
+                'status' => $application->status,
+            ]);
+        }
 
         return back();
     }
