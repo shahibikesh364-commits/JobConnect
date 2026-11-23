@@ -1,4 +1,3 @@
-
 @extends('admin.layout')
 
 @section('title', 'Manage Job Seekers')
@@ -12,71 +11,19 @@
         </div>
     </div>
 
-    <form class="admin-filters" method="GET" action="{{ route('admin.job-seekers.index') }}">
-        <input
-            type="search"
-            name="search"
-            value="{{ request('search') }}"
-            placeholder="Search name or email"
-        >
+    <form id="job-seekers-filter-form" class="admin-filters" method="GET" action="{{ route('admin.job-seekers.index') }}">
+        <input type="search" name="search" value="{{ request('search') }}" placeholder="Search name or email">
 
-        <button class="admin-button" type="submit">Search job seekers</button>
+        <button class="admin-button" type="submit">
+            Search job seekers
+        </button>
 
-        @if (request()->filled('search'))
-            <a class="reset-link" href="{{ route('admin.job-seekers.index') }}">Reset</a>
-        @endif
+        <button class="admin-button" type="button" id="clear-job-seeker-search">
+            Clear
+        </button>
     </form>
 
-    <div class="table-card">
-        <div class="table-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Job Seeker</th>
-                        <th>Applications</th>
-                        <th>Joined</th>
-                        <th>Account Actions</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @forelse ($jobSeekers as $jobSeeker)
-                        <tr>
-                            <td>
-                                <strong>{{ $jobSeeker->name }}</strong>
-                                <small>{{ $jobSeeker->email }}</small>
-                            </td>
-
-                            <td>{{ $jobSeeker->applications_count }}</td>
-
-                            <td>{{ $jobSeeker->created_at->format('M j, Y') }}</td>
-
-                            <td>
-                                <form
-                                    method="POST"
-                                    action="{{ route('admin.users.destroy', $jobSeeker) }}"
-                                    onsubmit="return confirm('Delete {{ addslashes($jobSeeker->name) }} and their associated data?')"
-                                >
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button class="small-button danger" type="submit">
-                                        Delete account
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="table-empty">
-                                No job seekers found.
-                            </td>
-                        </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
+    <div id="job-seekers-results">
+        @include('admin.partials._job-seekers-table', ['jobSeekers' => $jobSeekers])
     </div>
-
-    @include('admin.pagination', ['paginator' => $jobSeekers])
 @endsection
