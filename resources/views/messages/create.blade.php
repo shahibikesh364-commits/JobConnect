@@ -14,15 +14,14 @@
 
 <body class="messages-page employer-messages-page employer-workspace">
 
+    <x-employer-workspace-toolbar title="New Conversation" subtitle="Connect directly with JobConnect candidates"
+        icon="✉" />
+
     <div class="messages-shell">
 
         <x-employer-sidebar />
 
         <div class="messages-main">
-
-            <x-employer-workspace-toolbar title="New Conversation" subtitle="Connect directly with JobConnect candidates"
-                icon="✉" />
-
             <main class="messages-container new-conversation-page">
 
                 {{-- Page heading --}}
