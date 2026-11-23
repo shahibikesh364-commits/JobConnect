@@ -317,17 +317,17 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         }, 400);
     });
 
-    filterForm.addEventListener("click", (event) => {
-        const resetLink = event.target.closest(".reset-link");
-        if (!resetLink) return;
+    // Clear search and role filters
+    document
+        .querySelector("#clear-user-filters")
+        ?.addEventListener("click", () => {
+            if (searchInput) searchInput.value = "";
+            if (roleSelect) roleSelect.value = "";
 
-        event.preventDefault();
+            clearTimeout(debounceTimer);
 
-        if (searchInput) searchInput.value = "";
-        if (roleSelect) roleSelect.value = "";
-
-        loadUsers(resetLink.href);
-    });
+            loadUsers(filterForm.action);
+        });
 
     // Handle Save and Delete forms without reloading the page.
     usersPage.addEventListener("submit", async (event) => {
