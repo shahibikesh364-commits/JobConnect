@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Http\JsonResponse;
 
 class AdminManagementController extends Controller
 {
@@ -67,22 +68,45 @@ class AdminManagementController extends Controller
         return view('admin.job-seekers', compact('jobSeekers'));
     }
 
-    public function updateUserRole(Request $request, User $user): RedirectResponse
+
+    public function updateUserRole(Request $request, User $user): RedirectResponse|JsonResponse
     {
         abort_if($user->role === 'admin', 403, 'Administrator roles cannot be changed here.');
 
         $validated = $request->validate([
             'role' => ['required', 'in:job_seeker,employer'],
         ]);
+
         $user->update($validated);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User role updated successfully.',
+                'role' => $user->role,
+                'role_label' => str_replace('_', ' ', ucfirst($user->role)),
+            ]);
+        }
 
         return back();
     }
 
-    public function destroyUser(Request $request, User $user): RedirectResponse
+    public function destroyUser(Request $request, User $user): RedirectResponse|JsonResponse
     {
-        abort_if($user->id === $request->user()->id || $user->role === 'admin', 403, 'Administrator accounts cannot be deleted here.');
+        abort_if(
+            $user->id === $request->user()->id || $user->role === 'admin',
+            403,
+            'Administrator accounts cannot be deleted here.'
+        );
+
         $user->delete();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User deleted successfully.',
+            ]);
+        }
 
         return back();
     }

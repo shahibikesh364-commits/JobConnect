@@ -233,9 +233,8 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         });
     });
 });
-/* Admin Users - AJAX filtering and pagination */
 
-/* Admin Users - AJAX filtering and pagination */
+/* Admin Users - AJAX filtering, pagination, save and delete */
 (() => {
     const usersPage = document.querySelector("#users-results");
 
@@ -266,22 +265,18 @@ applicationDeadlineInput?.addEventListener("focus", () => {
                 signal: activeController.signal,
             });
 
-            if (!response.ok) {
+            if (!response.ok)
                 throw new Error(`Request failed: ${response.status}`);
-            }
 
-            const html = await response.text();
-
-            // The controller returns the table partial directly.
-            usersPage.innerHTML = html;
+            usersPage.innerHTML = await response.text();
 
             if (updateHistory) {
                 window.history.pushState({}, "", url);
             }
         } catch (error) {
             if (error.name !== "AbortError") {
-                console.error("Admin users AJAX error:", error);
-                window.alert("Unable to load users. Please try again.");
+                console.error(error);
+                alert("Unable to load users. Please try again.");
             }
         } finally {
             if (activeController?.signal.aborted === false) {
@@ -304,33 +299,26 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         return url;
     };
 
-    // Filter form submission
     filterForm.addEventListener("submit", (event) => {
         event.preventDefault();
-
         clearTimeout(debounceTimer);
         loadUsers(buildFilterUrl().toString());
     });
 
-    // Filter automatically when role changes
     roleSelect?.addEventListener("change", () => {
         clearTimeout(debounceTimer);
         loadUsers(buildFilterUrl().toString());
     });
 
-    // Search automatically with a short delay
     searchInput?.addEventListener("input", () => {
         clearTimeout(debounceTimer);
-
         debounceTimer = setTimeout(() => {
             loadUsers(buildFilterUrl().toString());
         }, 400);
     });
 
-    // Reset filters
     filterForm.addEventListener("click", (event) => {
         const resetLink = event.target.closest(".reset-link");
-
         if (!resetLink) return;
 
         event.preventDefault();
@@ -341,17 +329,68 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         loadUsers(resetLink.href);
     });
 
-    // AJAX pagination
+    // Handle Save and Delete forms without reloading the page.
+    usersPage.addEventListener("submit", async (event) => {
+        const form = event.target.closest(".row-actions form");
+
+        if (!form) return;
+
+        event.preventDefault();
+
+        if (form.querySelector('input[name="_method"]')?.value === "DELETE") {
+            if (
+                !confirm(
+                    form
+                        .getAttribute("onsubmit")
+                        ?.match(/confirm\(['"](.+?)['"]\)/)?.[1] ||
+                        "Are you sure you want to delete this user?",
+                )
+            ) {
+                return;
+            }
+        }
+
+        const button = form.querySelector('button[type="submit"]');
+        if (button) button.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json",
+                },
+                credentials: "same-origin",
+                body: new FormData(form),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || "The action could not be completed.",
+                );
+            }
+
+            alert(data.message);
+
+            // Refresh only the table, preserving current filters.
+            await loadUsers(window.location.href, false);
+        } catch (error) {
+            console.error("User action error:", error);
+            alert(error.message || "Unable to complete the action.");
+            if (button) button.disabled = false;
+        }
+    });
+
     usersPage.addEventListener("click", (event) => {
         const link = event.target.closest(".admin-pagination a");
-
         if (!link) return;
 
         event.preventDefault();
         loadUsers(link.href);
     });
 
-    // Browser back and forward navigation
     window.addEventListener("popstate", () => {
         const url = new URL(window.location.href);
 
