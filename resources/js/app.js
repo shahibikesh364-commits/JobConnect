@@ -233,3 +233,136 @@ applicationDeadlineInput?.addEventListener("focus", () => {
         });
     });
 });
+/* Admin Users - AJAX filtering and pagination */
+
+/* Admin Users - AJAX filtering and pagination */
+(() => {
+    const usersPage = document.querySelector("#users-results");
+
+    if (!usersPage) return;
+
+    const filterForm = document.querySelector(".admin-filters");
+    if (!filterForm) return;
+
+    const searchInput = filterForm.querySelector('[name="search"]');
+    const roleSelect = filterForm.querySelector('[name="role"]');
+
+    let debounceTimer;
+    let activeController;
+
+    const loadUsers = async (url, updateHistory = true) => {
+        activeController?.abort();
+        activeController = new AbortController();
+
+        usersPage.setAttribute("aria-busy", "true");
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "text/html",
+                },
+                credentials: "same-origin",
+                signal: activeController.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            const html = await response.text();
+
+            // The controller returns the table partial directly.
+            usersPage.innerHTML = html;
+
+            if (updateHistory) {
+                window.history.pushState({}, "", url);
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Admin users AJAX error:", error);
+                window.alert("Unable to load users. Please try again.");
+            }
+        } finally {
+            if (activeController?.signal.aborted === false) {
+                usersPage.removeAttribute("aria-busy");
+            }
+        }
+    };
+
+    const buildFilterUrl = () => {
+        const url = new URL(filterForm.action, window.location.href);
+
+        if (searchInput?.value.trim()) {
+            url.searchParams.set("search", searchInput.value.trim());
+        }
+
+        if (roleSelect?.value) {
+            url.searchParams.set("role", roleSelect.value);
+        }
+
+        return url;
+    };
+
+    // Filter form submission
+    filterForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        clearTimeout(debounceTimer);
+        loadUsers(buildFilterUrl().toString());
+    });
+
+    // Filter automatically when role changes
+    roleSelect?.addEventListener("change", () => {
+        clearTimeout(debounceTimer);
+        loadUsers(buildFilterUrl().toString());
+    });
+
+    // Search automatically with a short delay
+    searchInput?.addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+
+        debounceTimer = setTimeout(() => {
+            loadUsers(buildFilterUrl().toString());
+        }, 400);
+    });
+
+    // Reset filters
+    filterForm.addEventListener("click", (event) => {
+        const resetLink = event.target.closest(".reset-link");
+
+        if (!resetLink) return;
+
+        event.preventDefault();
+
+        if (searchInput) searchInput.value = "";
+        if (roleSelect) roleSelect.value = "";
+
+        loadUsers(resetLink.href);
+    });
+
+    // AJAX pagination
+    usersPage.addEventListener("click", (event) => {
+        const link = event.target.closest(".admin-pagination a");
+
+        if (!link) return;
+
+        event.preventDefault();
+        loadUsers(link.href);
+    });
+
+    // Browser back and forward navigation
+    window.addEventListener("popstate", () => {
+        const url = new URL(window.location.href);
+
+        if (searchInput) {
+            searchInput.value = url.searchParams.get("search") || "";
+        }
+
+        if (roleSelect) {
+            roleSelect.value = url.searchParams.get("role") || "";
+        }
+
+        loadUsers(url.toString(), false);
+    });
+})();
