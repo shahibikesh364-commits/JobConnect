@@ -49,7 +49,7 @@ class AdminManagementController extends Controller
         return view('admin.employers', compact('employers'));
     }
 
-    public function jobSeekers(Request $request): View
+    public function jobSeekers(Request $request): View|JsonResponse
     {
         $jobSeekers = User::where('role', 'job_seeker')
             ->withCount('applications')
@@ -65,9 +65,14 @@ class AdminManagementController extends Controller
             ->paginate(15)
             ->withQueryString();
 
+        if ($request->ajax()) {
+            return response()->json([
+                'html' => view('admin.partials._job-seekers-table', compact('jobSeekers'))->render(),
+            ]);
+        }
+
         return view('admin.job-seekers', compact('jobSeekers'));
     }
-
 
     public function updateUserRole(Request $request, User $user): RedirectResponse|JsonResponse
     {
