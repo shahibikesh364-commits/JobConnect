@@ -16,6 +16,10 @@
 
 <body
     class="messages-page {{ auth()->user()->isEmployer() ? 'employer-messages-page employer-workspace' : 'job-seeker-messages-page' }}">
+    @if (auth()->user()->isEmployer())
+        <x-employer-workspace-toolbar />
+    @endif
+
     <div class="messages-shell">
         @if (auth()->user()->isEmployer())
             <x-employer-sidebar />
@@ -24,9 +28,7 @@
         @endif
 
         <div class="messages-main">
-            @if (auth()->user()->isEmployer())
-                <x-employer-workspace-toolbar />
-            @else
+            @unless (auth()->user()->isEmployer())
                 <header class="messages-header">
                     <div class="messages-header-context">
                         <p>{{ auth()->user()->isEmployer() ? 'HIRING WORKSPACE' : 'YOUR NETWORK' }}</p>
@@ -40,7 +42,7 @@
                         @endunless
                     </div>
                 </header>
-            @endif
+            @endunless
 
             <main class="messages-container">
                 <section class="messages-hero">
