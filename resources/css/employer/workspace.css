@@ -638,11 +638,18 @@ body.employer-workspace .job-editor-page #application_deadline {
     scroll-margin-block: 40vh;
 }
 
-html[data-theme="dark"] body.employer-workspace .job-editor-page .job-form-field label {
+html[data-theme="dark"]
+    body.employer-workspace
+    .job-editor-page
+    .job-form-field
+    label {
     color: #cbd5e1;
 }
 
-html[data-theme="dark"] body.employer-workspace .job-editor-page #application_deadline {
+html[data-theme="dark"]
+    body.employer-workspace
+    .job-editor-page
+    #application_deadline {
     color-scheme: dark;
 }
 
@@ -845,31 +852,93 @@ html[data-theme="dark"]
     color: #a9b6c8;
 }
 
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-brand h2,
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-brand h3,
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-column h3,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-brand h2,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-brand h3,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-column h3 {
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-brand
+    h2,
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-brand
+    h3,
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-column
+    h3,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-brand
+    h2,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-brand
+    h3,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-column
+    h3 {
     color: #e8eef7;
 }
 
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-brand p,
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-column p,
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-column a,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-brand p,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-column p,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-column a {
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-brand
+    p,
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-column
+    p,
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-column
+    a,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-brand
+    p,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-column
+    p,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-column
+    a {
     color: #a9b6c8;
 }
 
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-column a:hover,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-column a:hover {
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-column
+    a:hover,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-column
+    a:hover {
     color: #8fb4ff;
 }
 
-html[data-theme="dark"] body.employer-workspace .site-footer--employer .footer-bottom,
-html[data-theme="dark"] body.employer-messages-page .site-footer--employer .footer-bottom {
+html[data-theme="dark"]
+    body.employer-workspace
+    .site-footer--employer
+    .footer-bottom,
+html[data-theme="dark"]
+    body.employer-messages-page
+    .site-footer--employer
+    .footer-bottom {
     border-top-color: #2b3a50;
     color: #a9b6c8;
 }
@@ -1315,7 +1384,10 @@ body.employer-messages-page .messages-main > .employer-workspace-toolbar {
     text-decoration: none;
 }
 
-.employer-toolbar-brand-logo { width: 36px; height: 36px; }
+.employer-toolbar-brand-logo {
+    width: 36px;
+    height: 36px;
+}
 
 .employer-navigation-menu {
     position: relative;
@@ -1341,10 +1413,19 @@ body.employer-messages-page .messages-main > .employer-workspace-toolbar {
     box-shadow: none;
 }
 
-.employer-navigation-menu > summary::-webkit-details-marker { display: none; }
+.employer-navigation-menu > summary::-webkit-details-marker {
+    display: none;
+}
 .employer-navigation-menu > summary:hover,
-.employer-navigation-menu[open] > summary { border-color: var(--employer-border); background: #f3f6fa; color: var(--employer-midnight); }
-.employer-navigation-menu > summary:focus-visible { outline: 3px solid rgb(37 99 235 / 22%); outline-offset: 2px; }
+.employer-navigation-menu[open] > summary {
+    border-color: var(--employer-border);
+    background: #f3f6fa;
+    color: var(--employer-midnight);
+}
+.employer-navigation-menu > summary:focus-visible {
+    outline: 3px solid rgb(37 99 235 / 22%);
+    outline-offset: 2px;
+}
 
 .employer-navigation-panel {
     position: absolute;
@@ -1372,9 +1453,16 @@ body.employer-messages-page .messages-main > .employer-workspace-toolbar {
     font-weight: 750;
 }
 
-.employer-navigation-logo { width: 31px; height: 31px; flex: 0 0 31px; }
+.employer-navigation-logo {
+    width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+}
 
-.employer-navigation-panel nav { display: grid; gap: 3px; }
+.employer-navigation-panel nav {
+    display: grid;
+    gap: 3px;
+}
 
 .employer-navigation-panel nav a {
     display: flex;
@@ -1401,15 +1489,37 @@ body.employer-messages-page .messages-main > .employer-workspace-toolbar {
     font-size: 15px;
 }
 
-.employer-navigation-panel nav a:hover { background: #f3f6fa; color: var(--employer-midnight); }
-.employer-navigation-panel nav a.is-active { background: #edf3ff; color: #1d4ed8; font-weight: 750; }
+.employer-navigation-panel nav a:hover {
+    background: #f3f6fa;
+    color: var(--employer-midnight);
+}
+.employer-navigation-panel nav a.is-active {
+    background: #edf3ff;
+    color: #1d4ed8;
+    font-weight: 750;
+}
 
 html[data-theme="dark"] .employer-navigation-menu > summary,
-html[data-theme="dark"] .employer-navigation-panel { border-color: #344154; background: #151f30; color: #e8eef7; }
-html[data-theme="dark"] .employer-navigation-panel-brand { border-color: #344154; color: #e8eef7; }
-html[data-theme="dark"] .employer-navigation-panel nav a { color: #bdc6d5; }
-html[data-theme="dark"] .employer-navigation-panel nav a:hover { background: #23344d; color: #e8eef7; }
-html[data-theme="dark"] .employer-navigation-panel nav a.is-active { background: #26395b; color: #b9d0ff; }
+html[data-theme="dark"] .employer-navigation-panel {
+    border-color: #344154;
+    background: #151f30;
+    color: #e8eef7;
+}
+html[data-theme="dark"] .employer-navigation-panel-brand {
+    border-color: #344154;
+    color: #e8eef7;
+}
+html[data-theme="dark"] .employer-navigation-panel nav a {
+    color: #bdc6d5;
+}
+html[data-theme="dark"] .employer-navigation-panel nav a:hover {
+    background: #23344d;
+    color: #e8eef7;
+}
+html[data-theme="dark"] .employer-navigation-panel nav a.is-active {
+    background: #26395b;
+    color: #b9d0ff;
+}
 
 body.employer-workspace .employer-workspace-toolbar,
 body.employer-messages-page .employer-workspace-toolbar {
@@ -1438,17 +1548,46 @@ body.employer-messages-page .messages-main > .employer-workspace-toolbar {
     border-left: 1px solid var(--employer-border);
 }
 
-html[data-theme="dark"] body.employer-workspace .employer-toolbar-brand { color: #e8eef7; }
-html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar { border-color: #344154; background: #151f30; }
-html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar-context { border-left-color: #344154; }
-html[data-theme="dark"] body.employer-workspace .employer-navigation-menu > summary { background: transparent; color: #bdc6d5; }
-html[data-theme="dark"] body.employer-workspace .employer-navigation-menu > summary:hover,
-html[data-theme="dark"] body.employer-workspace .employer-navigation-menu[open] > summary { border-color: #344154; background: #23344d; color: #e8eef7; }
+html[data-theme="dark"] body.employer-workspace .employer-toolbar-brand {
+    color: #e8eef7;
+}
+html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar {
+    border-color: #344154;
+    background: #151f30;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-workspace-toolbar-context {
+    border-left-color: #344154;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-navigation-menu
+    > summary {
+    background: transparent;
+    color: #bdc6d5;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-navigation-menu
+    > summary:hover,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-navigation-menu[open]
+    > summary {
+    border-color: #344154;
+    background: #23344d;
+    color: #e8eef7;
+}
 
 @media (max-width: 900px) {
     .employer-toolbar-brand > span,
-    .employer-workspace-toolbar-actions > time { display: none; }
-    .employer-workspace-toolbar-start { gap: 10px; }
+    .employer-workspace-toolbar-actions > time {
+        display: none;
+    }
+    .employer-workspace-toolbar-start {
+        gap: 10px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -1461,16 +1600,38 @@ html[data-theme="dark"] body.employer-workspace .employer-navigation-menu[open] 
         padding: 8px 10px 12px;
     }
 
-    .employer-workspace-toolbar-start { flex: 1 1 auto; gap: 8px; }
-    .employer-toolbar-brand { gap: 0; }
-    .employer-toolbar-brand > span { display: none; }
-    .employer-toolbar-brand-logo { width: 32px; height: 32px; }
-    .employer-navigation-menu > summary { min-height: 36px; padding-inline: 9px; }
-    .employer-workspace-toolbar-context { gap: 8px; padding-left: 9px; }
-    .employer-workspace-toolbar-copy > strong { font-size: 15px; }
+    .employer-workspace-toolbar-start {
+        flex: 1 1 auto;
+        gap: 8px;
+    }
+    .employer-toolbar-brand {
+        gap: 0;
+    }
+    .employer-toolbar-brand > span {
+        display: none;
+    }
+    .employer-toolbar-brand-logo {
+        width: 32px;
+        height: 32px;
+    }
+    .employer-navigation-menu > summary {
+        min-height: 36px;
+        padding-inline: 9px;
+    }
+    .employer-workspace-toolbar-context {
+        gap: 8px;
+        padding-left: 9px;
+    }
+    .employer-workspace-toolbar-copy > strong {
+        font-size: 15px;
+    }
     .employer-workspace-toolbar-copy > span,
-    .employer-workspace-toolbar-actions > time { display: none; }
-    .employer-workspace-toolbar-actions { gap: 6px; }
+    .employer-workspace-toolbar-actions > time {
+        display: none;
+    }
+    .employer-workspace-toolbar-actions {
+        gap: 6px;
+    }
 }
 
 /* Employer workspace: branded utility row and clear primary navigation row. */
@@ -1520,7 +1681,7 @@ body.employer-messages-page .employer-workspace-toolbar {
     color: var(--employer-steel);
     font-size: 10px;
     font-weight: 600;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
 }
 
 .employer-workspace-toolbar-actions {
@@ -1546,8 +1707,12 @@ body.employer-messages-page .employer-workspace-toolbar {
     flex: 0 0 auto;
 }
 
-.employer-navigation-menu > summary { display: none; }
-.employer-primary-nav-mobile { display: none; }
+.employer-navigation-menu > summary {
+    display: none;
+}
+.employer-primary-nav-mobile {
+    display: none;
+}
 
 .employer-primary-nav {
     display: flex;
@@ -1569,7 +1734,10 @@ body.employer-messages-page .employer-workspace-toolbar {
     font-weight: 650;
     text-decoration: none;
     white-space: nowrap;
-    transition: background .16s ease, color .16s ease, border-color .16s ease;
+    transition:
+        background 0.16s ease,
+        color 0.16s ease,
+        border-color 0.16s ease;
 }
 
 .employer-primary-nav a > span {
@@ -1578,9 +1746,19 @@ body.employer-messages-page .employer-workspace-toolbar {
     line-height: 1;
 }
 
-.employer-primary-nav a:hover { background: #f3f6fa; color: var(--employer-midnight); }
-.employer-primary-nav a.is-active { border-color: #dbe7ff; background: #eff4ff; color: #1d4ed8; font-weight: 750; }
-.employer-primary-nav a.is-active > span { color: #2563eb; }
+.employer-primary-nav a:hover {
+    background: #f3f6fa;
+    color: var(--employer-midnight);
+}
+.employer-primary-nav a.is-active {
+    border-color: #dbe7ff;
+    background: #eff4ff;
+    color: #1d4ed8;
+    font-weight: 750;
+}
+.employer-primary-nav a.is-active > span {
+    color: #2563eb;
+}
 
 .employer-toolbar-post-job {
     display: inline-flex;
@@ -1600,10 +1778,21 @@ body.employer-messages-page .employer-workspace-toolbar {
     box-shadow: 0 2px 5px rgb(37 99 235 / 15%);
 }
 
-.employer-toolbar-post-job:hover { border-color: #1d4ed8; background: #1d4ed8; color: #fff; }
-.employer-toolbar-post-job > span { font-size: 17px; line-height: 1; }
+.employer-toolbar-post-job:hover {
+    border-color: #1d4ed8;
+    background: #1d4ed8;
+    color: #fff;
+}
+.employer-toolbar-post-job > span {
+    font-size: 17px;
+    line-height: 1;
+}
 
-.employer-profile-menu { position: relative; z-index: 72; flex: 0 0 auto; }
+.employer-profile-menu {
+    position: relative;
+    z-index: 72;
+    flex: 0 0 auto;
+}
 
 .employer-profile-menu > summary {
     display: grid;
@@ -1621,9 +1810,14 @@ body.employer-messages-page .employer-workspace-toolbar {
     box-shadow: 0 2px 7px rgb(23 32 51 / 7%);
 }
 
-.employer-profile-menu > summary::-webkit-details-marker { display: none; }
+.employer-profile-menu > summary::-webkit-details-marker {
+    display: none;
+}
 .employer-profile-menu > summary:hover,
-.employer-profile-menu[open] > summary { border-color: #b8ccf8; background: #f6f8ff; }
+.employer-profile-menu[open] > summary {
+    border-color: #b8ccf8;
+    background: #f6f8ff;
+}
 
 .employer-profile-menu-panel {
     position: absolute;
@@ -1659,9 +1853,22 @@ body.employer-messages-page .employer-workspace-toolbar {
     font-weight: 800;
 }
 
-.employer-profile-menu-user > span:last-child { display: grid; min-width: 0; gap: 3px; }
-.employer-profile-menu-user strong { overflow: hidden; color: var(--employer-midnight); font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
-.employer-profile-menu-user small { color: var(--employer-steel); font-size: 10px; }
+.employer-profile-menu-user > span:last-child {
+    display: grid;
+    min-width: 0;
+    gap: 3px;
+}
+.employer-profile-menu-user strong {
+    overflow: hidden;
+    color: var(--employer-midnight);
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.employer-profile-menu-user small {
+    color: var(--employer-steel);
+    font-size: 10px;
+}
 .employer-profile-menu-panel > a,
 .employer-profile-menu-panel form button {
     display: flex;
@@ -1682,30 +1889,103 @@ body.employer-messages-page .employer-workspace-toolbar {
 }
 
 .employer-profile-menu-panel > a:hover,
-.employer-profile-menu-panel form button:hover { background: #f3f6fa; color: var(--employer-midnight); }
-.employer-profile-menu-panel form { margin: 0; }
+.employer-profile-menu-panel form button:hover {
+    background: #f3f6fa;
+    color: var(--employer-midnight);
+}
+.employer-profile-menu-panel form {
+    margin: 0;
+}
 
-html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar-top-row,
-html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar-nav-row { border-color: #344154; }
-html[data-theme="dark"] body.employer-workspace .employer-toolbar-brand-copy strong,
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-user strong { color: #e8eef7; }
-html[data-theme="dark"] body.employer-workspace .employer-toolbar-brand-copy small,
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-user small { color: #a9b6c8; }
-html[data-theme="dark"] body.employer-workspace .employer-primary-nav a { color: #bdc6d5; }
-html[data-theme="dark"] body.employer-workspace .employer-primary-nav a:hover { background: #23344d; color: #e8eef7; }
-html[data-theme="dark"] body.employer-workspace .employer-primary-nav a.is-active { border-color: #344b72; background: #26395b; color: #b9d0ff; }
-html[data-theme="dark"] body.employer-workspace .employer-primary-nav a > span { color: #9ab7eb; }
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu > summary,
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel { border-color: #344154; background: #151f30; color: #e8eef7; }
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-user { border-color: #344154; }
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel > a,
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel form button { color: #bdc6d5; }
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel > a:hover,
-html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel form button:hover { background: #23344d; color: #e8eef7; }
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-workspace-toolbar-top-row,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-workspace-toolbar-nav-row {
+    border-color: #344154;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-toolbar-brand-copy
+    strong,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-user
+    strong {
+    color: #e8eef7;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-toolbar-brand-copy
+    small,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-user
+    small {
+    color: #a9b6c8;
+}
+html[data-theme="dark"] body.employer-workspace .employer-primary-nav a {
+    color: #bdc6d5;
+}
+html[data-theme="dark"] body.employer-workspace .employer-primary-nav a:hover {
+    background: #23344d;
+    color: #e8eef7;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-primary-nav
+    a.is-active {
+    border-color: #344b72;
+    background: #26395b;
+    color: #b9d0ff;
+}
+html[data-theme="dark"] body.employer-workspace .employer-primary-nav a > span {
+    color: #9ab7eb;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu
+    > summary,
+html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel {
+    border-color: #344154;
+    background: #151f30;
+    color: #e8eef7;
+}
+html[data-theme="dark"] body.employer-workspace .employer-profile-menu-user {
+    border-color: #344154;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-panel
+    > a,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-panel
+    form
+    button {
+    color: #bdc6d5;
+}
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-panel
+    > a:hover,
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-profile-menu-panel
+    form
+    button:hover {
+    background: #23344d;
+    color: #e8eef7;
+}
 
 @media (max-width: 1100px) {
-    .employer-primary-nav-desktop { display: none; }
-    .employer-navigation-menu { display: block; }
+    .employer-primary-nav-desktop {
+        display: none;
+    }
+    .employer-navigation-menu {
+        display: block;
+    }
     .employer-navigation-menu > summary {
         display: inline-flex;
         min-height: 36px;
@@ -1721,10 +2001,19 @@ html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel for
         list-style: none;
         cursor: pointer;
     }
-    .employer-navigation-menu > summary::-webkit-details-marker { display: none; }
+    .employer-navigation-menu > summary::-webkit-details-marker {
+        display: none;
+    }
     .employer-navigation-menu > summary:hover,
-    .employer-navigation-menu[open] > summary { border-color: #b8ccf8; background: #f6f8ff; color: #1d4ed8; }
-    .employer-navigation-menu-icon { font-size: 15px; line-height: 1; }
+    .employer-navigation-menu[open] > summary {
+        border-color: #b8ccf8;
+        background: #f6f8ff;
+        color: #1d4ed8;
+    }
+    .employer-navigation-menu-icon {
+        font-size: 15px;
+        line-height: 1;
+    }
     .employer-primary-nav-mobile {
         position: absolute;
         top: calc(100% + 8px);
@@ -1740,11 +2029,29 @@ html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel for
         background: #fff;
         box-shadow: 0 16px 40px rgb(23 32 51 / 16%);
     }
-    .employer-navigation-menu[open] > .employer-primary-nav-mobile { display: flex; }
-    .employer-primary-nav-mobile a { width: 100%; min-height: 40px; }
-    .employer-toolbar-post-job { min-height: 36px; margin-left: auto; padding-inline: 11px; }
-    html[data-theme="dark"] body.employer-workspace .employer-navigation-menu > summary,
-    html[data-theme="dark"] body.employer-workspace .employer-primary-nav-mobile { border-color: #344154; background: #151f30; color: #bdc6d5; }
+    .employer-navigation-menu[open] > .employer-primary-nav-mobile {
+        display: flex;
+    }
+    .employer-primary-nav-mobile a {
+        width: 100%;
+        min-height: 40px;
+    }
+    .employer-toolbar-post-job {
+        min-height: 36px;
+        margin-left: auto;
+        padding-inline: 11px;
+    }
+    html[data-theme="dark"]
+        body.employer-workspace
+        .employer-navigation-menu
+        > summary,
+    html[data-theme="dark"]
+        body.employer-workspace
+        .employer-primary-nav-mobile {
+        border-color: #344154;
+        background: #151f30;
+        color: #bdc6d5;
+    }
 }
 
 @media (max-width: 760px) {
@@ -1752,7 +2059,10 @@ html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel for
         grid-template-columns: auto minmax(0, 1fr);
         gap: 8px;
     }
-    .employer-workspace-toolbar-actions { grid-column: 2; grid-row: 1; }
+    .employer-workspace-toolbar-actions {
+        grid-column: 2;
+        grid-row: 1;
+    }
     .employer-workspace-toolbar-center {
         grid-column: 1 / -1;
         grid-row: 2;
@@ -1872,15 +2182,38 @@ html[data-theme="dark"] body.employer-workspace .employer-profile-menu-panel for
 }
 
 @media (max-width: 420px) {
-    .employer-toolbar-brand-copy small { display: none; }
-    .employer-toolbar-brand { gap: 8px; }
-    .employer-toolbar-brand-logo { width: 32px; height: 32px; }
-    .employer-workspace-toolbar-top-row { gap: 8px; }
-    body.employer-workspace .employer-workspace-toolbar { padding-inline: 12px; }
-    .employer-workspace-toolbar-actions { gap: 5px; }
-    .employer-workspace-toolbar-actions .theme-toggle { width: 38px; min-height: 38px; padding: 0; font-size: 0; }
-    .employer-workspace-toolbar-actions .theme-toggle [data-theme-icon] { font-size: 15px; }
-    .employer-toolbar-post-job { padding-inline: 9px; font-size: 11px; }
+    .employer-toolbar-brand-copy small {
+        display: none;
+    }
+    .employer-toolbar-brand {
+        gap: 8px;
+    }
+    .employer-toolbar-brand-logo {
+        width: 32px;
+        height: 32px;
+    }
+    .employer-workspace-toolbar-top-row {
+        gap: 8px;
+    }
+    body.employer-workspace .employer-workspace-toolbar {
+        padding-inline: 12px;
+    }
+    .employer-workspace-toolbar-actions {
+        gap: 5px;
+    }
+    .employer-workspace-toolbar-actions .theme-toggle {
+        width: 38px;
+        min-height: 38px;
+        padding: 0;
+        font-size: 0;
+    }
+    .employer-workspace-toolbar-actions .theme-toggle [data-theme-icon] {
+        font-size: 15px;
+    }
+    .employer-toolbar-post-job {
+        padding-inline: 9px;
+        font-size: 11px;
+    }
 }
 
 /* Keep the mobile applicant workspace in normal document flow and compact. */
@@ -1937,7 +2270,10 @@ html[data-theme="dark"] body.employer-workspace .employer-applicants-insight {
     background: #1e2b3f;
 }
 
-html[data-theme="dark"] body.employer-workspace .employer-applicants-insight h2 {
+html[data-theme="dark"]
+    body.employer-workspace
+    .employer-applicants-insight
+    h2 {
     color: #e8eef7;
 }
 
@@ -1961,13 +2297,17 @@ html[data-theme="dark"] body.employer-workspace .employer-insight-tips span {
 /* Keep the shared employer toolbar anchored to the viewport on every page. */
 body.employer-workspace .employer-workspace-toolbar-slot,
 body.employer-messages-page .employer-workspace-toolbar-slot {
+    position: static;
     display: block;
     box-sizing: border-box;
-    height: 100px;
-    flex: 0 0 100px;
+    height: 150px;
+    flex: 0 0 150px;
+    padding: 0;
 }
 
 body.employer-messages-page .messages-container {
+    box-sizing: border-box;
+    padding-inline: clamp(18px, 3vw, 48px);
     padding-top: 0;
 }
 
@@ -1979,22 +2319,17 @@ body.employer-workspace.notifications-page {
 
 body.employer-workspace .employer-workspace-toolbar,
 body.employer-messages-page .employer-workspace-toolbar {
-    position: fixed;
-    z-index: 1200;
+    position: fixed !important;
+    z-index: 2147483647 !important;
     top: 12px;
     right: clamp(18px, 3vw, 48px);
     left: clamp(18px, 3vw, 48px);
     box-sizing: border-box;
     width: auto;
+    height: auto;
     margin: 0;
-}
-
-@media (max-width: 560px) {
-    body.employer-workspace .employer-workspace-toolbar-slot,
-    body.employer-messages-page .employer-workspace-toolbar-slot {
-        height: 112px;
-        flex-basis: 112px;
-    }
+    background: #fff;
+    box-shadow: 0 8px 24px rgb(16 27 45 / 5%);
 }
 
 @media (max-width: 1100px) {
@@ -2011,4 +2346,54 @@ body.employer-messages-page .employer-workspace-toolbar {
         z-index: 1203;
         pointer-events: auto;
     }
+}
+/* Hide scrolling content in the gap above the employer toolbar. */
+body.employer-workspace::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 108px;
+    background: #f3f6fa;
+    z-index: 2147483646;
+    pointer-events: none;
+}
+
+html[data-theme="dark"] body.employer-workspace::before {
+    background: #151f30;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-workspace-toolbar,
+html[data-theme="dark"] body.employer-messages-page .employer-workspace-toolbar {
+    background: #151f30;
+}
+
+/* Keep the messages toolbar outside the page stacking context while it overlays scroll content. */
+body.employer-messages-page > .employer-workspace-toolbar-slot {
+    position: static;
+    height: 150px;
+    flex: 0 0 150px;
+    padding: 0;
+}
+
+body.employer-messages-page > .employer-workspace-toolbar-slot > .employer-workspace-toolbar {
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    top: 12px;
+    right: clamp(18px, 3vw, 48px);
+    left: clamp(18px, 3vw, 48px);
+    width: auto;
+    margin: 0;
+}
+
+body.employer-messages-page::before {
+    top: 0;
+    height: 108px;
+    background: #f3f6fa;
+    z-index: 2147483646;
+}
+
+html[data-theme="dark"] body.employer-messages-page::before {
+    background: #151f30;
 }
