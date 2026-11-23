@@ -809,3 +809,156 @@ applicationDeadlineInput?.addEventListener("focus", () => {
     });
 })();
 
+/* Admin Applications - AJAX filtering, pagination, clear and status update */
+(() => {
+    const results = document.querySelector("#applications-results");
+    const filterForm = document.querySelector("#applications-filter-form");
+
+    if (!results || !filterForm) return;
+
+    const statusSelect = filterForm.querySelector('[name="status"]');
+    const clearButton = document.querySelector("#clear-applications-filter");
+
+    let activeController;
+
+    const loadApplications = async (url, updateHistory = true) => {
+        activeController?.abort();
+        activeController = new AbortController();
+
+        results.setAttribute("aria-busy", "true");
+
+        try {
+            const response = await fetch(url, {
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json, text/html",
+                },
+                credentials: "same-origin",
+                signal: activeController.signal,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            const contentType = response.headers.get("content-type") || "";
+            if (contentType.includes("application/json")) {
+                const data = await response.json();
+                results.innerHTML = data.html;
+                if (data.status !== undefined && statusSelect) {
+                    statusSelect.value = data.status;
+                }
+            } else {
+                const html = await response.text();
+                results.innerHTML = html;
+            }
+
+            if (updateHistory) {
+                window.history.pushState({}, "", url);
+            }
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Admin applications AJAX error:", error);
+                window.alert("Unable to load applications. Please try again.");
+            }
+        } finally {
+            if (activeController?.signal.aborted === false) {
+                results.removeAttribute("aria-busy");
+            }
+        }
+    };
+
+    const buildFilterUrl = () => {
+        const url = new URL(filterForm.action, window.location.href);
+        const status = statusSelect?.value;
+
+        if (status) {
+            url.searchParams.set("status", status);
+        } else {
+            url.searchParams.delete("status");
+        }
+
+        return url;
+    };
+
+    // Filter submit without reload
+    filterForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        loadApplications(buildFilterUrl().toString());
+    });
+
+    // Auto-filter when status changes
+    statusSelect?.addEventListener("change", () => {
+        loadApplications(buildFilterUrl().toString());
+    });
+
+    // Clear filter button: resets to all statuses without reload
+    clearButton?.addEventListener("click", () => {
+        if (statusSelect) {
+            statusSelect.value = "";
+        }
+        loadApplications(filterForm.action);
+    });
+
+    // Pagination clicks without reload
+    results.addEventListener("click", (event) => {
+        const link = event.target.closest(".admin-pagination a");
+        if (!link) return;
+
+        event.preventDefault();
+        loadApplications(link.href);
+    });
+
+    // Update application review status inline without reload
+    results.addEventListener("submit", async (event) => {
+        const form = event.target.closest(".application-status-form");
+        if (!form) return;
+
+        event.preventDefault();
+
+        const button = form.querySelector('button[type="submit"]');
+        if (button) button.disabled = true;
+
+        try {
+            const response = await fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    Accept: "application/json",
+                },
+                credentials: "same-origin",
+                body: new FormData(form),
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.message || "Failed to update status.");
+            }
+
+            if (data.message) {
+                alert(data.message);
+            }
+
+            // Refresh table
+            await loadApplications(window.location.href, false);
+        } catch (error) {
+            console.error("Application status error:", error);
+            alert(error.message || "Unable to update application status.");
+            if (button) button.disabled = false;
+        }
+    });
+
+    // Support browser Back and Forward navigation
+    window.addEventListener("popstate", () => {
+        const url = new URL(window.location.href);
+        const status = url.searchParams.get("status") || "";
+
+        if (statusSelect) {
+            statusSelect.value = status;
+        }
+
+        loadApplications(url.toString(), false);
+    });
+})();
+
+
