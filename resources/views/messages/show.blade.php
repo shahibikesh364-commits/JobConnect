@@ -27,6 +27,10 @@
         $isArchived = $conversation->archivedAtFor($currentUser) !== null;
     @endphp
 
+    @if ($currentUser->isEmployer())
+        <x-employer-workspace-toolbar :title="$otherUser?->name ?? 'Candidate Conversation'" :subtitle="($conversation->job?->title ?? 'General conversation') . ' · Candidate messages'" icon="✉" />
+    @endif
+
     <div class="messages-shell">
         @if (auth()->user()->isEmployer())
             <x-employer-sidebar />
@@ -34,9 +38,7 @@
             <x-job-seeker-sidebar active="messages" />
         @endif
         <div class="messages-main">
-            @if (auth()->user()->isEmployer())
-                <x-employer-workspace-toolbar :title="$otherUser?->name ?? 'Candidate Conversation'" :subtitle="($conversation->job?->title ?? 'General conversation') . ' · Candidate messages'" icon="✉" />
-            @else
+            @unless (auth()->user()->isEmployer())
                 <header class="messages-header">
                     <div class="messages-header-context">
                         <p>{{ auth()->user()->isEmployer() ? 'HIRING WORKSPACE' : 'YOUR NETWORK' }}</p>
@@ -50,7 +52,7 @@
                         @endunless
                     </div>
                 </header>
-            @endif
+            @endunless
 
             <main class="chat-container">
                 <aside class="chat-conversation-sidebar" aria-label="Other conversations">
