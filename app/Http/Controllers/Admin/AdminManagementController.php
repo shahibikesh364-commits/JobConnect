@@ -116,7 +116,7 @@ class AdminManagementController extends Controller
         return back();
     }
 
-    public function jobs(Request $request): View
+    public function jobs(Request $request): View|JsonResponse|string
     {
         $jobSummary = [
             'total' => JobListing::count(),
@@ -133,15 +133,35 @@ class AdminManagementController extends Controller
                     ->orWhere('company_name', 'like', "%{$search}%"));
             })
             ->when($request->filled('employer'), fn($query) => $query->where('employer_id', $request->integer('employer')))
-            ->when($request->filled('status'), fn($query) => $query->where('status', $request->input('status')))
+            ->when($request->filled('status'), function ($query) use ($request) {
+                $status = $request->input('status');
+                if ($status === 'applications' || $status === 'has_applications') {
+                    $query->has('applications');
+                } else {
+                    $query->where('status', $status);
+                }
+            })
             ->latest()
             ->paginate(15)
             ->withQueryString();
 
+        if ($request->ajax()) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'html' => view('admin.partials._jobs-table', compact('jobs'))->render(),
+                    'total' => $jobs->total(),
+                    'total_formatted' => number_format($jobs->total()) . ' ' . \Illuminate\Support\Str::plural('result', $jobs->total()),
+                    'status' => $request->input('status', ''),
+                ]);
+            }
+
+            return view('admin.partials._jobs-table', compact('jobs'))->render();
+        }
+
         return view('admin.jobs', compact('jobs', 'jobSummary'));
     }
 
-    public function updateJobStatus(Request $request, JobListing $job): RedirectResponse
+    public function updateJobStatus(Request $request, JobListing $job): RedirectResponse|JsonResponse
     {
         $validated = $request->validate([
             'status' => ['required', 'in:open,closed'],
@@ -154,12 +174,27 @@ class AdminManagementController extends Controller
             ['job_id' => $job->id, 'status' => $validated['status']],
         ));
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Job listing status updated successfully.',
+                'status' => $job->status,
+            ]);
+        }
+
         return back();
     }
 
-    public function destroyJob(JobListing $job): RedirectResponse
+    public function destroyJob(Request $request, JobListing $job): RedirectResponse|JsonResponse
     {
         $job->delete();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Job listing deleted successfully.',
+            ]);
+        }
 
         return back();
     }
