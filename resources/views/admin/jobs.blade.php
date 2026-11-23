@@ -11,11 +11,55 @@
         <div class="jobs-hero-note"><span class="jobs-hero-dot"></span>Marketplace overview</div>
     </section>
 
+    @php
+        $currentStatus = request('status');
+        $baseParams = request()->except(['status', 'page']);
+    @endphp
+
     <section class="jobs-summary" aria-label="Job listing summary">
-        <article class="jobs-summary-card"><span class="jobs-summary-icon">▤</span><div><p>All listings</p><strong>{{ number_format($jobSummary['total']) }}</strong><small>Across the marketplace</small></div></article>
-        <article class="jobs-summary-card"><span class="jobs-summary-icon open">●</span><div><p>Open listings</p><strong>{{ number_format($jobSummary['open']) }}</strong><small>Accepting applications</small></div></article>
-        <article class="jobs-summary-card"><span class="jobs-summary-icon closed">◷</span><div><p>Closed listings</p><strong>{{ number_format($jobSummary['closed']) }}</strong><small>No longer accepting applications</small></div></article>
-        <article class="jobs-summary-card"><span class="jobs-summary-icon applications">✓</span><div><p>Total applications</p><strong>{{ number_format($jobSummary['applications']) }}</strong><small>Submitted across all listings</small></div></article>
+        <a href="{{ route('admin.jobs.index', $baseParams) }}"
+           class="jobs-summary-card {{ empty($currentStatus) ? 'is-active' : '' }}"
+           title="Show all listings">
+            <span class="jobs-summary-icon">▤</span>
+            <div>
+                <p>All listings</p>
+                <strong>{{ number_format($jobSummary['total']) }}</strong>
+                <small>Across the marketplace</small>
+            </div>
+        </a>
+
+        <a href="{{ route('admin.jobs.index', array_merge($baseParams, ['status' => 'open'])) }}"
+           class="jobs-summary-card {{ $currentStatus === 'open' ? 'is-active active-open' : '' }}"
+           title="Filter by open listings">
+            <span class="jobs-summary-icon open">●</span>
+            <div>
+                <p>Open listings</p>
+                <strong>{{ number_format($jobSummary['open']) }}</strong>
+                <small>Accepting applications</small>
+            </div>
+        </a>
+
+        <a href="{{ route('admin.jobs.index', array_merge($baseParams, ['status' => 'closed'])) }}"
+           class="jobs-summary-card {{ $currentStatus === 'closed' ? 'is-active active-closed' : '' }}"
+           title="Filter by closed listings">
+            <span class="jobs-summary-icon closed">◷</span>
+            <div>
+                <p>Closed listings</p>
+                <strong>{{ number_format($jobSummary['closed']) }}</strong>
+                <small>No longer accepting applications</small>
+            </div>
+        </a>
+
+        <a href="{{ route('admin.applications.index') }}"
+           class="jobs-summary-card card-applications"
+           title="View all applications">
+            <span class="jobs-summary-icon applications">✓</span>
+            <div>
+                <p>Total applications</p>
+                <strong>{{ number_format($jobSummary['applications']) }}</strong>
+                <small>Submitted across all listings</small>
+            </div>
+        </a>
     </section>
 
     <div class="jobs-listings-heading">
