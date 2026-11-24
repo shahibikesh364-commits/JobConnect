@@ -1,6 +1,42 @@
 @import "./jobs.css";
 /* Applicants page - Recruitment Insight */
 
+.employer-applicants-page .employer-applicant-stats {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.employer-applicants-page .employer-applicant-stats article {
+    display: flex;
+    min-height: 92px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 14px 18px;
+}
+
+.employer-applicants-page .employer-applicant-stats article strong {
+    margin-top: 0;
+}
+
+.employer-applicants-page .employer-applicant-stats article small {
+    color: #75819a;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+@media (max-width: 1050px) {
+    .employer-applicants-page .employer-applicant-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .employer-applicants-page .employer-applicant-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
 .employer-applicants-page .employer-applicant-card > .employer-candidate-avatar {
     box-sizing: border-box;
     width: 46px !important;
@@ -110,4 +146,617 @@
 @media (max-width: 560px) {
     .employer-applicants-hero { gap: 0; padding: 18px; }
     .employer-applicants-insight { display: none; }
+}
+
+/* ==========================================================================
+   MODERN 3-ZONE CANDIDATE APPLICANT CARD
+   ========================================================================== */
+
+.employer-applicants-page .employer-applicant-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 0;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02);
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.employer-applicants-page .employer-applicant-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+/* Left edge status accent */
+.employer-applicants-page .employer-applicant-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: #94a3b8;
+    z-index: 2;
+}
+
+.employer-applicants-page .employer-applicant-card.card-state-submitted::before {
+    background: #0ea5e9;
+}
+
+.employer-applicants-page .employer-applicant-card.card-state-reviewing::before {
+    background: #f59e0b;
+}
+
+.employer-applicants-page .employer-applicant-card.card-state-shortlisted::before {
+    background: #10b981;
+}
+
+.employer-applicants-page .employer-applicant-card.card-state-rejected::before {
+    background: #f43f5e;
+}
+
+/* 3-Zone Grid: Fills the entire card width */
+.applicant-card-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 1.1fr) minmax(280px, 1.2fr) minmax(320px, 1.1fr);
+    align-items: center;
+    gap: 20px 28px;
+    padding: 20px 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Zone 1: Candidate Identity */
+.applicant-col-candidate {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+}
+
+.employer-candidate-avatar {
+    box-sizing: border-box;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px;
+    min-height: 48px;
+    flex: 0 0 48px !important;
+    border-radius: 50% !important;
+    overflow: hidden;
+    border: 2px solid #e2e8f0;
+}
+
+.candidate-text-block {
+    min-width: 0;
+}
+
+.candidate-name {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+}
+
+.candidate-email {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 3px 0 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.candidate-email svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.candidate-headline {
+    margin: 4px 0 0;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Zone 2: Role Applied For */
+.applicant-col-role {
+    min-width: 0;
+}
+
+.role-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+}
+
+.role-badge-label {
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.role-title-link {
+    color: #0f172a;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+}
+
+.role-title-link:hover {
+    color: #2563eb;
+}
+
+.role-company-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.role-company-line svg {
+    color: #94a3b8;
+}
+
+.applied-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.applied-date-badge svg {
+    color: #94a3b8;
+}
+
+/* Zone 3: Status & Action Controls */
+.applicant-col-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    min-width: 0;
+}
+
+.actions-status-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.applicant-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.applicant-status-badge .status-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.applicant-status-badge.is-submitted {
+    background: #f0f9ff;
+    color: #0284c7;
+    border: 1px solid #bae6fd;
+}
+.applicant-status-badge.is-submitted .status-indicator {
+    background: #0ea5e9;
+}
+
+.applicant-status-badge.is-reviewing {
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+}
+.applicant-status-badge.is-reviewing .status-indicator {
+    background: #f59e0b;
+}
+
+.applicant-status-badge.is-shortlisted {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+.applicant-status-badge.is-shortlisted .status-indicator {
+    background: #10b981;
+}
+
+.applicant-status-badge.is-rejected {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+}
+.applicant-status-badge.is-rejected .status-indicator {
+    background: #f43f5e;
+}
+
+.actions-toolbar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.applicant-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #334155;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+}
+
+.applicant-btn:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+.applicant-btn.btn-message {
+    color: #2563eb;
+    border-color: #dbeafe;
+    background: #eff6ff;
+}
+
+.applicant-btn.btn-message:hover {
+    background: #dbeafe;
+    border-color: #bfdbfe;
+    color: #1d4ed8;
+}
+
+.applicant-btn.btn-message svg {
+    color: #2563eb;
+}
+
+/* Inline Status Form */
+.applicant-status-form {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+}
+
+.applicant-select {
+    min-height: 34px;
+    padding: 0 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #1e293b;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.applicant-select:focus {
+    border-color: #2563eb;
+}
+
+.applicant-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 0 13px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.applicant-btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+/* ==========================================================================
+   DRAWER / DETAILS ACCORDION
+   ========================================================================== */
+
+.applicant-card-drawer {
+    width: 100%;
+    border-top: 1px solid #edf2f7;
+    background: #fafbfc;
+}
+
+.drawer-summary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 24px;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: all 0.15s ease;
+}
+
+.drawer-summary-btn::-webkit-details-marker {
+    display: none;
+}
+
+.drawer-summary-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.drawer-summary-btn .chevron-arrow {
+    transition: transform 0.2s ease;
+}
+
+.applicant-card-drawer[open] .drawer-summary-btn .chevron-arrow {
+    transform: rotate(180deg);
+}
+
+.drawer-content-box {
+    padding: 16px 24px 20px;
+    background: #ffffff;
+    border-top: 1px solid #edf2f7;
+}
+
+.drawer-meta-line {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    color: #64748b;
+    font-size: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.drawer-meta-line .bullet {
+    color: #cbd5e1;
+}
+
+.drawer-meta-line strong {
+    color: #1e293b;
+}
+
+.drawer-letter-area {
+    margin-top: 12px;
+}
+
+.letter-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.letter-quote {
+    padding: 14px 18px;
+    background: #f8fafc;
+    border-left: 3px solid #2563eb;
+    border-radius: 0 10px 10px 0;
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+}
+
+.letter-empty-note {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* ==========================================================================
+   DARK MODE
+   ========================================================================== */
+
+html[data-theme="dark"] body.employer-workspace .employer-applicants-page .employer-applicant-card {
+    background: #1e293b !important;
+    border-color: #334155;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-applicants-page .employer-applicant-card:hover {
+    border-color: #475569;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] body.employer-workspace .candidate-name {
+    color: #f1f5f9;
+}
+
+html[data-theme="dark"] body.employer-workspace .candidate-email {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .candidate-headline {
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] body.employer-workspace .role-card-inner {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .role-title-link {
+    color: #f1f5f9;
+}
+
+html[data-theme="dark"] body.employer-workspace .role-title-link:hover {
+    color: #60a5fa;
+}
+
+html[data-theme="dark"] body.employer-workspace .role-company-line {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .applicant-card-drawer {
+    background: #172033;
+    border-color: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .drawer-summary-btn {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .drawer-summary-btn:hover {
+    background: #334155;
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] body.employer-workspace .drawer-content-box {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .drawer-meta-line {
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .drawer-meta-line strong {
+    color: #f1f5f9;
+}
+
+html[data-theme="dark"] body.employer-workspace .letter-quote {
+    background: #1e293b;
+    color: #cbd5e1;
+    border-left-color: #3b82f6;
+}
+
+html[data-theme="dark"] body.employer-workspace .applicant-btn {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+html[data-theme="dark"] body.employer-workspace .applicant-btn:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+html[data-theme="dark"] body.employer-workspace .applicant-btn.btn-message {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: rgba(37, 99, 235, 0.3);
+    color: #60a5fa;
+}
+
+html[data-theme="dark"] body.employer-workspace .applicant-select {
+    background: #0f172a;
+    border-color: #334155;
+    color: #f1f5f9;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+    .applicant-card-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .applicant-col-actions {
+        grid-column: 1 / -1;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9;
+    }
+}
+
+@media (max-width: 680px) {
+    .applicant-card-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .applicant-col-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .actions-status-row {
+        justify-content: flex-start;
+    }
+
+    .actions-toolbar-row {
+        justify-content: stretch;
+    }
+
+    .actions-toolbar-row > * {
+        flex: 1;
+    }
+
+    .applicant-status-form {
+        width: 100%;
+    }
+
+    .applicant-select {
+        flex: 1;
+    }
+}
+
+@media (min-width: 681px) {
+    .applicant-card-grid {
+        gap: 12px 22px;
+        padding: 14px 20px;
+    }
+
+    .role-card-inner {
+        gap: 3px;
+        padding: 8px 12px;
+    }
+
+    .applicant-col-actions {
+        gap: 8px;
+    }
+
+    .drawer-summary-btn {
+        padding: 8px 20px;
+    }
 }
