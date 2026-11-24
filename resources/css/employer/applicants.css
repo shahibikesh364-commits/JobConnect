@@ -1,6 +1,25 @@
 @import "./jobs.css";
 /* Applicants page - Recruitment Insight */
 
+.employer-applicants-page .employer-applicant-card > .employer-candidate-avatar {
+    box-sizing: border-box;
+    width: 46px !important;
+    height: 46px !important;
+    min-width: 46px;
+    min-height: 46px;
+    flex: 0 0 46px !important;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 50% !important;
+}
+
+.employer-applicants-page .employer-applicant-card > .employer-candidate-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    border-radius: 50% !important;
+}
+
 .employer-applicants-hero {
     display: flex;
     align-items: center;
