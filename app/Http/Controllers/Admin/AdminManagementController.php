@@ -17,6 +17,7 @@ class AdminManagementController extends Controller
     public function users(Request $request): View|string
     {
         $users = User::query()
+            ->withCount(['applications', 'jobListings'])
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
 
