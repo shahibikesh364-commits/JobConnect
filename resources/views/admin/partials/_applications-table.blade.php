@@ -14,8 +14,13 @@
                 @forelse ($applications as $application)
                     <tr>
                         <td>
-                            <strong>{{ $application->applicant->name }}</strong>
-                            <small>{{ $application->applicant->email }}</small>
+                            <div class="user-meta-cell">
+                                <x-user-avatar :user="$application->applicant" class="user-avatar-pill job_seeker" />
+                                <div class="user-names">
+                                    <strong>{{ $application->applicant->name }}</strong>
+                                    <small>{{ $application->applicant->email }}</small>
+                                </div>
+                            </div>
                         </td>
                         <td>
                             <a class="table-link" href="{{ route('jobs.show', $application->job) }}">{{ $application->job->title }}</a>
