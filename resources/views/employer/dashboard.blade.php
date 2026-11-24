@@ -152,9 +152,7 @@
 
                 @forelse ($recentApplications as $application)
                     <article class="employer-dashboard-application">
-                        <span class="employer-dashboard-applicant-avatar" aria-hidden="true">
-                            {{ strtoupper(substr($application->applicant?->name ?? 'A', 0, 1)) }}
-                        </span>
+                        <x-user-avatar :user="$application->applicant" class="employer-dashboard-applicant-avatar" />
                         <div class="employer-dashboard-application-copy">
                             <strong>{{ $application->applicant?->name ?? 'Applicant account unavailable' }}</strong>
                             <span>{{ $application->job?->title ?? 'Job listing unavailable' }}</span>
