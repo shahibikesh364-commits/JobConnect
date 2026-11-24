@@ -79,14 +79,14 @@ class EmployerJobController extends Controller
             ->first();
 
         $recentApplications = JobApplication::query()
-            ->with(['job:id,title,employer_id', 'applicant:id,name'])
+            ->with(['job:id,title,employer_id', 'applicant:id,name', 'applicant.jobSeekerProfile'])
             ->whereHas('job', fn ($query) => $query->where('employer_id', $user->employerWorkspaceId()))
             ->latest()
             ->limit(5)
             ->get();
 
         $newApplications = JobApplication::query()
-            ->with(['job:id,title,employer_id', 'applicant:id,name'])
+            ->with(['job:id,title,employer_id', 'applicant:id,name', 'applicant.jobSeekerProfile'])
             ->where('status', 'submitted')
             ->whereHas('job', fn ($query) => $query->where('employer_id', $user->employerWorkspaceId()))
             ->latest()
@@ -341,7 +341,7 @@ class EmployerJobController extends Controller
         ]);
         $ownedJobIds = $user->jobListings()->select('job_listings.id');
         $applicationsQuery = JobApplication::query()
-            ->with(['applicant:id,name,email', 'job:id,title,company_name,employer_id'])
+            ->with(['applicant:id,name,email', 'applicant.jobSeekerProfile', 'job:id,title,company_name,employer_id'])
             ->whereIn('job_listing_id', $ownedJobIds)
             ->when($filters['search'] ?? null, function ($query, $search) {
                 $query->where(function ($query) use ($search) {
@@ -435,7 +435,7 @@ class EmployerJobController extends Controller
     public function applicants(Request $request, JobListing $job): View
     {
         $this->authorizeOwner($request, $job);
-        $applications = $job->applications()->with('applicant')->latest()->paginate(10);
+        $applications = $job->applications()->with(['applicant.jobSeekerProfile'])->latest()->paginate(10);
         $statusCounts = $job->applications()
             ->selectRaw('status, COUNT(*) as aggregate')
             ->groupBy('status')
