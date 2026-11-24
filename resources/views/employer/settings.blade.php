@@ -20,7 +20,6 @@
                 <div>
                     <p class="settings-eyebrow">EMPLOYER WORKSPACE</p>
                     <h1>Settings</h1>
-                    <p>Manage your company, account, hiring workflow, and team.</p>
                 </div>
             </header>
 
