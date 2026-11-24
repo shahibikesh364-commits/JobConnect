@@ -16,9 +16,7 @@
                     <tr>
                         <td>
                             <div class="user-meta-cell">
-                                <div class="user-avatar-pill {{ $user->role }}" aria-hidden="true">
-                                    {{ strtoupper(substr($user->name, 0, 1)) }}
-                                </div>
+                                <x-user-avatar :user="$user" class="user-avatar-pill {{ $user->role }}" />
                                 <div class="user-names">
                                     <strong>{{ $user->name }}</strong>
                                     <small>{{ $user->email }}</small>
