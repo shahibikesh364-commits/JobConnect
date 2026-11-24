@@ -16,6 +16,10 @@ use App\Http\Controllers\EmployerAnalyticsController;
 use App\Http\Controllers\EmployerSettingsController;
 
 Route::get('/', function () {
+    if (request()->user()?->isAdmin()) {
+        return redirect()->route('admin.dashboard');
+    }
+
     return redirect()->route('jobs.index');
 });
 
