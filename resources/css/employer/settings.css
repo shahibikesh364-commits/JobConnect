@@ -3,22 +3,29 @@ body.employer-workspace .employer-page-content.employer-settings-page {
     box-sizing: border-box;
     width: 100%;
     min-width: 0;
+    height: 100%;
     margin-left: 0;
-    padding: 0 var(--employer-page-gutter) 42px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 var(--employer-page-gutter) 18px;
 }
 
 body.employer-settings-layout {
     display: flex;
-    min-height: 100vh;
-    min-height: 100dvh;
+    height: 100vh;
+    height: 100dvh;
     flex-direction: column;
+    overflow: hidden;
 }
 
 body.employer-settings-layout > .employer-page-shell {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
 }
 body.employer-settings-layout > .site-footer {
-    flex: 0 0 40px;
+    display: none;
 }
 
 .employer-settings-page {
@@ -36,6 +43,7 @@ body.employer-settings-layout > .site-footer {
     display: none !important;
 }
 .employer-settings-page .settings-hub-heading {
+    flex: 0 0 auto;
     padding: 6px 0 20px;
 }
 .employer-settings-page .settings-eyebrow {
@@ -79,13 +87,18 @@ body.employer-settings-layout > .site-footer {
 
 .employer-settings-page .settings-workspace {
     display: grid;
+    flex: 1 1 auto;
+    min-height: 0;
     grid-template-columns: minmax(250px, 280px) minmax(0, 1fr);
-    align-items: start;
+    align-items: stretch;
     gap: 28px;
 }
+.employer-settings-page .settings-app:not([hidden]) {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 0;
+}
 .employer-settings-page .settings-tabs {
-    position: sticky;
-    top: 18px;
     display: grid;
     gap: 5px;
     padding: 12px;
@@ -152,8 +165,14 @@ body.employer-settings-layout > .site-footer {
     background: #fff;
 }
 .employer-settings-page .settings-panels {
+    grid-column: 2;
     min-width: 0;
-    overflow: hidden;
+    min-height: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
     border: 1px solid var(--settings-line);
     border-radius: 11px;
     background: var(--settings-surface);
@@ -973,12 +992,14 @@ html[data-theme="dark"] .employer-settings-page .text-red-600 {
         gap: 14px;
     }
     .employer-settings-page .settings-tabs {
-        position: static;
         display: flex;
         gap: 4px;
         overflow-x: auto;
         padding: 6px;
         scrollbar-width: thin;
+    }
+    .employer-settings-page .settings-panels {
+        grid-column: 1;
     }
     .employer-settings-page .settings-tabs::before {
         display: none;
