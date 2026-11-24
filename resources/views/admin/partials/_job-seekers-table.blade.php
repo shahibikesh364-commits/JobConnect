@@ -14,8 +14,13 @@
                 @forelse ($jobSeekers as $jobSeeker)
                     <tr>
                         <td>
-                            <strong>{{ $jobSeeker->name }}</strong>
-                            <small>{{ $jobSeeker->email }}</small>
+                            <div class="user-meta-cell">
+                                <x-user-avatar :user="$jobSeeker" class="user-avatar-pill job_seeker" />
+                                <div class="user-names">
+                                    <strong>{{ $jobSeeker->name }}</strong>
+                                    <small>{{ $jobSeeker->email }}</small>
+                                </div>
+                            </div>
                         </td>
 
                         <td>{{ $jobSeeker->applications_count }}</td>
