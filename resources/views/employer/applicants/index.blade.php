@@ -45,26 +45,43 @@
             </header>
 
             {{-- Application Statistics --}}
+            @php($totalApplicants = $statusCounts->sum())
             <section class="employer-applicant-stats" aria-label="Application summary">
 
                 <article>
                     <span>Total Applicants</span>
-                    <strong>{{ $statusCounts->sum() }}</strong>
+                    <strong>{{ $totalApplicants }}</strong>
+                    <small>Across all your job listings</small>
                 </article>
 
                 <article>
                     <span>New Applicants</span>
                     <strong>{{ $statusCounts->get('submitted', 0) }}</strong>
+                    <small>Waiting for an initial review</small>
                 </article>
 
                 <article>
                     <span>In review</span>
                     <strong>{{ $statusCounts->get('reviewing', 0) }}</strong>
+                    <small>Currently being evaluated</small>
                 </article>
 
                 <article>
                     <span>Shortlisted</span>
                     <strong>{{ $statusCounts->get('shortlisted', 0) }}</strong>
+                    <small>Ready for the next hiring step</small>
+                </article>
+
+                <article>
+                    <span>Rejected</span>
+                    <strong>{{ $statusCounts->get('rejected', 0) }}</strong>
+                    <small>Applications closed</small>
+                </article>
+
+                <article>
+                    <span>Jobs with applicants</span>
+                    <strong>{{ $jobsWithApplicants }}</strong>
+                    <small>Listings represented in this table</small>
                 </article>
 
             </section>
@@ -143,128 +160,131 @@
             <section class="employer-applicant-list" aria-label="Candidate applications">
 
                 @forelse ($applications as $application)
-                    <article class="employer-applicant-card">
-
-                        <x-user-avatar :user="$application->applicant" class="employer-candidate-avatar" />
-
-                        <div class="employer-candidate-content">
-
-                            <div class="employer-candidate-top">
-                                <div>
-                                    <h3>
-                                        {{ $application->applicant?->name ?? 'Candidate account unavailable' }}
-                                    </h3>
-
-                                    <p>
-                                        {{ $application->applicant?->email ?? 'Email unavailable' }}
+                    <article class="employer-applicant-card card-state-{{ $application->status }}">
+                        <div class="applicant-card-grid">
+                            {{-- Zone 1: Candidate Profile --}}
+                            <div class="applicant-col-candidate">
+                                <x-user-avatar :user="$application->applicant" class="employer-candidate-avatar" />
+                                <div class="candidate-text-block">
+                                    <h3 class="candidate-name">{{ $application->applicant?->name ?? 'Candidate account unavailable' }}</h3>
+                                    <p class="candidate-email">
+                                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                        <span>{{ $application->applicant?->email ?? 'Email unavailable' }}</span>
                                     </p>
+                                    @if ($application->applicant?->jobSeekerProfile?->headline)
+                                        <p class="candidate-headline">
+                                            {{ $application->applicant->jobSeekerProfile->headline }}
+                                        </p>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Zone 2: Role Applied For --}}
+                            <div class="applicant-col-role">
+                                <div class="role-card-inner">
+                                    <span class="role-badge-label">APPLIED FOR ROLE</span>
+                                    @if ($application->job)
+                                        <a href="{{ route('jobs.show', $application->job) }}" class="role-title-link" target="_blank">
+                                            {{ $application->job->title }}
+                                        </a>
+                                        <span class="role-company-line">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                            {{ $application->job->company_name }}
+                                        </span>
+                                    @else
+                                        <span class="role-title-link text-muted">Job listing unavailable</span>
+                                    @endif
+                                    <span class="applied-date-badge">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                        Applied {{ $application->created_at->format('M j, Y') }} ({{ $application->created_at->diffForHumans() }})
+                                    </span>
+                                </div>
+                            </div>
+
+                            {{-- Zone 3: Status & Action Controls --}}
+                            <div class="applicant-col-actions">
+                                <div class="actions-status-row">
+                                    <span class="applicant-status-badge is-{{ $application->status }}">
+                                        <span class="status-indicator"></span>
+                                        {{ $application->status === 'submitted' ? 'New Application' : ucfirst($application->status) }}
+                                    </span>
                                 </div>
 
-                                <span class="employer-app-status is-{{ $application->status }}">
-                                    {{ $application->status === 'submitted' ? 'New' : ucfirst($application->status) }}
-                                </span>
-                            </div>
-
-                            <div class="employer-candidate-job">
-                                <span>Applied for</span>
-                                <strong>
-                                    {{ $application->job?->title ?? 'Job listing unavailable' }}
-                                </strong>
-                                <small>{{ $application->job?->company_name }}</small>
-                            </div>
-
-                            <div class="employer-candidate-bottom">
-
-                                <time datetime="{{ $application->created_at->toIso8601String() }}">
-                                    Applied {{ $application->created_at->format('M j, Y') }}
-                                </time>
-
-                                <div class="employer-candidate-actions">
-
+                                <div class="actions-toolbar-row">
                                     @if ($application->job && $application->applicant)
-                                        <a class="employer-action-secondary"
+                                        <a class="applicant-btn btn-message"
                                             href="{{ route('employer.messages.start-for-applicant', [$application->job, $application->applicant]) }}">
-                                            Message candidate
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                            <span>Message</span>
                                         </a>
                                     @endif
 
                                     @if ($application->job)
-                                        <a class="employer-action-secondary"
-                                            href="{{ route('employer.jobs.applicants', $application->job) }}">
-                                            Job applicants
+                                        <a class="applicant-btn btn-outline"
+                                            href="{{ route('employer.jobs.applicants', $application->job) }}"
+                                            title="View all applicants for {{ $application->job->title }}">
+                                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                            <span>Job applicants</span>
                                         </a>
                                     @endif
 
                                     @if ($application->job)
-                                        <form method="POST"
+                                        <form class="applicant-status-form" method="POST"
                                             action="{{ route('employer.applications.update', [$application->job, $application]) }}">
-
                                             @csrf
                                             @method('PATCH')
 
-                                            <label class="sr-only" for="application-status-{{ $application->id }}">
-                                                Update status for {{ $application->applicant?->name ?? 'candidate' }}
-                                            </label>
-
-                                            <select id="application-status-{{ $application->id }}" name="status"
-                                                required>
-
+                                            <select name="status" class="applicant-select" required aria-label="Status">
                                                 <option value="submitted" disabled @selected($application->status === 'submitted')>
-                                                    New (current status)
+                                                    New
                                                 </option>
-
                                                 <option value="reviewing" @selected($application->status === 'reviewing')>
                                                     In review
                                                 </option>
-
                                                 <option value="shortlisted" @selected($application->status === 'shortlisted')>
                                                     Shortlisted
                                                 </option>
-
                                                 <option value="rejected" @selected($application->status === 'rejected')>
                                                     Rejected
                                                 </option>
-
                                             </select>
 
-                                            <button class="employer-filter-button" type="submit">
+                                            <button class="applicant-btn-primary" type="submit">
                                                 Update
                                             </button>
-
                                         </form>
                                     @endif
-
                                 </div>
                             </div>
-
-                            {{-- Application Details --}}
-                            <details class="employer-cover-letter">
-
-                                <summary>View application details</summary>
-
-                                <p>
-                                    <strong>Status:</strong>
-                                    {{ $application->status === 'submitted' ? 'New' : ucfirst($application->status) }}
-                                    <br>
-
-                                    <strong>Applied:</strong>
-                                    {{ $application->created_at->format('M j, Y') }}
-                                </p>
-
-                                @if (filled($application->cover_letter))
-                                    <p>
-                                        <strong>Cover letter</strong>
-                                        <br>
-                                        {{ $application->cover_letter }}
-                                    </p>
-                                @else
-                                    <p>No cover letter was provided.</p>
-                                @endif
-
-                            </details>
-
                         </div>
 
+                        {{-- Details / Cover Letter Footer Drawer --}}
+                        <details class="applicant-card-drawer">
+                            <summary class="drawer-summary-btn">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                <span>View cover letter & candidate details</span>
+                                <svg class="chevron-arrow" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+                            </summary>
+                            <div class="drawer-content-box">
+                                <div class="drawer-meta-line">
+                                    <span><strong>Candidate:</strong> {{ $application->applicant?->name ?? 'Candidate' }}</span>
+                                    <span class="bullet">·</span>
+                                    <span><strong>Email:</strong> {{ $application->applicant?->email ?? 'N/A' }}</span>
+                                    <span class="bullet">·</span>
+                                    <span><strong>Submitted:</strong> {{ $application->created_at->format('M j, Y - g:i A') }}</span>
+                                </div>
+                                <div class="drawer-letter-area">
+                                    <span class="letter-label">Cover letter</span>
+                                    @if (filled($application->cover_letter))
+                                        <div class="letter-quote">
+                                            {{ $application->cover_letter }}
+                                        </div>
+                                    @else
+                                        <p class="letter-empty-note">No cover letter was submitted with this application.</p>
+                                    @endif
+                                </div>
+                            </div>
+                        </details>
                     </article>
 
                 @empty
