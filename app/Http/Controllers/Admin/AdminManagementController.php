@@ -17,6 +17,7 @@ class AdminManagementController extends Controller
     public function users(Request $request): View|string
     {
         $users = User::query()
+            ->with('jobSeekerProfile')
             ->withCount(['applications', 'jobListings'])
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
@@ -53,6 +54,7 @@ class AdminManagementController extends Controller
     public function jobSeekers(Request $request): View|JsonResponse
     {
         $jobSeekers = User::where('role', 'job_seeker')
+            ->with('jobSeekerProfile')
             ->withCount('applications')
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
@@ -202,7 +204,7 @@ class AdminManagementController extends Controller
 
     public function applications(Request $request): View|JsonResponse|string
     {
-        $applications = JobApplication::with(['job.employer', 'applicant'])
+        $applications = JobApplication::with(['job.employer', 'applicant.jobSeekerProfile'])
             ->when($request->filled('status'), fn($query) => $query->where('status', $request->input('status')))
             ->latest()
             ->paginate(15)
