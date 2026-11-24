@@ -253,9 +253,7 @@
                         <tr>
                             <td>
                                 <div class="user-meta-cell">
-                                    <div class="user-avatar-pill {{ $user->role }}">
-                                        {{ strtoupper(substr($user->name, 0, 1)) }}
-                                    </div>
+                                    <x-user-avatar :user="$user" class="user-avatar-pill {{ $user->role }}" />
                                     <div class="user-names">
                                         <strong>{{ $user->name }}</strong>
                                         <small class="user-id-mono">UID #{{ $user->id }}</small>
