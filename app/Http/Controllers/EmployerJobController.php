@@ -373,8 +373,12 @@ class EmployerJobController extends Controller
             ->selectRaw('status, COUNT(*) as aggregate')
             ->groupBy('status')
             ->pluck('aggregate', 'status');
+        $jobsWithApplicants = JobApplication::query()
+            ->whereIn('job_listing_id', $ownedJobIds)
+            ->distinct()
+            ->count('job_listing_id');
 
-        return view('employer.applicants.index', compact('applications', 'jobs', 'statusCounts'));
+        return view('employer.applicants.index', compact('applications', 'jobs', 'statusCounts', 'jobsWithApplicants'));
     }
 
     public function create(Request $request): View
