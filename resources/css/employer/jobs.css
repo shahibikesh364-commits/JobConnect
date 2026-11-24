@@ -38,3 +38,530 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
+/* ==========================================================================
+   MODERN JOB LISTING CARD
+   ========================================================================== */
+
+.employer-jobs-page .employer-listing-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 4px 12px rgba(15, 23, 42, 0.02);
+    overflow: hidden;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.employer-jobs-page .employer-listing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+    background: #94a3b8;
+    transition: background-color 0.2s ease;
+}
+
+.employer-jobs-page .employer-listing-card.status-open::before {
+    background: #10b981;
+}
+
+.employer-jobs-page .employer-listing-card.status-closed::before {
+    background: #cbd5e1;
+}
+
+.employer-jobs-page .employer-listing-card:hover {
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+}
+
+/* Card Body: Main info on left, KPIs on right */
+.employer-listing-body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 22px 24px;
+}
+
+.employer-listing-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    min-width: 0;
+    flex: 1;
+}
+
+.employer-listing-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 46px;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+}
+
+.employer-listing-copy {
+    min-width: 0;
+    flex: 1;
+}
+
+.employer-listing-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.employer-listing-title-row h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+}
+
+.employer-listing-title-row h3 a {
+    color: #0f172a;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.employer-listing-title-row h3 a:hover {
+    color: #2563eb;
+}
+
+/* Status Pill */
+.employer-listing-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.employer-listing-status .status-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.employer-listing-status.is-open {
+    background: #ecfdf5;
+    color: #059669;
+    border: 1px solid #a7f3d0;
+}
+
+.employer-listing-status.is-open .status-indicator {
+    background: #10b981;
+}
+
+.employer-listing-status.is-closed {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.employer-listing-status.is-closed .status-indicator {
+    background: #94a3b8;
+}
+
+/* Company and Location */
+.employer-listing-company {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0 10px;
+    color: #475569;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.employer-listing-company .bullet {
+    color: #cbd5e1;
+}
+
+.employer-listing-company .company-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #64748b;
+}
+
+/* Metadata badges */
+.employer-listing-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.meta-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.meta-tag.job-type {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+    text-transform: capitalize;
+}
+
+.meta-tag.deadline {
+    background: #fffbeb;
+    border-color: #fde68a;
+    color: #92400e;
+}
+
+.meta-tag.salary {
+    background: #f0fdfa;
+    border-color: #99f6e4;
+    color: #0f766e;
+    font-weight: 700;
+}
+
+/* KPI Stats Block (Right side of Body) */
+.employer-listing-kpis {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 12px 18px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.employer-kpi-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 72px;
+}
+
+.employer-kpi-item.has-link {
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 4px 6px;
+    margin: -4px -6px;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.employer-kpi-item.has-link:hover {
+    background: #eef2ff;
+    transform: scale(1.05);
+}
+
+.employer-kpi-item.has-link .kpi-val.highlight {
+    color: #2563eb;
+}
+
+.employer-kpi-divider {
+    width: 1px;
+    height: 36px;
+    background: #e2e8f0;
+}
+
+.kpi-label {
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.kpi-val {
+    margin: 2px 0 1px;
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+}
+
+.kpi-desc {
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.employer-kpi-progress {
+    width: 58px;
+    height: 5px;
+    margin: 4px 0 2px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e2e8f0;
+}
+
+.employer-kpi-progress span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: #2563eb;
+}
+
+/* ==========================================================================
+   CARD FOOTER (Full width balanced bottom bar)
+   ========================================================================== */
+
+.employer-listing-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 12px 24px;
+    background: #fafbfc;
+    border-top: 1px solid #edf2f7;
+}
+
+.employer-listing-footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.employer-preview-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.employer-preview-link:hover {
+    color: #2563eb;
+}
+
+.employer-footer-deadline {
+    display: inline-flex;
+    align-items: center;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* Actions Aligned to the Right */
+.employer-listing-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.employer-listing-actions form {
+    margin: 0;
+}
+
+.employer-listing-actions .employer-action-primary {
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+}
+
+.employer-listing-actions .employer-action-primary:hover {
+    background: #1d4ed8;
+}
+
+.employer-listing-actions .employer-action-secondary {
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #d1d5db;
+}
+
+.employer-listing-actions .employer-action-secondary:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.employer-listing-actions .employer-action-danger {
+    min-height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #ffffff;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.employer-listing-actions .employer-action-danger:hover {
+    background: #fef2f2;
+    border-color: #f87171;
+}
+
+/* Dark mode support */
+html[data-theme="dark"] body.employer-workspace .employer-jobs-page .employer-listing-card {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-jobs-page .employer-listing-card:hover {
+    border-color: #475569;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-title-row h3 a {
+    color: #f1f5f9;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-title-row h3 a:hover {
+    color: #60a5fa;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-company {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .meta-tag {
+    background: #0f172a;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .meta-tag.job-type {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: #34d399;
+}
+
+html[data-theme="dark"] body.employer-workspace .meta-tag.deadline {
+    background: rgba(245, 158, 11, 0.12);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+html[data-theme="dark"] body.employer-workspace .meta-tag.salary {
+    background: rgba(20, 184, 166, 0.12);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: #2dd4bf;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-kpi-item.has-link:hover {
+    background: #1e293b;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-kpis {
+    background: #0f172a;
+    border-color: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .kpi-label {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .kpi-val {
+    color: #f8fafc;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-kpi-divider {
+    background: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-footer {
+    background: #172033;
+    border-color: #334155;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-preview-link {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-preview-link:hover {
+    color: #60a5fa;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-actions .employer-action-secondary {
+    background: #0f172a;
+    border-color: #334155;
+    color: #e2e8f0;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-actions .employer-action-secondary:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+html[data-theme="dark"] body.employer-workspace .employer-listing-actions .employer-action-danger {
+    background: #0f172a;
+    border-color: rgba(220, 38, 38, 0.3);
+    color: #f87171;
+}
+
+/* Responsive adjustments */
+@media (max-width: 960px) {
+    .employer-listing-body {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+    }
+
+    .employer-listing-kpis {
+        justify-content: space-around;
+    }
+}
+
+@media (max-width: 650px) {
+    .employer-listing-body {
+        padding: 16px;
+    }
+
+    .employer-listing-footer {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .employer-listing-actions {
+        width: 100%;
+        margin-left: 0;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .employer-listing-actions a,
+    .employer-listing-actions form,
+    .employer-listing-actions button {
+        flex: 1;
+        text-align: center;
+    }
+}
