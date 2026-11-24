@@ -48,7 +48,7 @@ class AdminDashboardController extends Controller
         ];
 
         // Recent registrations
-        $recentUsers = User::latest()
+        $recentUsers = User::with('jobSeekerProfile')->latest()
             ->take(6)
             ->get();
 
@@ -60,7 +60,7 @@ class AdminDashboardController extends Controller
 
         // Recent applications
         $recentApplications = JobApplication::with([
-            'applicant',
+            'applicant.jobSeekerProfile',
             'job',
         ])
             ->latest()
