@@ -23,7 +23,6 @@
 
         $otherUser =
             $currentUser->id === $conversation->job_seeker_id ? $conversation->employer : $conversation->jobSeeker;
-        $profilePhoto = $otherUser?->jobSeekerProfile?->profile_photo;
         $isArchived = $conversation->archivedAtFor($currentUser) !== null;
     @endphp
 
@@ -71,19 +70,11 @@
                                         ? $sidebarConversation->employer
                                         : $sidebarConversation->jobSeeker;
                                 $sidebarLastMessage = $sidebarConversation->latestMessage;
-                                $sidebarPhoto = $sidebarOtherUser?->jobSeekerProfile?->profile_photo;
                             @endphp
                             <a class="chat-conversation-item {{ $sidebarConversation->is($conversation) ? 'is-active' : '' }} {{ $sidebarConversation->unread_count > 0 ? 'has-unread' : '' }}"
                                 href="{{ route('messages.show', $sidebarConversation) }}"
                                 @if ($sidebarConversation->is($conversation)) aria-current="page" @endif>
-                                <span class="chat-list-avatar" aria-hidden="true">
-                                    @if ($sidebarPhoto)
-                                        <img src="{{ asset('storage/' . $sidebarPhoto) }}" alt=""
-                                            loading="lazy">
-                                    @else
-                                        {{ strtoupper(substr($sidebarOtherUser->name ?? 'U', 0, 1)) }}
-                                    @endif
-                                </span>
+                                <x-user-avatar :user="$sidebarOtherUser" class="chat-list-avatar" />
                                 <span class="chat-conversation-copy">
                                     <span class="chat-conversation-topline">
                                         <strong>{{ $sidebarOtherUser->name ?? 'Conversation partner unavailable' }}</strong>
@@ -126,13 +117,7 @@
                             ←
                         </a>
 
-                        <div class="conversation-avatar">
-                            @if ($profilePhoto)
-                                <img src="{{ asset('storage/' . $profilePhoto) }}" alt="" loading="lazy">
-                            @else
-                                {{ strtoupper(substr($otherUser->name ?? 'U', 0, 1)) }}
-                            @endif
-                        </div>
+                        <x-user-avatar :user="$otherUser" class="conversation-avatar" />
 
                         <div class="chat-user-info">
                             <h2>{{ $otherUser->name ?? (auth()->user()->isEmployer() ? 'Candidate unavailable' : 'Employer unavailable') }}

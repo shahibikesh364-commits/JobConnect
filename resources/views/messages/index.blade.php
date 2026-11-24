@@ -202,19 +202,11 @@
                                                 ? $conversation->employer
                                                 : $conversation->jobSeeker;
                                         $lastMessage = $conversation->latestMessage;
-                                        $profilePhoto = $otherUser?->jobSeekerProfile?->profile_photo;
                                     @endphp
 
                                     <a href="{{ route('messages.show', $conversation) }}"
                                         class="conversation-card {{ $conversation->unread_count > 0 ? 'has-unread' : '' }}">
-                                        <span class="conversation-avatar" aria-hidden="true">
-                                            @if ($profilePhoto)
-                                                <img src="{{ asset('storage/' . $profilePhoto) }}" alt=""
-                                                    loading="lazy">
-                                            @else
-                                                {{ strtoupper(substr($otherUser->name ?? 'U', 0, 1)) }}
-                                            @endif
-                                        </span>
+                                        <x-user-avatar :user="$otherUser" class="conversation-avatar" />
                                         <span class="conversation-content">
                                             <span class="conversation-top">
                                                 <strong>{{ $otherUser->name ?? (auth()->user()->isEmployer() ? 'Candidate unavailable' : 'Employer unavailable') }}</strong>

@@ -145,9 +145,7 @@
                 @forelse ($applications as $application)
                     <article class="employer-applicant-card">
 
-                        <div class="employer-candidate-avatar" aria-hidden="true">
-                            {{ strtoupper(substr($application->applicant?->name ?? 'C', 0, 1)) }}
-                        </div>
+                        <x-user-avatar :user="$application->applicant" class="employer-candidate-avatar" />
 
                         <div class="employer-candidate-content">
 

@@ -76,9 +76,7 @@
             @forelse ($applications as $application)
                 <article class="management-card applicant-card">
                     <div class="applicant-main">
-                        <div class="avatar" aria-hidden="true">
-                            {{ strtoupper(substr($application->applicant->name ?? 'C', 0, 1)) }}
-                        </div>
+                        <x-user-avatar :user="$application->applicant" class="avatar" />
 
                         <div class="applicant-info">
                             <h3>{{ $application->applicant->name ?? 'Candidate' }}</h3>
