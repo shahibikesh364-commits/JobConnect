@@ -1,26 +1,67 @@
 <div class="table-card">
     <div class="table-scroll">
-        <table>
+        <table class="users-management-table">
             <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Role</th>
-                    <th>Joined</th>
-                    <th>Account actions</th>
+                    <th style="width: 27%;">User</th>
+                    <th style="width: 14%;">Role</th>
+                    <th style="width: 12%;">Status</th>
+                    <th style="width: 15%;">Activity</th>
+                    <th style="width: 14%;">Joined</th>
+                    <th style="width: 18%;" class="text-right">Account actions</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($users as $user)
                     <tr>
-                        <td><strong>{{ $user->name }}</strong><small>{{ $user->email }}</small></td>
-                        <td><span
-                                class="role-badge role-{{ $user->role }}">{{ str_replace('_', ' ', ucfirst($user->role)) }}</span>
-                        </td>
-                        <td>{{ $user->created_at->format('M j, Y') }}</td>
                         <td>
+                            <div class="user-meta-cell">
+                                <div class="user-avatar-pill {{ $user->role }}" aria-hidden="true">
+                                    {{ strtoupper(substr($user->name, 0, 1)) }}
+                                </div>
+                                <div class="user-names">
+                                    <strong>{{ $user->name }}</strong>
+                                    <small>{{ $user->email }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="role-badge role-{{ $user->role }}">
+                                {{ str_replace('_', ' ', ucfirst($user->role)) }}
+                            </span>
+                        </td>
+                        <td>
+                            @if ($user->is_active ?? true)
+                                <span class="role-badge status-open">
+                                    <span class="status-indicator"></span>Active
+                                </span>
+                            @else
+                                <span class="role-badge status-closed">
+                                    <span class="status-indicator"></span>Inactive
+                                </span>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($user->role === 'job_seeker')
+                                <span class="count-pill">{{ $user->applications_count }}</span>
+                                <small class="table-subtext">{{ Str::plural('application', $user->applications_count) }}</small>
+                            @elseif ($user->role === 'employer')
+                                <span class="count-pill">{{ $user->job_listings_count }}</span>
+                                <small class="table-subtext">{{ Str::plural('listing', $user->job_listings_count) }}</small>
+                            @else
+                                <small class="muted-note">Staff member</small>
+                            @endif
+                        </td>
+                        <td>
+                            <strong>{{ $user->created_at->format('M j, Y') }}</strong>
+                            <small class="table-subtext-block">{{ $user->created_at->diffForHumans() }}</small>
+                        </td>
+                        <td class="text-right">
                             @if ($user->role !== 'admin')
-                                <div class="row-actions">
-                                    <form method="POST" action="{{ route('admin.users.role', $user) }}">@csrf @method('PATCH')
+                                <div class="row-actions justify-end">
+                                    <form method="POST" action="{{ route('admin.users.role', $user) }}">
+                                        @csrf
+                                        @method('PATCH')
                                         <select name="role" aria-label="Role for {{ $user->name }}">
                                             <option value="job_seeker" @selected($user->role === 'job_seeker')>Job seeker</option>
                                             <option value="employer" @selected($user->role === 'employer')>Employer</option>
@@ -29,17 +70,25 @@
                                     </form>
                                     <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
                                         onsubmit="return confirm('Delete {{ addslashes($user->name) }} and their associated data?')">
-                                        @csrf @method('DELETE')<button class="small-button danger" type="submit">Delete</button>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="small-button danger" type="submit">Delete</button>
                                     </form>
                                 </div>
                             @else
-                                <span class="muted-note">Protected admin account</span>
+                                <div class="row-actions justify-end">
+                                    <span class="muted-note">Protected admin account</span>
+                                </div>
                             @endif
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="4" class="table-empty">No users match these filters.</td>
+                        <td colspan="6" class="table-empty">
+                            <span class="jobs-empty-icon">⌕</span>
+                            <strong>No users match these filters.</strong>
+                            <small>Try clearing your search term or selecting "All roles".</small>
+                        </td>
                     </tr>
                 @endforelse
             </tbody>
