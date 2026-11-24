@@ -204,7 +204,7 @@
 /* 3-Zone Grid: Fills the entire card width */
 .applicant-card-grid {
     display: grid;
-    grid-template-columns: minmax(260px, 1.1fr) minmax(280px, 1.2fr) minmax(320px, 1.1fr);
+    grid-template-columns: minmax(250px, .6fr) minmax(300px, 1.1fr) minmax(440px, 1fr);
     align-items: center;
     gap: 20px 28px;
     padding: 20px 24px;
@@ -743,7 +743,7 @@ html[data-theme="dark"] body.employer-workspace .applicant-select {
 
 @media (min-width: 681px) {
     .applicant-card-grid {
-        gap: 12px 22px;
+        gap: 12px 18px;
         padding: 14px 20px;
     }
 
