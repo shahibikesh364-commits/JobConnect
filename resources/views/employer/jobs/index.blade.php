@@ -20,10 +20,12 @@
         <div class="employer-flash" data-employer-job-feedback role="status" aria-live="polite" hidden></div>
 
         <section class="employer-job-summary" data-employer-job-summary aria-label="Job listing summary">
-            <article><span>Total listings</span><strong>{{ $summary->total }}</strong></article>
-            <article><span>Open and accepting applications</span><strong>{{ $summary->open_count }}</strong></article>
-            <article><span>Closed listings</span><strong>{{ $summary->closed_count }}</strong></article>
-            <article><span>Total applications</span><strong>{{ $applicationTotal }}</strong></article>
+            <article><span>Total listings</span><strong>{{ $summary->total }}</strong><small>Across all statuses</small></article>
+            <article><span>Open and accepting applications</span><strong>{{ $summary->open_count }}</strong><small>Available to candidates now</small></article>
+            <article><span>Closed listings</span><strong>{{ $summary->closed_count }}</strong><small>Not currently accepting applications</small></article>
+            <article><span>Total applications</span><strong>{{ $applicationSummary->total }}</strong><small>Across all your listings</small></article>
+            <article><span>New applications</span><strong>{{ $applicationSummary->new_count }}</strong><small>Waiting for your review</small></article>
+            <article><span>Listings with applicants</span><strong>{{ $listingsWithApplications }}</strong><small>{{ $summary->total > 0 ? round(($listingsWithApplications / $summary->total) * 100) : 0 }}% of all listings</small></article>
         </section>
 
         <form class="employer-job-filters" method="GET" action="{{ route('employer.jobs.index') }}">
