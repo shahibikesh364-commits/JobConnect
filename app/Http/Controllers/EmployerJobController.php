@@ -42,11 +42,24 @@ class EmployerJobController extends Controller
                 ['open', today()->toDateString(), 'closed'],
             )
             ->first();
-        $applicationTotal = JobApplication::query()
+        $applicationSummary = JobApplication::query()
             ->whereIn('job_listing_id', $user->jobListings()->select('job_listings.id'))
-            ->count();
-
-        return view('employer.jobs.index', compact('jobs', 'summary', 'applicationTotal'));
+            ->selectRaw(
+                'COUNT(*) as total, '
+                . 'COALESCE(SUM(CASE WHEN status = ? THEN 1 ELSE 0 END), 0) as new_count',
+                ['submitted'],
+            )
+            ->first();
+        $listingsWithApplications = JobApplication::query()
+            ->whereIn('job_listing_id', $user->jobListings()->select('job_listings.id'))
+            ->distinct()
+            ->count('job_listing_id');
+        return view('employer.jobs.index', compact(
+            'jobs',
+            'summary',
+            'applicationSummary',
+            'listingsWithApplications',
+        ));
     }
 
     public function dashboard(Request $request): View
