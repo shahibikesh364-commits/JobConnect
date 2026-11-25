@@ -42,7 +42,7 @@ class ProfileController extends Controller
             return view('employer.settings', compact('user'));
         }
         if ($user->isAdmin()) {
-            return view('admin.settings', compact('user'));
+            return view('admin.profile', compact('user'));
         }
 
         return view('profile.edit', compact('user'));
