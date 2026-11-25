@@ -2397,3 +2397,16 @@ body.employer-messages-page::before {
 html[data-theme="dark"] body.employer-messages-page::before {
     background: #151f30;
 }
+
+@media (min-width: 1800px) {
+    body.employer-workspace .management-container {
+        width: min(calc(100% - 160px), 3200px);
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    body.employer-workspace .employer-page-content {
+        padding-right: clamp(48px, 4vw, 112px);
+        padding-left: clamp(48px, 4vw, 112px);
+    }
+}
