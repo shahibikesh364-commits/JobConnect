@@ -73,6 +73,12 @@ summary:focus-visible {
     margin: 0 auto;
 }
 
+@media (min-width: 1800px) {
+    .management-container {
+        width: min(calc(100% - 160px), 3200px);
+    }
+}
+
 .management-header {
     display: flex;
     flex-wrap: wrap;
