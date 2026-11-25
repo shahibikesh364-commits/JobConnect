@@ -41,16 +41,40 @@ class AdminManagementController extends Controller
         return view('admin.users', compact('users'));
     }
 
-    public function employers(): View
+    public function employers(Request $request): View
     {
         $employers = User::where('role', 'employer')
-            ->withCount('jobListings')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->string('search')->toString();
+
+                $query->where(function ($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%");
+                });
+            })
+            ->addSelect([
+                'total_jobs_count' => JobListing::query()
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('employer_id', 'users.id'),
+                'active_jobs_count' => JobListing::query()
+                    ->selectRaw('COUNT(*)')
+                    ->whereColumn('employer_id', 'users.id')
+                    ->where('status', 'open'),
+                'applications_count' => JobApplication::query()
+                    ->selectRaw('COUNT(*)')
+                    ->whereIn(
+                        'job_listing_id',
+                        JobListing::query()
+                            ->select('id')
+                            ->whereColumn('employer_id', 'users.id')
+                    ),
+            ])
             ->latest()
-            ->paginate(15);
+            ->paginate(15)
+            ->withQueryString();
 
         return view('admin.employers', compact('employers'));
     }
-
     public function jobSeekers(Request $request): View|JsonResponse
     {
         $jobSeekers = User::where('role', 'job_seeker')
