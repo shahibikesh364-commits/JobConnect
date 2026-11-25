@@ -36,6 +36,7 @@ html[data-theme="dark"] .profile-page-heading p:last-child { color: #a4aec0; }
 .profile-edit-link:hover,
 .profile-back-link:hover { background: #4338ca; }
 .profile-editor-page { max-width: 1120px; margin: 28px auto 40px; padding: 0 24px; }
+
 .profile-editor-form { display: grid; gap: 18px; }
 .profile-editor-card {
     padding: 25px;
@@ -776,3 +777,9 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
 .profile-overview-page .candidate-panel-heading h2,
 .profile-overview-page .candidate-panel-heading.compact h2 { font-size: 20px; }
 .profile-overview-page .candidate-timeline-title h3 { font-size: 16px; }
+
+@media (min-width: 1800px) {
+    .profile-editor-page { max-width: 2200px; }
+    .profile-page { max-width: 2200px; }
+    .profile-overview-page { width: min(calc(100% - 128px), 2400px); }
+}
