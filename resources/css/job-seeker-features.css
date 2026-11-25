@@ -95,6 +95,12 @@
     box-shadow: 0 2px 6px rgba(25, 35, 55, .025);
 }
 
+@media (min-width: 1800px) {
+    .job-feature-card {
+        width: min(100%, 1100px);
+    }
+}
+
 .job-feature-icon {
     display: grid;
     width: 48px;
