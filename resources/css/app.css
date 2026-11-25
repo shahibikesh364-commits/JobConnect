@@ -212,4 +212,10 @@ html[data-theme="dark"] body:has(.guest-theme-toggle) input {
     }
 }
 
+@media (min-width: 1800px) {
+    .max-w-7xl {
+        max-width: min(92vw, 3200px);
+    }
+}
+
 @import ". ./components/footers/footer.css";
