@@ -6385,6 +6385,37 @@ html:not([data-theme="dark"]) .inline-status-form select:focus {
     outline-offset: 3px;
 }
 
+@media (min-width: 1800px) {
+    .admin-content {
+        width: min(100%, 3200px);
+        padding-right: clamp(40px, 4vw, 96px);
+        padding-left: clamp(40px, 4vw, 96px);
+    }
+
+    .admin-site-footer-main,
+    .admin-site-footer-bottom {
+        max-width: 3200px;
+    }
+
+    .admin-site-footer {
+        flex: 0 0 auto;
+    }
+}
+
 [x-cloak] {
     display: none !important;
 }
+
+/* Keep the footer in normal flow directly after each page's content. */
+.admin-main {
+    flex: 1 0 auto;
+}
+
+.admin-content {
+    flex: 0 0 auto;
+}
+
+.admin-site-footer {
+    flex: 1 0 auto;
+}
+
