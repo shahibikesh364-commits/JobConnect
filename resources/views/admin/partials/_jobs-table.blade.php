@@ -3,12 +3,12 @@
         <table class="admin-jobs-management-table">
             <thead>
                 <tr>
-                    <th style="width: 24%;">Job Listing</th>
-                    <th style="width: 15%;">Employer</th>
-                    <th style="width: 16%;">Compensation & Deadline</th>
-                    <th style="width: 14%;">Applications & Reach</th>
-                    <th style="width: 9%;">Status</th>
-                    <th style="width: 22%;" class="admin-jobs-actions-heading">Listing Controls</th>
+                    <th style="width: 26%;">Job Listing</th>
+                    <th style="width: 17%;">Employer</th>
+                    <th style="width: 18%;">Compensation & Deadline</th>
+                    <th style="width: 15%;">Applications & Reach</th>
+                    <th style="width: 10%;">Status</th>
+                    <th style="width: 14%;" class="admin-jobs-actions-heading">Listing Controls</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,19 +16,22 @@
                     <tr>
                         <td>
                             <strong class="table-job-title">
-                                <a class="table-link" href="{{ route('jobs.show', $job) }}" target="_blank" title="Preview public listing">
+                                <a class="table-link" href="{{ route('jobs.show', $job) }}" target="_blank"
+                                    title="Preview public listing">
                                     {{ $job->title }}
                                 </a>
                             </strong>
                             <div class="table-company-location">
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
                                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                                     <circle cx="12" cy="10" r="3"></circle>
                                 </svg>
                                 <span>{{ $job->company_name }} · {{ $job->location }}</span>
                             </div>
                             <div class="table-job-meta">
-                                <span class="table-jobtype-badge">{{ str($job->job_type)->replace('_', ' ')->title() }}</span>
+                                <span
+                                    class="table-jobtype-badge">{{ str($job->job_type)->replace('_', ' ')->title() }}</span>
                                 <span class="table-posted-time">Posted {{ $job->created_at->format('M j, Y') }}</span>
                             </div>
                         </td>
@@ -40,7 +43,8 @@
                                     <strong>{{ $job->employer?->name ?? 'Account removed' }}</strong>
                                     <small>{{ $job->employer?->email ?? 'No email' }}</small>
                                     @if ($job->employer_id)
-                                        <a href="{{ route('admin.jobs.index', ['employer' => $job->employer_id]) }}" class="table-filter-sublink">
+                                        <a href="{{ route('admin.jobs.index', ['employer' => $job->employer_id]) }}"
+                                            class="table-filter-sublink">
                                             Filter listings
                                         </a>
                                     @endif
@@ -52,6 +56,11 @@
                             <div>
                                 @if ($job->salary_min || $job->salary_max)
                                     <span class="table-salary-pill">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2.5">
+                                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                        </svg>
                                         @if ($job->salary_min && $job->salary_max)
                                             Rs. {{ number_format($job->salary_min) }} – {{ number_format($job->salary_max) }}
                                         @elseif ($job->salary_min)
@@ -66,7 +75,8 @@
                             </div>
                             @if ($job->application_deadline)
                                 <div class="table-deadline-badge {{ $job->application_deadline->isPast() ? 'expired' : '' }}">
-                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
                                         <circle cx="12" cy="12" r="10"></circle>
                                         <polyline points="12 6 12 12 16 14"></polyline>
                                     </svg>
@@ -83,15 +93,19 @@
                         <td>
                             <div>
                                 <span class="count-pill">{{ number_format($job->applications_count) }}</span>
-                                <span class="job-activity-label">{{ \Illuminate\Support\Str::plural('application', $job->applications_count) }}</span>
+                                <span
+                                    class="job-activity-label">{{ \Illuminate\Support\Str::plural('application', $job->applications_count) }}</span>
                             </div>
                             <small class="table-reach-sub">
-                                {{ number_format($job->views_count) }} {{ \Illuminate\Support\Str::plural('view', $job->views_count) }} · {{ number_format($job->saved_jobs_count) }} saved
+                                {{ number_format($job->views_count) }}
+                                {{ \Illuminate\Support\Str::plural('view', $job->views_count) }} ·
+                                {{ number_format($job->saved_jobs_count) }} saved
                             </small>
                         </td>
 
                         <td>
-                            <span class="role-badge status-{{ $job->status }}"><span class="status-indicator"></span>{{ ucfirst($job->status) }}</span>
+                            <span class="role-badge status-{{ $job->status }}"><span
+                                    class="status-indicator"></span>{{ ucfirst($job->status) }}</span>
                         </td>
 
                         <td>
