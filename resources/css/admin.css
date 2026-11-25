@@ -180,6 +180,48 @@ html[data-theme="dark"] .user-names small {
     color: #a4aec0;
 }
 
+html[data-theme="dark"] .table-location {
+    color: #cbd5e1;
+}
+
+html[data-theme="dark"] .table-contact-phone {
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .table-exp-badge {
+    background: #1b2230;
+    border-color: #334155;
+    color: #a4aec0;
+}
+
+html[data-theme="dark"] .table-resume-pill.has-resume {
+    background: rgba(16, 185, 129, 0.14);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+}
+
+html[data-theme="dark"] .table-resume-pill.no-resume {
+    background: #1b2230;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .table-skill-tag {
+    background: rgba(59, 130, 246, 0.14);
+    border-color: rgba(59, 130, 246, 0.35);
+    color: #60a5fa;
+}
+
+html[data-theme="dark"] .table-skill-more {
+    background: #1b2230;
+    border-color: #334155;
+    color: #94a3b8;
+}
+
+html[data-theme="dark"] .table-saved-jobs-sub {
+    color: #8b95a5;
+}
+
 html[data-theme="dark"] .management-link strong {
     color: #edf0f8;
 }
@@ -838,6 +880,137 @@ td small {
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #798395;
+    font-size: 11px;
+}
+
+.job-seeker-headline {
+    max-width: 330px;
+    margin-top: 5px !important;
+    color: #4f46e5 !important;
+}
+
+.job-seeker-activity-label {
+    margin-left: 5px;
+    color: #4c586b;
+    font-size: 12px;
+}
+
+.job-seeker-activity-date {
+    margin-top: 5px;
+}
+
+.job-seeker-actions-cell,
+.job-seeker-actions-heading {
+    text-align: right;
+}
+
+.job-seekers-management-table {
+    min-width: 980px;
+    table-layout: fixed;
+}
+
+.table-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #334155;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.table-location svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.table-contact-phone {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.table-contact-phone svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.table-exp-badge {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.table-resume-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 7px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.table-resume-pill.has-resume {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+}
+
+.table-resume-pill.has-resume svg {
+    color: #059669;
+}
+
+.table-resume-pill.no-resume {
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+}
+
+.table-skills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.table-skill-tag {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border: 1px solid #dbeafe;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table-skill-more {
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.table-saved-jobs-sub {
+    display: block;
+    margin-top: 3px;
+    color: #8b95a5;
     font-size: 11px;
 }
 
