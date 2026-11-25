@@ -353,6 +353,14 @@ html[data-theme="dark"] .filter-field select {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
 }
+
+@media (min-width: 1800px) {
+    .job-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (min-width: 3000px) {
+    .job-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
 .job-card {
     display: flex;
     min-width: 0;
