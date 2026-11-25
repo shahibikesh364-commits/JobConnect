@@ -16,7 +16,7 @@ class AdminManagementController extends Controller
 {
     public function users(Request $request): View|string
     {
-        $users = User::query()
+        $users = User::whereIn('role', ['job_seeker', 'employer'])
             ->with('jobSeekerProfile')
             ->withCount(['applications', 'jobListings'])
             ->when($request->filled('search'), function ($query) use ($request) {
