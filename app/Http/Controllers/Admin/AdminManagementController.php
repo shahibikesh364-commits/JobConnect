@@ -154,7 +154,7 @@ class AdminManagementController extends Controller
         ];
 
         $jobs = JobListing::with('employer')
-            ->withCount('applications')
+            ->withCount(['applications', 'views', 'savedJobs'])
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
                 $query->where(fn($q) => $q->where('title', 'like', "%{$search}%")
