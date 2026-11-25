@@ -175,3 +175,10 @@
         align-items: flex-start;
     }
 }
+
+@media (min-width: 1800px) {
+    .footer-container,
+    .footer-bottom {
+        max-width: 2800px;
+    }
+}
