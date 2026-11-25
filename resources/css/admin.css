@@ -7716,4 +7716,37 @@ html[data-theme="dark"] .acf-status-dot {
 .admin-job-actions .job-status-form select { width: 82px; }
 .admin-job-actions .small-button { flex: 0 0 auto; padding-right: 8px; padding-left: 8px; }
 
+@media (max-width: 640px) {
+    .admin-hero-banner {
+        width: 100%;
+        min-width: 0;
+        gap: 16px;
+        padding: 22px 20px;
+        border-radius: 14px;
+    }
+
+    .admin-hero-banner .ahb-content { width: 100%; min-width: 0; }
+    .admin-hero-banner .ahb-title {
+        font-size: clamp(22px, 7vw, 27px);
+        line-height: 1.18;
+        overflow-wrap: anywhere;
+    }
+    .admin-hero-banner .ahb-subtitle { font-size: 13px; line-height: 1.5; }
+    .admin-hero-banner .ahb-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+        width: 100%;
+    }
+    .admin-hero-banner .ahb-btn {
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        justify-content: flex-start;
+        padding: 10px 13px;
+        white-space: nowrap;
+    }
+    .admin-hero-banner .ahb-badge { margin-left: auto; white-space: nowrap; }
+}
+
 
