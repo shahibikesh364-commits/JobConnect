@@ -1872,3 +1872,9 @@ html[data-theme="dark"] .messages-pagination span[aria-current="page"] span {
     }
     .chat-inbox-link { display: none; }
 }
+
+@media (min-width: 1800px) {
+    .chat-container {
+        width: min(calc(100% - 128px), 1800px);
+    }
+}
