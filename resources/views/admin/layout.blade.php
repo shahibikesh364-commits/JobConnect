@@ -78,28 +78,24 @@
                         </button>
 
                         <div class="admin-account-dropdown" x-show="open" x-cloak x-transition>
-                            <a href="{{ route('admin.profile') }}">
-                                <span>My Profile</span>
-                            </a>
-
                             <a href="{{ route('admin.settings') }}">
                                 <span>Account Settings</span>
                             </a>
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="admin-account-dropdown-logout">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                                        <polyline points="16 17 21 12 16 7" />
+                                        <line x1="21" x2="9" y1="12" y2="12" />
+                                    </svg>
+                                    <span>Log out</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    {{-- Logout Form --}}
-                    <form method="POST" action="{{ route('logout') }}" class="admin-logout-form">
-                        @csrf
-                        <button type="submit" class="admin-logout-button" title="Sign out of administration">
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
-                                <polyline points="16 17 21 12 16 7" />
-                                <line x1="21" x2="9" y1="12" y2="12" />
-                            </svg>
-                            <span>Logout</span>
-                        </button>
-                    </form>
                 </div>
             </div>
 
@@ -221,11 +217,11 @@
                 @yield('content')
             </main>
 
-            {{-- Shared Admin Footer --}}
+            {{-- Shared full admin footer --}}
             <footer class="admin-site-footer">
                 <div class="admin-site-footer-main">
                     <section class="admin-site-footer-brand">
-                        <a href="{{ route('admin.dashboard') }}" aria-label="JobConnect Admin dashboard">
+                        <a href="{{ route('admin.dashboard') }}">
                             <x-jobconnect-logo class="admin-site-footer-logo" />
                             <span>JobConnect Admin</span>
                         </a>
@@ -233,7 +229,7 @@
                         <p>Manage accounts, employers, job listings, and applications across JobConnect.</p>
                     </section>
 
-                    <nav class="admin-site-footer-column" aria-label="Admin quick links">
+                    <nav class="admin-site-footer-column" aria-label="Quick links">
                         <h2>Quick Links</h2>
                         <a href="{{ route('admin.dashboard') }}">Overview</a>
                         <a href="{{ route('admin.users.index') }}">Users</a>
