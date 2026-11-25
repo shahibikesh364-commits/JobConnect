@@ -54,8 +54,9 @@ class AdminManagementController extends Controller
     public function jobSeekers(Request $request): View|JsonResponse
     {
         $jobSeekers = User::where('role', 'job_seeker')
-            ->with('jobSeekerProfile')
-            ->withCount('applications')
+            ->with(['jobSeekerProfile', 'skills'])
+            ->withCount(['applications', 'savedJobs'])
+            ->withMax('applications', 'created_at')
             ->when($request->filled('search'), function ($query) use ($request) {
                 $search = $request->string('search')->toString();
 
