@@ -9,6 +9,12 @@
         </div>
     </div>
 
+    <form class="admin-filters" method="GET" action="{{ route('admin.employers.index') }}">
+        <input type="search" name="search" value="{{ request('search') }}" placeholder="Search name or email">
+        <button class="admin-button" type="submit">Search employers</button>
+        <a class="admin-button" href="{{ route('admin.employers.index') }}">Clear</a>
+    </form>
+
     <div class="table-card">
         <div class="table-scroll">
             <table>
@@ -35,7 +41,7 @@
 
                             <td>
                                 <span class="count-pill">
-                                    {{ $employer->job_listings_count }}
+                                    {{ $employer->total_jobs_count }}
                                 </span>
                             </td>
 
