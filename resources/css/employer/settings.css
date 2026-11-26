@@ -101,7 +101,7 @@ body.employer-settings-layout .employer-settings-page > .employer-workspace-tool
     min-height: 0;
     grid-template-columns: minmax(250px, 280px) minmax(0, 1fr);
     align-items: stretch;
-    gap: 28px;
+    gap: 20px;
 }
 .employer-settings-page .settings-app:not([hidden]) {
     display: flex;
@@ -190,15 +190,15 @@ body.employer-settings-layout .employer-settings-page > .employer-workspace-tool
 }
 .employer-settings-page .settings-panel {
     min-width: 0;
-    padding: clamp(20px, 3vw, 30px);
+    padding: clamp(18px, 1.5vw, 24px);
 }
 .employer-settings-page .settings-panel-heading {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 20px;
-    padding: 0 0 20px;
-    margin: 0 0 20px;
+    padding: 0 0 14px;
+    margin: 0 0 14px;
     border-bottom: 1px solid var(--settings-line);
 }
 .employer-settings-page .settings-kicker {
@@ -269,7 +269,7 @@ body.employer-settings-layout .employer-settings-page > .employer-workspace-tool
 .employer-settings-page .settings-fields {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 18px;
+    gap: 12px 16px;
 }
 .employer-settings-page .settings-field {
     display: grid;
@@ -405,9 +405,9 @@ body.employer-settings-layout .employer-settings-page > .employer-workspace-tool
 .employer-settings-page .settings-logo-row {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding-bottom: 20px;
-    margin-bottom: 19px;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 14px;
     border-bottom: 1px solid var(--settings-line);
 }
 .employer-settings-page .settings-logo-preview {
