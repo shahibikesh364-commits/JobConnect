@@ -160,6 +160,26 @@ html[data-theme="dark"] .messages-directory-empty { border-color: var(--messages
     .job-seeker-messages-page .messages-shell > .messages-main { margin-left: 0; }
     .messages-directory-container { width: calc(100% - 32px); margin: 24px auto; }
     .messages-page-heading { align-items: flex-start; flex-direction: column; }
+    .job-seeker-messages-page .messages-heading-actions {
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 8px;
+    }
+    .job-seeker-messages-page .messages-heading-actions > a {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        min-height: 44px;
+        padding-inline: 8px;
+        text-align: center;
+        line-height: 1.25;
+    }
+    .job-seeker-messages-page .messages-heading-actions .new-conversation-main-button {
+        gap: 6px;
+        font-size: 12px;
+    }
     .messages-directory-search { flex-wrap: wrap; }
     .messages-directory-search input { flex-basis: 100%; }
     .messages-employer-card { align-items: flex-start; flex-wrap: wrap; }
