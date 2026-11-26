@@ -1,4 +1,4 @@
-async function loadCompanies(url, updateHistory = true) {
+async function loadCompanies(url, updateHistory = true, scrollToResults = false) {
     const currentResults = document.querySelector("#companies-results");
 
     if (!currentResults) return;
@@ -30,6 +30,15 @@ async function loadCompanies(url, updateHistory = true) {
 
         if (updateHistory) {
             window.history.pushState({}, "", url);
+        }
+
+        if (scrollToResults) {
+            requestAnimationFrame(() => {
+                newResults.querySelector("#company-list")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
+            });
         }
     } catch (error) {
         console.error("Company search error:", error);
@@ -67,7 +76,7 @@ document.addEventListener("click", (event) => {
     if (!link) return;
 
     event.preventDefault();
-    loadCompanies(link.href);
+    loadCompanies(link.href, true, link.matches(".companies-pagination a"));
 });
 
 // Browser back and forward
