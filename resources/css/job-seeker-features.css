@@ -263,6 +263,7 @@
 .companies-page-numbers .is-current { border-color: #5147d9; background: #5147d9; color: #fff; font-weight: 750; }
 .companies-pagination-controls .is-disabled { color: #aeb5c1; cursor: default; }
 .company-profile-content { width: min(100%, 1240px); gap: 17px; padding-top: 25px; }
+.company-profile-employer-content { width: 100%; max-width: none; margin: 0; padding: 24px 0 40px; }
 .company-profile-back { width: max-content; color: #596579; font-size: 13px; font-weight: 650; text-decoration: none; }
 .company-profile-back:hover { color: #5147d9; }
 .company-profile-hero { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: 25px; border: 1px solid #e2e6f0; border-radius: 16px; background: linear-gradient(115deg, #fff, #f5f6ff); box-shadow: 0 5px 18px rgba(31, 40, 70, .045); }
