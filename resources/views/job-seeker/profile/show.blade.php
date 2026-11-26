@@ -47,9 +47,13 @@
                     </div>
                 </div>
             </div>
-            <a class="candidate-hero-edit" href="{{ route('job-seeker.profile.edit') }}">
-                <span aria-hidden="true">✎</span><span>Edit profile</span>
-            </a>
+            <section class="candidate-completion-panel candidate-hero-completion" aria-label="Profile completion">
+                <div class="completion-panel-top"><span class="completion-panel-icon" aria-hidden="true">◉</span><span class="completion-panel-caption">PROFILE COMPLETION</span></div>
+                <div class="completion-panel-score">{{ $completion }}<span>%</span></div>
+                <p>{{ $completion >= 100 ? 'Your profile is complete and ready for employers.' : 'Complete more details to give employers a fuller picture.' }}</p>
+                <progress max="100" value="{{ $completion }}" aria-label="Profile completion">{{ $completion }}%</progress>
+                <a class="candidate-hero-edit" href="{{ route('job-seeker.profile.edit') }}"><span aria-hidden="true">✎</span><span>Edit profile</span></a>
+            </section>
         </section>
 
         <section class="profile-snapshot" aria-label="Profile snapshot">
@@ -145,13 +149,6 @@
             </div>
 
             <aside class="candidate-profile-aside" aria-label="Profile details">
-                <section class="candidate-completion-panel">
-                    <div class="completion-panel-top"><span class="completion-panel-icon" aria-hidden="true">◉</span><span class="completion-panel-caption">PROFILE STRENGTH</span></div>
-                    <div class="completion-panel-score">{{ $completion }}<span>%</span></div>
-                    <p>{{ $completion >= 100 ? 'Your profile is filled out and ready to represent you.' : 'Complete more details to give employers a fuller picture of you.' }}</p>
-                    <progress max="100" value="{{ $completion }}" aria-label="Profile completion">{{ $completion }}%</progress>
-                </section>
-
                 <section class="candidate-panel candidate-contact-panel" aria-labelledby="contact-heading">
                     <div class="candidate-panel-heading compact"><div><span class="candidate-section-kicker">GET IN TOUCH</span><h2 id="contact-heading">Contact</h2></div></div>
                     <div class="candidate-contact-list">
