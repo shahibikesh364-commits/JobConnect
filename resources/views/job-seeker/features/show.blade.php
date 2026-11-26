@@ -209,9 +209,8 @@
                                                     {{ \Illuminate\Support\Carbon::parse($company->latest_posted)->diffForHumans() }}
                                                 </span>
 
-                                                <a
-                                                    href="{{ route('jobs.index', ['search' => $company->company_name]) }}">
-                                                    View all roles
+                                                <a href="{{ route('job-seeker.companies.show', $roles->first()->employer_id) }}">
+                                                    View company profile
                                                     <span aria-hidden="true">→</span>
                                                 </a>
 
