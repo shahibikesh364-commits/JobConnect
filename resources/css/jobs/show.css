@@ -837,6 +837,19 @@ textarea:focus-visible {
     line-height: 1.8;
 }
 
+.company-profile-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 13px;
+    color: #5147d9;
+    font-size: 12px;
+    font-weight: 750;
+    text-decoration: none;
+}
+
+.company-profile-link:hover { text-decoration: underline; }
+
 .application-tips-heading {
     display: flex;
     align-items: flex-start;
