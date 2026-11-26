@@ -473,7 +473,7 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 
 /* Candidate profile overview */
 .profile-overview-page {
-    width: min(calc(100% - 48px), 1560px);
+    width: min(calc(100% - 48px), 1360px);
     max-width: none;
     margin: 26px auto 46px;
     padding: 0;
@@ -482,13 +482,14 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 }
 .candidate-profile-hero {
     position: relative;
-    display: flex;
-    min-height: 230px;
+    display: grid;
+    grid-template-columns: minmax(0, 620px) minmax(320px, 460px);
+    min-height: 190px;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
+    justify-content: center;
+    gap: clamp(24px, 3vw, 40px);
     overflow: hidden;
-    padding: 32px clamp(22px, 3.5vw, 46px);
+    padding: 24px clamp(22px, 3.5vw, 40px);
     border: 1px solid #e1e4f0;
     border-radius: 18px;
     background: linear-gradient(112deg, #fff 0%, #fafaff 54%, #f0f3ff 100%);
@@ -540,14 +541,14 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 .candidate-identity-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; color: #737f92; font-size: 11px; }
 .candidate-identity-meta > span { display: inline-flex; align-items: center; gap: 6px; }
 .candidate-identity-meta > span > span { color: #6b63e6; font-size: 14px; }
-.candidate-hero-edit { position: relative; z-index: 1; display: inline-flex; min-height: 42px; flex: 0 0 auto; align-items: center; justify-content: center; gap: 8px; padding: 9px 14px; border: 1px solid #4f46e5; border-radius: 9px; background: #4f46e5; box-shadow: 0 5px 12px rgba(79,70,229,.18); color: #fff; font-size: 11px; font-weight: 750; text-decoration: none; transition: background .15s ease, transform .15s ease, box-shadow .15s ease; }
+.candidate-hero-edit { position: relative; z-index: 1; display: inline-flex; min-height: 38px; width: max-content; align-items: center; justify-content: center; gap: 8px; margin-top: 12px; padding: 8px 12px; border: 1px solid #4f46e5; border-radius: 9px; background: #4f46e5; box-shadow: 0 5px 12px rgba(79,70,229,.18); color: #fff; font-size: 11px; font-weight: 750; text-decoration: none; transition: background .15s ease, transform .15s ease, box-shadow .15s ease; }
 .candidate-hero-edit:hover { transform: translateY(-1px); background: #4338ca; box-shadow: 0 7px 16px rgba(79,70,229,.23); }
 .candidate-hero-edit > span:first-child { font-size: 14px; }
 .candidate-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
 .candidate-tag { display: inline-flex; min-height: 25px; align-items: center; gap: 6px; padding: 4px 9px; border: 1px solid #e2e5f1; border-radius: 99px; background: rgba(255,255,255,.78); color: #586478; font-size: 10px; font-weight: 650; }
 .candidate-tag.available { border-color: #cfeedd; background: #f2fbf6; color: #187446; }
 .candidate-tag i { width: 6px; height: 6px; border-radius: 50%; background: #23a36a; }
-.profile-snapshot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 16px 0 22px; }
+.profile-snapshot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 12px 0 16px; }
 .snapshot-card { display: flex; min-width: 0; align-items: center; gap: 12px; padding: 15px; border: 1px solid #e5e8f0; border-radius: 12px; background: #fff; box-shadow: 0 3px 10px rgba(39, 48, 80, .035); }
 .snapshot-icon { display: grid; width: 38px; height: 38px; flex: 0 0 38px; place-items: center; border-radius: 11px; background: #eef0ff; color: #4f46e5; font-size: 18px; }
 .snapshot-icon.violet { background: #f2edff; color: #7448d8; }
@@ -613,6 +614,7 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 .candidate-completion-panel progress::-webkit-progress-value { border-radius: 99px; background: linear-gradient(90deg, #635bdf, #8b7cf6); }
 .candidate-completion-panel progress::-moz-progress-bar { border-radius: 99px; background: #635bdf; }
 .candidate-completion-panel > a { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: #4f46c2; font-size: 10px; font-weight: 750; text-decoration: none; }
+.candidate-completion-panel > a.candidate-hero-edit { color: #fff; }
 .candidate-completion-panel > a:hover { text-decoration: underline; }
 .candidate-contact-list { display: grid; gap: 13px; }
 .candidate-contact-list > div { display: flex; min-width: 0; align-items: center; gap: 10px; }
@@ -705,6 +707,7 @@ html[data-theme="dark"] .candidate-completion-panel > a { color: #c0bdff; }
 html[data-theme="dark"] .candidate-completion-panel progress,
 html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-bar { background: #343b4b; }
 @media (max-width: 1120px) {
+    .candidate-profile-hero { grid-template-columns: minmax(0, 1fr) minmax(280px, 38%); gap: 22px; }
     .candidate-profile-grid { grid-template-columns: minmax(0, 1fr); }
     .candidate-resume-panel { flex: initial; }
     .candidate-profile-aside { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
@@ -715,7 +718,8 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
 }
 @media (max-width: 720px) {
     .profile-overview-page { width: min(calc(100% - 32px), 620px); margin-top: 18px; }
-    .candidate-profile-hero { align-items: flex-start; padding: 22px; }
+    .candidate-profile-hero { grid-template-columns: minmax(0, 1fr); align-items: flex-start; gap: 18px; padding: 22px; }
+    .candidate-hero-completion { width: 100%; }
     .candidate-identity { align-items: flex-start; gap: 15px; }
     .candidate-avatar-group { width: 75px; flex-basis: 75px; }
     .candidate-avatar { width: 75px; height: 75px; flex-basis: 75px; border-radius: 21px; font-size: 28px; }
@@ -732,6 +736,7 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
     .snapshot-card strong { font-size: 18px; }
     .snapshot-card p { grid-column: 1 / -1; }
     .candidate-profile-hero { padding: 18px 15px; }
+    .candidate-hero-edit { margin-top: 10px; }
     .candidate-identity { flex-direction: column; }
     .candidate-avatar-group { width: auto; flex-basis: auto; justify-items: start; }
     .candidate-identity-copy h2 { font-size: 25px; }
@@ -781,5 +786,5 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
 @media (min-width: 1800px) {
     .profile-editor-page { max-width: 2200px; }
     .profile-page { max-width: 2200px; }
-    .profile-overview-page { width: min(calc(100% - 128px), 2400px); }
+    .profile-overview-page { width: min(calc(100% - 128px), 1800px); }
 }
