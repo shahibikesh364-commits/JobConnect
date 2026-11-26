@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobListing;
 use App\Models\JobListingView;
+use App\Models\EmployerSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -88,6 +89,8 @@ class JobListingController extends Controller
     {
         $deadlinePassed = $job->application_deadline?->lt(today()) ?? false;
         $acceptingApplications = $job->status === 'open' && !$deadlinePassed;
+        $companySettings = EmployerSetting::query()->where('employer_id', $job->employer_id)->first();
+        $companyProfileVisible = $companySettings?->public_profile ?? true;
         $hasApplied = Auth::check()
             && $job->applications()
             ->where('user_id', Auth::id())
@@ -116,6 +119,8 @@ class JobListingController extends Controller
             'isOwner',
             'deadlinePassed',
             'acceptingApplications',
+            'companySettings',
+            'companyProfileVisible',
         ));
     }
 }
