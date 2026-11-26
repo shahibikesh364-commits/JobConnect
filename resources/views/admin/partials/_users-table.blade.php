@@ -3,12 +3,12 @@
         <table class="users-management-table">
             <thead>
                 <tr>
-                    <th style="width: 27%;">User</th>
-                    <th style="width: 14%;">Role</th>
-                    <th style="width: 12%;">Status</th>
-                    <th style="width: 15%;">Activity</th>
-                    <th style="width: 14%;">Joined</th>
-                    <th style="width: 18%;" class="text-right">Account actions</th>
+                    <th style="width: 24%;">User</th>
+                    <th style="width: 12%;">Role</th>
+                    <th style="width: 11%;">Status</th>
+                    <th style="width: 13%;">Activity</th>
+                    <th style="width: 16%;">Joined</th>
+                    <th style="width: 24%;" class="text-right">Account actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
                             @endif
                         </td>
                         <td>
-                            <strong>{{ $user->created_at->format('M j, Y') }}</strong>
+                            <strong class="user-joined-date">{{ $user->created_at->format('M j, Y') }}</strong>
                             <small class="table-subtext-block">{{ $user->created_at->diffForHumans() }}</small>
                         </td>
                         <td class="text-right">
