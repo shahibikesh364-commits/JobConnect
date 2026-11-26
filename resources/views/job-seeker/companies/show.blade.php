@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <x-favicon />
     <title>{{ $companyName }} - JobConnect</title>
-    @vite(['resources/css/job-seeker-features.css', 'resources/css/notifications.css', 'resources/js/app.js'])
+    @if ($isOwner)
+        @vite(['resources/css/jobs/management.css', 'resources/css/employer/sidebar.css', 'resources/css/employer/workspace.css', 'resources/css/job-seeker-features.css', 'resources/css/notifications.css', 'resources/js/app.js'])
+    @else
+        @vite(['resources/css/job-seeker-features.css', 'resources/css/notifications.css', 'resources/js/app.js'])
+    @endif
 </head>
-<body class="job-feature-page company-profile-page">
+<body class="{{ $isOwner ? 'employer-workspace company-profile-employer-page' : 'job-feature-page company-profile-page' }}">
+    @if ($isOwner)
+        <main class="management-container">
+            <x-employer-sidebar />
+            <x-employer-workspace-toolbar />
+            <div class="job-feature-content company-profile-content company-profile-employer-content">
+    @else
     <div class="job-feature-shell">
         <x-job-seeker-sidebar active="companies" />
 
@@ -25,6 +35,7 @@
             </header>
 
             <div class="job-feature-content company-profile-content">
+    @endif
                 <a class="company-profile-back" href="{{ $backUrl }}">← {{ $backLabel }}</a>
 
                 <section class="company-profile-hero" aria-labelledby="company-profile-name">
@@ -119,7 +130,11 @@
                     </aside>
                 </div>
             </div>
+    @if ($isOwner)
+        </main>
+    @else
         </main>
     </div>
+    @endif
 </body>
 </html>
