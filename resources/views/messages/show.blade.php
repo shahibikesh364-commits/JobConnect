@@ -123,8 +123,8 @@
                             <h2>{{ $otherUser->name ?? (auth()->user()->isEmployer() ? 'Candidate unavailable' : 'Employer unavailable') }}
                             </h2>
                             <p>{{ $conversation->job?->title ?? ($conversation->job_listing_id ? 'Job listing no longer available' : 'General conversation') }}
-                                @if ($conversation->job?->company_name)
-                                    · {{ $conversation->job->company_name }}
+                                @if ($conversation->job?->company_name ?? (!$currentUser->isEmployer() ? $otherUser?->employerSetting?->company_name : null))
+                                    · {{ $conversation->job?->company_name ?? $otherUser->employerSetting->company_name }}
                                 @endif
                             </p>
                             @if (auth()->user()->isEmployer() && $otherUser?->jobSeekerProfile?->headline)
