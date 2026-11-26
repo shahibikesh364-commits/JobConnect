@@ -100,6 +100,11 @@ class User extends Authenticatable
         return $this->hasOne(JobSeekerProfile::class);
     }
 
+    public function employerSetting(): HasOne
+    {
+        return $this->hasOne(EmployerSetting::class, 'employer_id');
+    }
+
     /**
      * Get the user's education records.
      */
