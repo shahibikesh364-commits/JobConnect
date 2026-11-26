@@ -395,13 +395,16 @@
 
                                 <div>
                                     <strong>{{ $job->company_name }}</strong>
-                                    <p>Employer on JobConnect</p>
+                                    <p>{{ $companySettings?->tagline ?: 'Employer on JobConnect' }}</p>
                                 </div>
                             </div>
 
                             <p class="company-note">
                                 Review the job details and requirements carefully before submitting your application.
                             </p>
+                            @if ($companyProfileVisible && auth()->check() && auth()->user()->isJobSeeker())
+                                <a class="company-profile-link" href="{{ route('job-seeker.companies.show', $job->employer_id) }}">View company profile <span aria-hidden="true">→</span></a>
+                            @endif
                         </section>
 
                         <section class="sidebar-help">
