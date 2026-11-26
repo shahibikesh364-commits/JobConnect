@@ -184,6 +184,53 @@ document.querySelectorAll("[data-password-toggle]").forEach((button) => {
     });
 })();
 
+// On narrow Job Seeker views, reuse the existing header controls in the
+// sticky JobConnect brand row. Restore them to their original headers on wider screens.
+(() => {
+    const slot = document.querySelector("[data-job-seeker-mobile-actions]");
+    if (!slot) return;
+
+    const headerSelector = [
+        ".topbar-actions",
+        ".header-actions",
+        ".help-center-actions",
+        ".job-feature-topbar-actions",
+        ".profile-header-actions",
+        ".messages-header-right",
+        ".notifications-header-actions",
+    ].join(",");
+    const controls = [...document.querySelectorAll(headerSelector)].flatMap((header) =>
+        [...header.children].filter((child) =>
+            child.matches(".notification-bell, .theme-toggle, .job-seeker-profile-menu"),
+        ),
+    );
+    if (!controls.length) return;
+
+    const origins = controls.map((element) => ({
+        element,
+        parent: element.parentNode,
+        next: element.nextSibling,
+    }));
+    const mobile = window.matchMedia("(max-width: 760px)");
+
+    const placeActions = () => {
+        if (mobile.matches) {
+            origins.forEach(({ element }) => {
+                if (element.parentNode !== slot) slot.append(element);
+            });
+            return;
+        }
+
+        [...origins].reverse().forEach(({ element, parent, next }) => {
+            if (element.parentNode === parent) return;
+            parent.insertBefore(element, next?.parentNode === parent ? next : null);
+        });
+    };
+
+    placeActions();
+    mobile.addEventListener("change", placeActions);
+})();
+
 import "./applications.js";
 import "./jobs.js";
 import "./companies.js";
