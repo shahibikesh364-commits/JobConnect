@@ -63,14 +63,14 @@ class EmployerSettingsController extends Controller
             'industry' => ['nullable', 'string', 'max:120'],
             'company_size' => ['nullable', Rule::in(['1-10', '11-50', '51-200', '201-500', '500+'])],
             'founded_year' => ['nullable', 'integer', 'between:1800,' . now()->year],
-            'website' => ['nullable', 'url', 'max:255'],
+            'website' => ['nullable', 'url:http,https', 'max:255'],
             'about_company' => ['nullable', 'string', 'max:1000'],
             'country' => ['nullable', 'string', 'max:100'],
             'city' => ['nullable', 'string', 'max:100'],
             'full_address' => ['nullable', 'string', 'max:255'],
-            'social_links.linkedin' => ['nullable', 'url', 'max:255'],
-            'social_links.facebook' => ['nullable', 'url', 'max:255'],
-            'social_links.twitter' => ['nullable', 'url', 'max:255'],
+            'social_links.linkedin' => ['nullable', 'url:http,https', 'max:255'],
+            'social_links.facebook' => ['nullable', 'url:http,https', 'max:255'],
+            'social_links.twitter' => ['nullable', 'url:http,https', 'max:255'],
             'public_profile' => ['sometimes', 'boolean'],
         ]);
 
