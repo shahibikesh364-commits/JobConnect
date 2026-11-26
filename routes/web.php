@@ -4,6 +4,7 @@ use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\JobSeekerDashboardController;
 use App\Http\Controllers\JobSeekerFeatureController;
+use App\Http\Controllers\JobSeekerCompanyProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EmployerJobController;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -84,6 +85,10 @@ Route::middleware('auth')->group(function () {
 // Job seeker routes
 Route::middleware(['auth', 'role:job_seeker'])->group(function () {
 
+    Route::get('/companies/{employer}', [JobSeekerCompanyProfileController::class, 'show'])
+        ->whereNumber('employer')
+        ->name('job-seeker.companies.show');
+
     Route::get('/dashboard', [JobSeekerDashboardController::class, 'index'])
         ->name('dashboard');
 
@@ -135,6 +140,8 @@ Route::middleware(['auth', 'role:employer'])
     ->group(function () {
 
         Route::get('/settings', [ProfileController::class, 'settings'])->name('settings');
+        Route::get('/company-profile', [JobSeekerCompanyProfileController::class, 'preview'])
+            ->name('company-profile.preview');
 
         Route::get('/team/invitations/{token}/accept', [EmployerSettingsController::class, 'acceptInvitation'])
             ->name('team.accept');
@@ -226,6 +233,9 @@ Route::middleware(['auth', 'admin'])
         Route::delete('/users/{user}', [AdminManagementController::class, 'destroyUser'])->name('users.destroy');
 
         Route::get('/employers', [AdminManagementController::class, 'employers'])->name('employers.index');
+        Route::get('/employers/{employer}/company-profile', [JobSeekerCompanyProfileController::class, 'show'])
+            ->whereNumber('employer')
+            ->name('employers.profile');
 
         Route::get('/jobs', [AdminManagementController::class, 'jobs'])->name('jobs.index');
         Route::patch('/jobs/{job}/status', [AdminManagementController::class, 'updateJobStatus'])->name('jobs.status');
