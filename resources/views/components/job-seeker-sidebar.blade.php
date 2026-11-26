@@ -15,11 +15,14 @@
 @endphp
 
 <aside class="job-seeker-sidebar" aria-label="Main navigation">
-    <a class="job-seeker-brand" href="{{ $user?->isJobSeeker() ? route('dashboard') : route('jobs.index') }}"
-        aria-label="JobConnect home">
-        <x-jobconnect-logo class="job-seeker-brand-logo" />
-        <span>JobConnect</span>
-    </a>
+    <div class="job-seeker-sidebar-header">
+        <a class="job-seeker-brand" href="{{ $user?->isJobSeeker() ? route('dashboard') : route('jobs.index') }}"
+            aria-label="JobConnect home">
+            <x-jobconnect-logo class="job-seeker-brand-logo" />
+            <span>JobConnect</span>
+        </a>
+        <div class="job-seeker-sidebar-actions" data-job-seeker-mobile-actions></div>
+    </div>
 
     <nav class="job-seeker-nav">
         @if ($user?->isJobSeeker())
