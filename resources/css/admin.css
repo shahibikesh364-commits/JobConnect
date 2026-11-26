@@ -7705,6 +7705,25 @@ html[data-theme="dark"] .acf-status-dot {
     background: #34d399;
 }
 
+/* Keep Joined dates clear of the role controls in the horizontally scrollable mobile users table. */
+.admin-content .table-scroll table.users-management-table {
+    width: 100%;
+    min-width: 1000px;
+}
+
+.users-management-table .user-joined-date {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.users-management-table .row-actions {
+    gap: 6px;
+}
+
+.users-management-table .row-actions select {
+    max-width: 130px;
+}
+
 /* Keep job listing actions together; let narrow screens scroll the full table. */
 .admin-content .table-scroll table.admin-jobs-management-table { min-width: 1120px; }
 .admin-job-actions {
