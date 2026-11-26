@@ -20,6 +20,7 @@
                 <div>
                     <p class="settings-eyebrow">EMPLOYER WORKSPACE</p>
                     <h1>Settings</h1>
+                    <a class="settings-preview-profile" href="{{ route('employer.company-profile.preview') }}">Preview company profile <span aria-hidden="true">↗</span></a>
                 </div>
             </header>
 
