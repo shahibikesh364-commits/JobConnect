@@ -262,6 +262,66 @@
 .companies-pagination-controls a:hover,.companies-page-numbers a:hover { border-color: #deddfb; background: #f5f4ff; color: #5147d9; }
 .companies-page-numbers .is-current { border-color: #5147d9; background: #5147d9; color: #fff; font-weight: 750; }
 .companies-pagination-controls .is-disabled { color: #aeb5c1; cursor: default; }
+.company-profile-content { width: min(100%, 1240px); gap: 17px; padding-top: 25px; }
+.company-profile-back { width: max-content; color: #596579; font-size: 13px; font-weight: 650; text-decoration: none; }
+.company-profile-back:hover { color: #5147d9; }
+.company-profile-hero { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; align-items: center; gap: 20px; padding: 25px; border: 1px solid #e2e6f0; border-radius: 16px; background: linear-gradient(115deg, #fff, #f5f6ff); box-shadow: 0 5px 18px rgba(31, 40, 70, .045); }
+.company-profile-brand { display: grid; width: 76px; height: 76px; place-items: center; overflow: hidden; border: 1px solid #e3e6f1; border-radius: 15px; background: #eeedff; color: #5147d9; font-size: 28px; font-weight: 800; }
+.company-profile-brand img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.company-profile-kicker { color: #6863ce; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+.company-profile-heading h1 { margin: 5px 0; color: #20283a; font-size: clamp(25px, 3vw, 34px); letter-spacing: -.035em; }
+.company-profile-heading p { margin: 0; color: #687386; font-size: 14px; }
+.company-profile-badges { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.company-profile-badges span { padding: 5px 9px; border: 1px solid #e2e5ef; border-radius: 99px; background: #fff; color: #667186; font-size: 11px; font-weight: 650; }
+.company-profile-open-count { display: grid; min-width: 112px; justify-items: center; gap: 3px; padding: 12px 16px; border: 1px solid #d9eade; border-radius: 12px; background: #f3fbf5; color: #216b49; }
+.company-profile-open-count strong { font-size: 24px; line-height: 1.1; }
+.company-profile-open-count span { font-size: 11px; font-weight: 650; }
+.company-profile-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 320px); align-items: start; gap: 16px; }
+.company-profile-main,.company-profile-aside { display: grid; min-width: 0; gap: 16px; }
+.company-profile-panel { min-width: 0; padding: 22px; border: 1px solid #e3e7ed; border-radius: 14px; background: #fff; box-shadow: 0 3px 12px rgba(25, 35, 55, .03); }
+.company-profile-panel h2 { margin: 4px 0 14px; color: #253148; font-size: 19px; letter-spacing: -.02em; }
+.company-profile-about { margin: 0; color: #596579; font-size: 14px; line-height: 1.75; white-space: pre-line; overflow-wrap: anywhere; }
+.company-profile-section-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+.company-profile-section-heading h2 { margin-bottom: 0; }
+.company-profile-section-heading > span { color: #7a8495; font-size: 12px; }
+.company-profile-job { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 15px 0; border-top: 1px solid #edf0f5; }
+.company-profile-job h3 { margin: 0; font-size: 15px; }
+.company-profile-job h3 a { color: #263249; text-decoration: none; }
+.company-profile-job h3 a:hover { color: #5147d9; }
+.company-profile-job p { margin: 5px 0 0; color: #778296; font-size: 12px; }
+.company-profile-job-link { flex: 0 0 auto; color: #5147d9; font-size: 12px; font-weight: 750; text-decoration: none; }
+.company-profile-job-link:hover { text-decoration: underline; }
+.company-profile-no-jobs { margin: 0; padding: 17px 0 2px; border-top: 1px solid #edf0f5; color: #737e90; font-size: 13px; line-height: 1.6; }
+.company-profile-details { display: grid; gap: 0; margin: 0; }
+.company-profile-details > div { display: grid; gap: 4px; padding: 11px 0; border-top: 1px solid #edf0f5; }
+.company-profile-details dt { color: #8791a1; font-size: 11px; }
+.company-profile-details dd { margin: 0; color: #354158; font-size: 13px; font-weight: 650; overflow-wrap: anywhere; }
+.company-profile-details dd a { color: #5147d9; text-decoration: none; }
+.company-profile-details dd a:hover { text-decoration: underline; }
+.company-profile-socials { display: grid; gap: 7px; padding-top: 12px; border-top: 1px solid #edf0f5; }
+.company-profile-socials a { display: flex; justify-content: space-between; color: #5147d9; font-size: 12px; font-weight: 650; text-decoration: none; }
+.company-profile-pagination { margin-top: 10px; }
+html[data-theme="dark"] .company-profile-hero,
+html[data-theme="dark"] .company-profile-panel { border-color: #343b4b; background: #222938; box-shadow: none; }
+html[data-theme="dark"] .company-profile-heading h1,
+html[data-theme="dark"] .company-profile-panel h2,
+html[data-theme="dark"] .company-profile-job h3 a,
+html[data-theme="dark"] .company-profile-details dd { color: #edf0f8; }
+html[data-theme="dark"] .company-profile-heading p,
+html[data-theme="dark"] .company-profile-about,
+html[data-theme="dark"] .company-profile-job p { color: #a4aec0; }
+html[data-theme="dark"] .company-profile-badges { color: #d2d8e4; }
+html[data-theme="dark"] .company-profile-badges span,
+html[data-theme="dark"] .company-profile-brand { border-color: #3b4456; background: #1b2230; color: #c6c3ff; }
+html[data-theme="dark"] .company-profile-open-count { border-color: #315541; background: #1c3a32; color: #a3e5c1; }
+html[data-theme="dark"] .company-profile-job,
+html[data-theme="dark"] .company-profile-no-jobs,
+html[data-theme="dark"] .company-profile-details > div,
+html[data-theme="dark"] .company-profile-socials { border-color: #343b4b; }
+html[data-theme="dark"] .company-profile-details dt,
+html[data-theme="dark"] .company-profile-section-heading > span,
+html[data-theme="dark"] .company-profile-no-jobs,
+html[data-theme="dark"] .company-profile-back { color: #a4aec0; }
 html[data-theme="dark"] .job-feature-page { background: #171d29; color: #edf0f8; }
 html[data-theme="dark"] .job-feature-topbar, html[data-theme="dark"] .companies-metrics article, html[data-theme="dark"] .companies-directory { border-color: #343b4b; background: #222938; }
 html[data-theme="dark"] .job-feature-topbar span, html[data-theme="dark"] .companies-section-heading h2, html[data-theme="dark"] .companies-metrics strong, html[data-theme="dark"] .company-card h3, html[data-theme="dark"] .companies-empty-state h3 { color: #edf0f8; }
@@ -326,6 +386,14 @@ html[data-theme="dark"] .companies-page-numbers .is-current { border-color: #817
     .companies-sort { justify-content: space-between; }
     .companies-pagination { align-items: flex-start; flex-direction: column; }
     .companies-pagination-controls { width: 100%; justify-content: space-between; }
+    .company-profile-content { padding-top: 18px; }
+    .company-profile-hero { grid-template-columns: 58px minmax(0, 1fr); gap: 13px; padding: 17px; }
+    .company-profile-brand { width: 58px; height: 58px; border-radius: 12px; font-size: 23px; }
+    .company-profile-heading h1 { font-size: 24px; }
+    .company-profile-open-count { grid-column: 1 / -1; justify-items: start; width: 100%; padding: 10px 12px; }
+    .company-profile-open-count strong { font-size: 20px; }
+    .company-profile-layout { grid-template-columns: minmax(0, 1fr); }
+    .company-profile-panel { padding: 17px; }
 }
 
 @media (max-width: 480px) {
