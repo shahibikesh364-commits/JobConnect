@@ -1,5 +1,6 @@
 @import "./job-seeker-sidebar.css";
 @import "./notifications.css";
+@import "../views/components/footers/footer.css";
 
 @tailwind base;
 @tailwind components;
@@ -218,4 +219,3 @@ html[data-theme="dark"] body:has(.guest-theme-toggle) input {
     }
 }
 
-@import ". ./components/footers/footer.css";
