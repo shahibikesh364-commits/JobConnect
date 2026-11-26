@@ -34,7 +34,21 @@
                     @forelse ($employers as $employer)
                         <tr>
                             <td>
-                                <strong>{{ $employer->name }}</strong>
+                                <div class="admin-employer-identity">
+                                    <span class="admin-employer-avatar" aria-hidden="true">
+                                        @if ($employer->company_logo_path)
+                                            <img src="{{ asset('storage/' . $employer->company_logo_path) }}" alt="">
+                                        @else
+                                            {{ strtoupper(substr($employer->company_profile_name ?: $employer->name, 0, 1)) }}
+                                        @endif
+                                    </span>
+                                    <span class="admin-employer-copy">
+                                        <strong>{{ $employer->name }}</strong>
+                                        @if ($employer->company_profile_name && $employer->company_profile_name !== $employer->name)
+                                            <small>{{ $employer->company_profile_name }}</small>
+                                        @endif
+                                    </span>
+                                </div>
                             </td>
 
                             <td>{{ $employer->email }}</td>
@@ -60,6 +74,10 @@
                             <td>{{ $employer->created_at->format('M j, Y') }}</td>
 
                             <td>
+                                <a class="small-button link-button"
+                                    href="{{ route('admin.employers.profile', $employer) }}">
+                                    Company profile
+                                </a>
                                 <a class="small-button link-button"
                                     href="{{ route('admin.jobs.index', ['employer' => $employer->id]) }}">
                                     View listings
