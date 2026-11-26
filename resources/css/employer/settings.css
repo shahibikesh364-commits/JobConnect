@@ -65,6 +65,17 @@ body.employer-settings-layout .employer-settings-page > .employer-workspace-tool
     font-weight: 760;
     letter-spacing: -0.035em;
 }
+.employer-settings-page .settings-preview-profile {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    color: var(--settings-blue);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+.employer-settings-page .settings-preview-profile:hover { text-decoration: underline; }
 .employer-settings-page .settings-toast {
     position: sticky;
     z-index: 30;
