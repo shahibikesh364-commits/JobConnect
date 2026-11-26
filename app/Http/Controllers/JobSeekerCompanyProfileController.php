@@ -53,6 +53,6 @@ class JobSeekerCompanyProfileController extends Controller
             default => 'Back to companies',
         };
 
-        return view('job-seeker.companies.show', compact('employer', 'settings', 'jobs', 'companyName', 'logoUrl', 'backUrl', 'backLabel'));
+        return view('job-seeker.companies.show', compact('employer', 'settings', 'jobs', 'companyName', 'logoUrl', 'backUrl', 'backLabel', 'isOwner'));
     }
 }
