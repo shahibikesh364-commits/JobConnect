@@ -92,7 +92,7 @@ class JobSeekerFeatureController extends Controller
                 ->whereNotIn('employer_id', $privateEmployers)
                 ->whereIn('company_name', $companyNames)
                 ->latest()
-                ->get(['id', 'company_name', 'title', 'location', 'job_type', 'salary_min', 'salary_max', 'created_at'])
+                ->get(['id', 'employer_id', 'company_name', 'title', 'location', 'job_type', 'salary_min', 'salary_max', 'created_at'])
                 ->groupBy('company_name');
 
             $viewData += [
