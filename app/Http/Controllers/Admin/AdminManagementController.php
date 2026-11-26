@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use App\Models\EmployerSetting;
 use App\Notifications\EmployerSettingsNotification;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -53,6 +54,14 @@ class AdminManagementController extends Controller
                 });
             })
             ->addSelect([
+                'company_logo_path' => EmployerSetting::query()
+                    ->select('company_logo')
+                    ->whereColumn('employer_id', 'users.id')
+                    ->limit(1),
+                'company_profile_name' => EmployerSetting::query()
+                    ->select('company_name')
+                    ->whereColumn('employer_id', 'users.id')
+                    ->limit(1),
                 'total_jobs_count' => JobListing::query()
                     ->selectRaw('COUNT(*)')
                     ->whereColumn('employer_id', 'users.id'),
