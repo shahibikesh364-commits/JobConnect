@@ -23,10 +23,12 @@ class MessageController extends Controller
         $user = $request->user();
         $filters = $request->validate([
             'search' => ['nullable', 'string', 'max:120'],
-            'filter' => ['nullable', 'in:all,unread,archived'],
+            'filter' => ['nullable', 'in:all,unread,applications,general,archived'],
+            'sort' => ['nullable', 'in:recent,oldest'],
         ]);
         $search = trim($filters['search'] ?? '');
         $filter = $filters['filter'] ?? 'all';
+        $sort = $filters['sort'] ?? 'recent';
         $archiveColumn = $this->archiveColumn($user);
         $employerId = $user->employerWorkspaceId();
 
@@ -49,6 +51,7 @@ class MessageController extends Controller
             ->with([
                 'jobSeeker.jobSeekerProfile',
                 'employer.jobSeekerProfile',
+                'employer.employerSetting',
                 'job',
                 'latestMessage',
             ])
@@ -62,34 +65,55 @@ class MessageController extends Controller
 
         if ($filter === 'unread') {
             $conversationQuery->whereHas('messages', $unreadMessages);
+        } elseif ($filter === 'applications') {
+            $conversationQuery->whereNotNull('job_listing_id');
+        } elseif ($filter === 'general') {
+            $conversationQuery->whereNull('job_listing_id');
         }
 
         if ($search !== '') {
             $otherParticipantRelation = $user->isJobSeeker() ? 'employer' : 'jobSeeker';
             $conversationQuery->where(function ($query) use ($search, $otherParticipantRelation) {
                 $query->whereHas($otherParticipantRelation, fn($person) => $person->where('name', 'like', "%{$search}%"))
+                    ->orWhereHas($otherParticipantRelation . '.employerSetting', fn($company) => $company->where('company_name', 'like', "%{$search}%"))
                     ->orWhereHas('job', fn($job) => $job->where('title', 'like', "%{$search}%")
                         ->orWhere('company_name', 'like', "%{$search}%"))
                     ->orWhereHas('latestMessage', fn($message) => $message->where('body', 'like', "%{$search}%"));
             });
         }
 
-        $conversations = $conversationQuery->latest('updated_at')->paginate(12)->withQueryString();
+        $conversations = $conversationQuery
+            ->orderBy('updated_at', $sort === 'oldest' ? 'asc' : 'desc')
+            ->paginate(12)
+            ->withQueryString();
         $conversationCount = Conversation::query()->where($participantScope)->whereNull($archiveColumn)->count();
         $archivedConversationCount = Conversation::query()->where($participantScope)->whereNotNull($archiveColumn)->count();
-        $unreadMessageCount = Message::query()
-            ->whereNull('read_at')
-            ->where('sender_id', '!=', $user->id)
-            ->whereHas('conversation', $participantScope)
+        $unreadConversationCount = Conversation::query()
+            ->where($participantScope)
+            ->whereNull($archiveColumn)
+            ->whereHas('messages', $unreadMessages)
+            ->count();
+        $applicationConversationCount = Conversation::query()
+            ->where($participantScope)
+            ->whereNull($archiveColumn)
+            ->whereNotNull('job_listing_id')
+            ->count();
+        $generalConversationCount = Conversation::query()
+            ->where($participantScope)
+            ->whereNull($archiveColumn)
+            ->whereNull('job_listing_id')
             ->count();
 
         return view('messages.index', compact(
             'conversations',
             'conversationCount',
             'archivedConversationCount',
-            'unreadMessageCount',
+            'unreadConversationCount',
+            'applicationConversationCount',
+            'generalConversationCount',
             'search',
             'filter',
+            'sort',
         ));
     }
 
@@ -106,6 +130,7 @@ class MessageController extends Controller
         $conversation->load([
             'jobSeeker.jobSeekerProfile',
             'employer.jobSeekerProfile',
+            'employer.employerSetting',
             'job',
         ]);
         $applicationStatus = JobApplication::query()
@@ -139,6 +164,7 @@ class MessageController extends Controller
             ->with([
                 'jobSeeker.jobSeekerProfile',
                 'employer.jobSeekerProfile',
+                'employer.employerSetting',
                 'job',
                 'latestMessage',
             ])
