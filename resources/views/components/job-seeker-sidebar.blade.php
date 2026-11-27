@@ -14,8 +14,17 @@
             : 0;
 @endphp
 
-<aside class="job-seeker-sidebar" aria-label="Main navigation">
+<aside @class(['job-seeker-sidebar', 'job-seeker-sidebar-with-drawer' => $user?->isJobSeeker()]) aria-label="Main navigation">
     <div class="job-seeker-sidebar-header">
+        @if ($user?->isJobSeeker())
+            <button class="job-seeker-mobile-menu-button" type="button" data-job-seeker-menu-toggle
+                aria-expanded="false" aria-controls="job-seeker-mobile-navigation" aria-label="Open navigation menu">
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        @endif
         <a class="job-seeker-brand" href="{{ $user?->isJobSeeker() ? route('dashboard') : route('jobs.index') }}"
             aria-label="JobConnect home">
             <x-jobconnect-logo class="job-seeker-brand-logo" />
@@ -24,7 +33,7 @@
         <div class="job-seeker-sidebar-actions" data-job-seeker-mobile-actions></div>
     </div>
 
-    <nav class="job-seeker-nav">
+    <nav id="job-seeker-mobile-navigation" class="job-seeker-nav" aria-label="Job seeker navigation">
         @if ($user?->isJobSeeker())
             <p class="job-seeker-nav-section">Main Menu</p>
 
@@ -118,6 +127,11 @@
 
 </aside>
 
+@if ($user?->isJobSeeker())
+    <button class="job-seeker-mobile-menu-backdrop" type="button" data-job-seeker-menu-close
+        aria-label="Close navigation menu" tabindex="-1"></button>
+@endif
+
 @once
     <script>
         (() => {
@@ -137,6 +151,32 @@
 
             revealActiveMobileNavItem();
             window.addEventListener("resize", revealActiveMobileNavItem);
+
+            document.querySelectorAll(".job-seeker-sidebar").forEach((sidebar) => {
+                const toggle = sidebar.querySelector("[data-job-seeker-menu-toggle]");
+                const nav = sidebar.querySelector(".job-seeker-nav");
+                const backdrop = sidebar.nextElementSibling?.matches("[data-job-seeker-menu-close]")
+                    ? sidebar.nextElementSibling
+                    : null;
+                if (!toggle || !nav || !backdrop) return;
+
+                const setMenuOpen = (isOpen) => {
+                    nav.classList.toggle("is-open", isOpen);
+                    backdrop.classList.toggle("is-visible", isOpen);
+                    toggle.setAttribute("aria-expanded", String(isOpen));
+                    toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+                    backdrop.tabIndex = isOpen ? 0 : -1;
+                };
+
+                toggle.addEventListener("click", () => setMenuOpen(!nav.classList.contains("is-open")));
+                backdrop.addEventListener("click", () => setMenuOpen(false));
+                nav.addEventListener("click", (event) => {
+                    if (event.target.closest("a")) setMenuOpen(false);
+                });
+                document.addEventListener("keydown", (event) => {
+                    if (event.key === "Escape") setMenuOpen(false);
+                });
+            });
         })();
     </script>
 @endonce
