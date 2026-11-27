@@ -1,13 +1,15 @@
 <x-app-layout>
     <x-slot name="title">Edit Profile</x-slot>
     <x-slot name="header">
-        <div class="profile-header-main">
+        <div class="profile-header-main profile-editor-header-main">
             <div class="profile-page-heading">
-                <p class="profile-label">MY CAREER</p>
+                <div class="profile-editor-kicker-row">
+                    <p class="profile-label">MY CAREER</p>
+                    <a class="profile-back-link profile-back-link-mobile" href="{{ route('job-seeker.profile.show') }}">← Back to profile</a>
+                </div>
                 <h1>Edit profile</h1>
                 <p>Keep your details current so employers can understand your experience.</p>
             </div>
-            <a class="profile-back-link" href="{{ route('job-seeker.profile.show') }}">← Back to profile</a>
         </div>
     </x-slot>
 
@@ -27,6 +29,7 @@
                 <div class="profile-editor-section-heading">
                     <span class="profile-editor-icon violet" aria-hidden="true">◎</span>
                     <div><h2>Profile photo</h2><p>Choose a clear photo so people can recognize your profile.</p></div>
+                    <a class="profile-back-link profile-photo-back-link" href="{{ route('job-seeker.profile.show') }}">← Back to profile</a>
                 </div>
                 <div class="profile-photo-editor-row">
                     @if ($profile?->profile_photo)

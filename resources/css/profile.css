@@ -69,6 +69,21 @@ html[data-theme="dark"] .profile-page-heading p:last-child { color: #a4aec0; }
 .profile-photo-editor-copy { display: grid; min-width: 0; flex: 1; gap: 8px; }
 .profile-photo-editor-copy .profile-editor-field { max-width: 520px; }
 .profile-photo-editor-note { color: #7a8495; font-size: 10px; }
+.profile-editor-page .profile-photo-editor-copy .profile-editor-field {
+    width: 100%;
+    max-width: none;
+}
+.profile-editor-page .profile-editor-card {
+    padding: 20px;
+}
+.profile-editor-page .profile-editor-section-heading {
+    gap: 10px;
+    padding-bottom: 13px;
+    margin-bottom: 14px;
+}
+.profile-editor-page .profile-editor-grid {
+    column-gap: 14px;
+}
 .profile-editor-field > small { color: #7a8495; font-size: 10px; font-weight: 500; }
 .profile-photo-preview { display: flex; align-items: center; gap: 10px; padding: 9px; border: 1px solid #e5e8f0; border-radius: 9px; background: #fafbfe; }
 .profile-photo-preview img { width: 48px; height: 48px; flex: 0 0 48px; object-fit: cover; border-radius: 13px; }
@@ -841,5 +856,186 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
 @media (max-width: 720px) {
     .profile-overview-page .candidate-profile-hero {
         padding: 15px;
+    }
+}
+
+/* Let profile edit cards use the full main content width. */
+.profile-editor-page {
+    width: 100%;
+    max-width: none;
+    margin: 18px 0 24px;
+    padding-inline: clamp(12px, 1.2vw, 22px);
+}
+.profile-editor-page .profile-editor-form {
+    gap: 10px;
+}
+.profile-editor-page .profile-editor-card {
+    padding: 16px;
+}
+.profile-editor-page .profile-editor-section-heading {
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.profile-editor-page .profile-editor-grid {
+    row-gap: 12px;
+    column-gap: 12px;
+}
+.profile-editor-page .profile-photo-editor-row {
+    gap: 12px;
+}
+.profile-editor-page .profile-editor-field {
+    gap: 5px;
+}
+.profile-photo-back-link {
+    flex: 0 0 auto;
+    margin-left: auto;
+}
+.profile-back-link-mobile {
+    display: none;
+}
+.profile-photo-editor-card .profile-editor-section-heading .profile-photo-back-link {
+    align-self: center;
+}
+@media (max-width: 1200px) {
+    .job-seeker-profile-header:has(.profile-editor-header-main) {
+        position: relative;
+        display: block;
+        padding: 58px clamp(18px, 3vw, 42px) 14px;
+    }
+    .profile-editor-header-main {
+        width: 100%;
+    }
+    .profile-editor-header-main .profile-page-heading {
+        width: 100%;
+    }
+    .job-seeker-profile-header:has(.profile-editor-header-main) .profile-header-actions {
+        position: absolute;
+        top: 10px;
+        right: clamp(18px, 3vw, 42px);
+        width: auto;
+        margin: 0;
+    }
+}
+@media (max-width: 760px) {
+    .job-seeker-profile-header:has(.profile-editor-header-main) {
+        padding: 14px 18px;
+    }
+    .job-seeker-profile-header:has(.profile-editor-header-main) .profile-header-actions {
+        display: none;
+    }
+    .profile-photo-back-link {
+        display: none;
+    }
+    .profile-back-link-mobile {
+        display: inline-flex;
+        min-height: 32px;
+        gap: 5px;
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    .profile-editor-kicker-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+    .profile-editor-kicker-row .profile-label {
+        margin-bottom: 0;
+    }
+}
+@media (max-width: 480px) {
+    .job-seeker-profile-header:has(.profile-editor-header-main) {
+        padding: 12px;
+    }
+    .profile-editor-page .profile-photo-editor-row {
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
+    }
+    .profile-editor-page .profile-photo-editor-avatar {
+        width: 72px;
+        height: 72px;
+        flex-basis: 72px;
+        border-radius: 18px;
+    }
+    .profile-editor-page .profile-photo-editor-copy {
+        flex: 1 1 0;
+    }
+    .profile-editor-page .profile-photo-editor-copy input[type="file"] {
+        min-height: 38px;
+        padding: 5px;
+        font-size: 11px;
+    }
+}
+
+/* Keep the profile identity and completion card readable on phones. */
+@media (max-width: 720px) {
+    .profile-overview-page .candidate-profile-hero {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+    .profile-overview-page .candidate-identity {
+        align-items: flex-start;
+        flex-direction: row;
+        gap: 12px;
+    }
+    .profile-overview-page .candidate-avatar-group {
+        width: 64px;
+        flex-basis: 64px;
+    }
+    .profile-overview-page .candidate-avatar {
+        width: 64px;
+        height: 64px;
+        flex-basis: 64px;
+        border-width: 3px;
+        border-radius: 17px;
+        font-size: 24px;
+    }
+    .profile-overview-page .candidate-identity-copy {
+        flex: 1 1 0;
+    }
+    .profile-overview-page .candidate-identity-copy h2 {
+        margin-top: 4px;
+    }
+    .profile-overview-page .candidate-headline {
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+    }
+    .profile-overview-page .candidate-identity-meta {
+        gap: 6px 12px;
+        margin-top: 8px;
+    }
+    .profile-overview-page .candidate-completion-panel {
+        display: grid;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr);
+        align-items: start;
+        gap: 7px;
+        padding: 12px;
+    }
+    .profile-overview-page .completion-panel-top {
+        grid-column: 1;
+    }
+    .profile-overview-page .completion-panel-score {
+        grid-column: 1;
+        margin: 0;
+        font-size: 30px;
+    }
+    .profile-overview-page .candidate-completion-panel > p {
+        grid-column: 1;
+        margin: 0;
+    }
+    .profile-overview-page .candidate-completion-panel progress {
+        grid-column: 1;
+    }
+    .profile-overview-page .candidate-completion-panel > .candidate-hero-edit {
+        grid-column: 1;
+        justify-self: end;
+        margin: 0;
+        padding: 8px 10px;
+        white-space: nowrap;
     }
 }
