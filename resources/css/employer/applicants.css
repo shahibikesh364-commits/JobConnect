@@ -760,3 +760,28 @@ html[data-theme="dark"] body.employer-workspace .applicant-select {
         padding: 8px 20px;
     }
 }
+
+@media (max-width: 680px) {
+    body.employer-workspace .employer-page-content.employer-applicants-page {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        margin-inline: 0;
+        padding-inline: 16px;
+    }
+
+    body.employer-workspace .employer-applicants-page .employer-applicant-list {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        margin-inline: 0;
+    }
+
+    body.employer-workspace .employer-applicants-page .employer-applicant-card {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        margin-inline: 0;
+    }
+}
