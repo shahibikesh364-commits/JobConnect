@@ -597,6 +597,39 @@ html[data-theme="dark"] body.employer-workspace .employer-listing-actions .emplo
     color: #f87171;
 }
 
+@media (max-width: 650px) {
+    .employer-jobs-page .employer-listing-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .employer-jobs-page .employer-listing-actions > a,
+    .employer-jobs-page .employer-listing-actions > form {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+    }
+
+    .employer-jobs-page .employer-listing-actions > a {
+        min-width: 0;
+        padding-inline: 8px;
+    }
+
+    .employer-jobs-page .employer-listing-actions > form {
+        display: flex;
+    }
+
+    .employer-jobs-page .employer-listing-actions > form > button {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        padding-inline: 8px;
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
     .employer-listing-body {
