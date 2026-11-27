@@ -630,6 +630,44 @@ html[data-theme="dark"] body.employer-workspace .employer-listing-actions .emplo
     }
 }
 
+@media (max-width: 650px) {
+    .employer-jobs-page .employer-job-filters {
+        display: grid;
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .employer-jobs-page .employer-job-filters > label {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .employer-jobs-page .employer-job-filters > .employer-filter-search,
+    .employer-jobs-page .employer-job-filters > label:nth-of-type(2),
+    .employer-jobs-page .employer-job-filters > .employer-filter-reset {
+        grid-column: 1 / -1;
+    }
+
+    .employer-jobs-page .employer-job-filters > label:nth-of-type(3) {
+        grid-column: 1;
+    }
+
+    .employer-jobs-page .employer-job-filters > .employer-filter-button {
+        box-sizing: border-box;
+        grid-column: 2;
+        min-width: 120px;
+        min-height: 40px;
+        padding-inline: 12px;
+        white-space: nowrap;
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
     .employer-listing-body {
