@@ -28,12 +28,6 @@
                     <span class="candidate-eyebrow"><span aria-hidden="true">✦</span> JOB SEEKER PROFILE</span>
                     <h2 id="candidate-name">{{ $user->name }}</h2>
                     <p class="candidate-headline">{{ $profile?->headline ?: 'Add a professional headline to introduce yourself.' }}</p>
-                    <div class="candidate-identity-meta">
-                        <span><span aria-hidden="true">✉</span> {{ $user->email }}</span>
-                        @if ($profile?->address)
-                            <span><span aria-hidden="true">⌖</span> {{ $profile->address }}</span>
-                        @endif
-                    </div>
                     <div class="candidate-tags">
                         @if ($profile?->employment_status)
                             @php($isSeeking = in_array(mb_strtolower($profile->employment_status), ['actively looking', 'open to opportunities'], true))
@@ -46,6 +40,12 @@
                             <span class="candidate-tag">{{ $profile->experience_level }}</span>
                         @endif
                     </div>
+                </div>
+                <div class="candidate-identity-meta" aria-label="Contact information">
+                    <span><span aria-hidden="true">✉</span> {{ $user->email }}</span>
+                    @if ($profile?->address)
+                        <span><span aria-hidden="true">⌖</span> {{ $profile->address }}</span>
+                    @endif
                 </div>
             </div>
             <section class="candidate-completion-panel candidate-hero-completion" aria-label="Profile completion">
