@@ -552,3 +552,127 @@ html[data-theme="dark"] .job-seeker-sidebar { border-color: #343b4b; }
 .job-seeker-profile-menu-panel form {
     margin: 0;
 }
+
+.job-seeker-mobile-menu-button,
+.job-seeker-mobile-menu-backdrop { display: none; }
+
+@media (max-width: 760px) {
+    .job-seeker-sidebar-with-drawer {
+        z-index: 1003;
+        grid-template-rows: auto;
+        gap: 0;
+        padding-block: 8px;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-sidebar-header {
+        min-height: 42px;
+        gap: 9px;
+    }
+
+    .job-seeker-mobile-menu-button {
+        display: inline-flex;
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 1px solid #e3e7ed;
+        border-radius: 11px;
+        background: #fff;
+        color: #27324a;
+        box-shadow: 0 5px 14px rgba(31, 41, 55, .08);
+        cursor: pointer;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-brand {
+        margin-right: auto;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-nav {
+        position: fixed;
+        z-index: 1003;
+        inset: 60px auto 0 0;
+        display: flex;
+        width: min(82vw, 300px);
+        height: calc(100dvh - 60px);
+        min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 4px;
+        margin: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 12px 10px 18px;
+        border-right: 1px solid #e3e7ed;
+        background: #fff;
+        box-shadow: 14px 0 32px rgba(15, 23, 42, .2);
+        transform: translateX(-102%);
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform .24s ease, visibility .24s ease;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-nav.is-open {
+        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-nav-section {
+        display: block;
+        margin: 14px 10px 6px;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-nav a,
+    .job-seeker-sidebar-with-drawer .job-seeker-nav-placeholder {
+        width: 100%;
+        min-height: 46px;
+        flex: 0 0 auto;
+        justify-content: flex-start;
+        gap: 10px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-nav-label,
+    .job-seeker-sidebar-with-drawer .job-seeker-placeholder-copy {
+        display: block;
+        font-size: 13px;
+    }
+
+    .job-seeker-sidebar-with-drawer .job-seeker-placeholder-copy small { display: block; }
+
+    .job-seeker-mobile-menu-backdrop.is-visible {
+        position: fixed;
+        z-index: 1002;
+        inset: 60px 0 0;
+        display: block;
+        width: 100%;
+        height: calc(100dvh - 60px);
+        padding: 0;
+        border: 0;
+        background: rgba(15, 23, 42, .42);
+    }
+
+    html[data-theme="dark"] .job-seeker-mobile-menu-button {
+        border-color: #343b4b;
+        background: #1b2230;
+        color: #edf0f8;
+    }
+
+    html[data-theme="dark"] .job-seeker-sidebar-with-drawer .job-seeker-nav {
+        border-color: #343b4b;
+        background: #222938;
+    }
+}
+
+@media (max-width: 480px) {
+    .job-seeker-sidebar-with-drawer .job-seeker-brand > span { display: inline; }
+    .job-seeker-sidebar-with-drawer .job-seeker-brand { gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .job-seeker-sidebar-with-drawer .job-seeker-nav { transition: none; }
+}
