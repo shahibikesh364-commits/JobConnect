@@ -110,6 +110,10 @@
                             aria-hidden="true">→</span></a>
                 </aside>
 
+                <div class="chat-pane-resizer" role="separator" aria-label="Resize conversations and chat panels"
+                    aria-orientation="vertical" aria-valuemin="190" aria-valuemax="520" aria-valuenow="270"
+                    tabindex="0"></div>
+
                 <section class="chat-panel" aria-label="Conversation">
 
                     <div class="chat-header">
@@ -180,8 +184,6 @@
                                     </details>
                                 @endif
                                 <div class="message-bubble">
-                                    <span
-                                        class="message-sender-name">{{ $message->sender->name ?? 'Former JobConnect user' }}</span>
                                     @if ($message->trashed())
                                         <p class="message-deleted-copy">This message was deleted.</p>
                                     @else
@@ -189,12 +191,12 @@
                                         @if ($message->edited_at)
                                             <span class="message-edited-label">Edited</span>
                                         @endif
-                                        <span
-                                            class="message-time">{{ $message->created_at->format('M j, g:i A') }}</span>
-                                        @if ($message->sender_id === auth()->id())
-                                            <span
-                                                class="message-delivery-status">{{ $message->read_at ? 'Read' : 'Sent' }}</span>
-                                        @endif
+                                        <span class="message-meta">
+                                            <time class="message-time" datetime="{{ $message->created_at->toIso8601String() }}">{{ $message->created_at->format('g:i A') }}</time>
+                                            @if ($message->sender_id === auth()->id())
+                                                <span class="message-delivery-status {{ $message->read_at ? 'is-read' : 'is-sent' }}" role="img" aria-label="{{ $message->read_at ? 'Read' : 'Sent' }}">{{ $message->read_at ? '✓✓' : '✓' }}</span>
+                                            @endif
+                                        </span>
                                     @endif
                                 </div>
                             </div>
