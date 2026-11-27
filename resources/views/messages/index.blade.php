@@ -15,7 +15,7 @@
 </head>
 
 <body
-    class="messages-page {{ auth()->user()->isEmployer() ? 'employer-messages-page employer-workspace' : 'job-seeker-messages-page' }}">
+    class="messages-page messages-inbox-page {{ auth()->user()->isEmployer() ? 'employer-messages-page employer-workspace' : 'job-seeker-messages-page' }}">
     @if (auth()->user()->isEmployer())
         <x-employer-workspace-toolbar />
     @endif
