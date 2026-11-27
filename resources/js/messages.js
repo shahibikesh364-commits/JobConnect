@@ -68,6 +68,77 @@ window.addEventListener("popstate", () => {
     loadMessages(window.location.href, false);
 });
 
+/* Resize the conversation list with the divider on desktop layouts. */
+const chatLayout = document.querySelector(".chat-container");
+const chatResizer = chatLayout?.querySelector(".chat-pane-resizer");
+
+if (chatLayout && chatResizer) {
+    const storageKey = "jobconnect-chat-sidebar-width";
+    const getBounds = () => ({
+        min: 190,
+        max: Math.max(190, Math.min(520, chatLayout.clientWidth * 0.55)),
+    });
+    const setSidebarWidth = (width) => {
+        const bounds = getBounds();
+        const value = Math.round(Math.max(bounds.min, Math.min(bounds.max, width)));
+        chatLayout.style.setProperty("--chat-sidebar-width", `${value}px`);
+        chatResizer.setAttribute("aria-valuemin", String(bounds.min));
+        chatResizer.setAttribute("aria-valuemax", String(Math.round(bounds.max)));
+        chatResizer.setAttribute("aria-valuenow", String(value));
+        return value;
+    };
+
+    try {
+        const savedWidth = Number(localStorage.getItem(storageKey));
+        if (savedWidth) setSidebarWidth(savedWidth);
+    } catch {
+        // Resizing still works when browser storage is unavailable.
+    }
+
+    chatResizer.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 || window.matchMedia("(max-width: 760px)").matches) return;
+        event.preventDefault();
+        chatResizer.setPointerCapture(event.pointerId);
+        chatLayout.classList.add("is-resizing");
+    });
+
+    chatResizer.addEventListener("pointermove", (event) => {
+        if (!chatResizer.hasPointerCapture(event.pointerId)) return;
+        setSidebarWidth(event.clientX - chatLayout.getBoundingClientRect().left);
+    });
+
+    const finishResize = (event) => {
+        if (!chatResizer.hasPointerCapture(event.pointerId)) return;
+        chatResizer.releasePointerCapture(event.pointerId);
+        chatLayout.classList.remove("is-resizing");
+        try {
+            localStorage.setItem(storageKey, chatResizer.getAttribute("aria-valuenow"));
+        } catch {
+            // Keep the current width for this page even if saving is unavailable.
+        }
+    };
+
+    chatResizer.addEventListener("pointerup", finishResize);
+    chatResizer.addEventListener("pointercancel", finishResize);
+    chatResizer.addEventListener("keydown", (event) => {
+        const current = Number(chatResizer.getAttribute("aria-valuenow")) || 270;
+        let next;
+        if (event.key === "ArrowLeft") next = current - 20;
+        else if (event.key === "ArrowRight") next = current + 20;
+        else if (event.key === "Home") next = getBounds().min;
+        else if (event.key === "End") next = getBounds().max;
+        else return;
+
+        event.preventDefault();
+        const value = setSidebarWidth(next);
+        try {
+            localStorage.setItem(storageKey, String(value));
+        } catch {
+            // Keyboard resizing remains available without browser storage.
+        }
+    });
+}
+
 /* Send messages without reloading the page */
 document.addEventListener("submit", async function (event) {
     const form = event.target.closest("#chatForm");
@@ -121,22 +192,24 @@ document.addEventListener("submit", async function (event) {
         const bubble = document.createElement("div");
         bubble.className = "message-bubble";
 
-        const sender = document.createElement("span");
-        sender.className = "message-sender-name";
-        sender.textContent = data.message.sender_name;
-
         const messageBody = document.createElement("p");
         messageBody.textContent = data.message.body;
 
-        const time = document.createElement("span");
+        const time = document.createElement("time");
         time.className = "message-time";
         time.textContent = data.message.created_at;
 
         const status = document.createElement("span");
-        status.className = "message-delivery-status";
-        status.textContent = "Sent";
+        status.className = "message-delivery-status is-sent";
+        status.setAttribute("role", "img");
+        status.setAttribute("aria-label", "Sent");
+        status.textContent = "✓";
 
-        bubble.append(sender, messageBody, time, status);
+        const meta = document.createElement("span");
+        meta.className = "message-meta";
+        meta.append(time, status);
+
+        bubble.append(messageBody, meta);
         messageElement.appendChild(bubble);
         chatMessages.appendChild(messageElement);
 
