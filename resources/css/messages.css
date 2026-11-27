@@ -2840,6 +2840,20 @@ html[data-theme="dark"] .conv-you-prefix {
     }
 }
 
+/* Let a short inbox end near its content instead of reserving a viewport of blank space. */
+.messages-inbox-page .messages-shell,
+.messages-inbox-page .messages-main {
+    min-height: 0;
+}
+.job-seeker-messages-page.messages-inbox-page .job-seeker-sidebar {
+    height: auto;
+    min-height: 0;
+}
+.messages-inbox-page .messages-main > .messages-container {
+    flex: 0 0 auto;
+    padding-bottom: 28px;
+}
+
 /* Draggable divider for resizing the conversation list and chat pane. */
 @media (min-width: 761px) {
     .chat-container {
