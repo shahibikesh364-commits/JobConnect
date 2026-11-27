@@ -23,6 +23,10 @@
 <div class="employer-workspace-toolbar-slot">
     <header class="employer-workspace-toolbar">
         <div class="employer-workspace-toolbar-top-row">
+            <label class="employer-mobile-drawer-button" for="employer-mobile-navigation-toggle"
+                aria-label="Toggle employer navigation" title="Open navigation">
+                <span aria-hidden="true">☰</span>
+            </label>
             <a class="employer-toolbar-brand" href="{{ route('employer.dashboard') }}" aria-label="JobConnect employer dashboard">
                 <x-jobconnect-logo class="employer-toolbar-brand-logo" />
                 <span class="employer-toolbar-brand-copy">
@@ -43,4 +47,25 @@
             </div>
         </div>
     </header>
+
+    <input class="employer-mobile-drawer-toggle" type="checkbox" id="employer-mobile-navigation-toggle"
+        aria-label="Open employer navigation" aria-controls="employer-mobile-navigation">
+    <label class="employer-mobile-drawer-backdrop" for="employer-mobile-navigation-toggle"
+        aria-hidden="true"></label>
+    <aside id="employer-mobile-navigation" class="employer-mobile-drawer" aria-label="Employer navigation">
+        <div class="employer-mobile-drawer-heading">
+            <a href="{{ route('employer.dashboard') }}" class="employer-mobile-drawer-brand">
+                <x-jobconnect-logo class="employer-mobile-drawer-logo" />
+                <span>JobConnect</span>
+            </a>
+            <label class="employer-mobile-drawer-close" for="employer-mobile-navigation-toggle"
+                aria-label="Close navigation">×</label>
+        </div>
+        <nav class="employer-mobile-drawer-links" aria-label="Employer workspace navigation">
+            @include('components.employer-nav-links')
+            <a href="{{ route('employer.jobs.create') }}">
+                <span aria-hidden="true">＋</span> Post a Job
+            </a>
+        </nav>
+    </aside>
 </div>
