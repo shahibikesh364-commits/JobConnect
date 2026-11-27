@@ -13,6 +13,7 @@
     <div class="profile-page profile-overview-page">
         <section class="candidate-profile-hero" aria-labelledby="candidate-name">
             <div class="candidate-profile-hero-glow" aria-hidden="true"></div>
+            <span class="candidate-eyebrow candidate-eyebrow-mobile"><span aria-hidden="true">✦</span> JOB SEEKER PROFILE</span>
             <div class="candidate-identity">
                 <div class="candidate-avatar-group">
                     <div class="candidate-avatar">
