@@ -643,6 +643,24 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 .candidate-contact-list small { color: #8791a1; font-size: 9px; }
 .candidate-contact-list strong { overflow-wrap: anywhere; color: #374258; font-size: 10px; font-weight: 650; }
 .candidate-contact-list strong:where(:empty) { display: none; }
+.profile-overview-page .contact-symbol {
+    border: 1px solid rgba(91, 82, 206, .12);
+    background: linear-gradient(145deg, #ffffff, #e8e9ff);
+    box-shadow: 0 4px 8px rgba(53, 58, 110, .14), inset 0 1px 0 rgba(255, 255, 255, .95);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+}
+.profile-overview-page .contact-symbol.phone {
+    border-color: rgba(24, 128, 84, .12);
+    background: linear-gradient(145deg, #ffffff, #e2f6ec);
+}
+.profile-overview-page .contact-symbol.location {
+    border-color: rgba(179, 106, 34, .12);
+    background: linear-gradient(145deg, #ffffff, #fff0df);
+}
+.profile-overview-page .contact-symbol.birthday {
+    border-color: rgba(139, 79, 196, .12);
+    background: linear-gradient(145deg, #ffffff, #f3e7ff);
+}
 .candidate-panel-footer-link { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 12px; margin-top: 13px; border-top: 1px solid #edf0f4; color: #5149d2; font-size: 10px; font-weight: 700; text-decoration: none; }
 .candidate-panel-footer-link:hover { color: #3730a3; }
 .candidate-social-links { display: grid; gap: 7px; }
@@ -651,6 +669,13 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 .candidate-social-links > a:hover { border-color: #d8d9fa; background: #fbfbff; }
 .candidate-social-links > a > span:first-child,
 .candidate-social-missing > span { display: grid; width: 26px; height: 26px; flex: 0 0 26px; place-items: center; border-radius: 7px; background: #f0efff; color: #5a52ce; font-size: 10px; font-weight: 800; }
+.profile-overview-page .candidate-social-links > a > span:first-child,
+.profile-overview-page .candidate-social-missing > span {
+    border: 1px solid rgba(91, 82, 206, .13);
+    background: linear-gradient(145deg, #ffffff, #e7e8ff);
+    box-shadow: 0 3px 6px rgba(53, 58, 110, .13), inset 0 1px 0 rgba(255, 255, 255, .95);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+}
 .candidate-social-links strong,
 .candidate-social-missing strong { color: #465166; font-size: 10px; }
 .candidate-social-links small { margin-left: auto; color: #a0a7b3; font-size: 9px; }
