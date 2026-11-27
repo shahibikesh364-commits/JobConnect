@@ -1022,6 +1022,19 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
 }
 
 @media (min-width: 721px) and (max-width: 1120px) {
+    .profile-overview-page .candidate-profile-aside {
+        align-items: stretch;
+    }
+    .profile-overview-page .candidate-profile-aside > .candidate-panel {
+        padding: 14px;
+    }
+    .profile-overview-page .candidate-profile-aside .candidate-panel-heading {
+        margin-bottom: 8px;
+    }
+    .profile-overview-page .candidate-contact-list,
+    .profile-overview-page .candidate-social-links {
+        gap: 5px;
+    }
     .profile-overview-page .candidate-profile-aside .candidate-preferences-panel {
         grid-column: 1 / -1;
     }
