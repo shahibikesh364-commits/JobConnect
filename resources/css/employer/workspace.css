@@ -2687,3 +2687,15 @@ html[data-theme="dark"] .employer-mobile-drawer-links a.is-active {
     }
 }
 
+@media (max-width: 680px) {
+    body.employer-messages-page.messages-inbox-page > .employer-workspace-toolbar-slot {
+        height: 80px;
+        flex: 0 0 80px;
+    }
+
+    body.employer-messages-page.messages-inbox-page .messages-main > .messages-container {
+        margin-top: 0;
+        padding-top: 8px;
+    }
+}
+
