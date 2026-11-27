@@ -7929,4 +7929,17 @@ html[data-theme="dark"] .admin-employer-avatar {
     }
 }
 
+@media (max-width: 768px) {
+    .admin-content .table-scroll table.job-seekers-management-table {
+        width: 980px;
+        min-width: 980px;
+        table-layout: fixed;
+    }
+
+    .job-seekers-management-table .table-location span {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+}
+
 
