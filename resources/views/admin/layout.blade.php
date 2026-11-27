@@ -16,7 +16,8 @@
 </head>
 
 <body class="admin-page">
-    <div class="admin-shell" x-data="{ mobileMenuOpen: false }">
+    <div class="admin-shell" x-data="{ mobileMenuOpen: false }"
+        @keydown.escape.window="mobileMenuOpen = false">
         {{-- Full-Width Horizontal Administration Header --}}
         <header class="admin-top-header">
             {{-- Main Header Bar (Branding & Controls) --}}
@@ -24,6 +25,7 @@
                 <div class="admin-header-left">
                     {{-- Mobile menu button --}}
                     <button type="button" class="admin-mobile-toggle" @click="mobileMenuOpen = !mobileMenuOpen"
+                        :aria-expanded="mobileMenuOpen.toString()" aria-controls="admin-mobile-navigation"
                         aria-label="Toggle navigation menu">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -99,8 +101,13 @@
                 </div>
             </div>
 
-            {{-- Horizontal Top Navigation Bar --}}
-            <nav class="admin-horizontal-nav" :class="{ 'mobile-expanded': mobileMenuOpen }"
+            <button type="button" class="admin-mobile-menu-backdrop" x-show="mobileMenuOpen"
+                x-transition.opacity @click="mobileMenuOpen = false" aria-label="Close navigation menu"
+                tabindex="-1" x-cloak></button>
+
+            {{-- Desktop navigation bar and mobile side drawer --}}
+            <nav id="admin-mobile-navigation" class="admin-horizontal-nav"
+                :class="{ 'mobile-expanded': mobileMenuOpen }"
                 aria-label="Administration Links">
                 <div class="admin-nav-wrapper">
                     <div class="admin-nav-items">
