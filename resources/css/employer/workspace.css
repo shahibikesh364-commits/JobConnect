@@ -2642,6 +2642,22 @@ html[data-theme="dark"] body.employer-messages-page::before {
         padding: 0;
     }
 
+    body.employer-workspace .employer-workspace-toolbar-actions .theme-toggle,
+    body.employer-messages-page .employer-workspace-toolbar-actions .theme-toggle {
+        gap: 0;
+        font-size: 0;
+    }
+
+    body.employer-workspace .employer-workspace-toolbar-actions .theme-toggle [data-theme-label],
+    body.employer-messages-page .employer-workspace-toolbar-actions .theme-toggle [data-theme-label] {
+        display: none !important;
+    }
+
+    body.employer-workspace .employer-workspace-toolbar-actions .theme-toggle [data-theme-icon],
+    body.employer-messages-page .employer-workspace-toolbar-actions .theme-toggle [data-theme-icon] {
+        font-size: 16px;
+    }
+
 }
 
 @media (max-width: 380px) {
