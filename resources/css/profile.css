@@ -676,6 +676,20 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
     box-shadow: 0 3px 6px rgba(53, 58, 110, .13), inset 0 1px 0 rgba(255, 255, 255, .95);
     text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
 }
+.profile-overview-page .social-brand-icon {
+    color: #5a52ce;
+}
+.profile-overview-page .social-brand-icon.linkedin {
+    color: #0a66c2;
+}
+.profile-overview-page .social-brand-icon.github {
+    color: #181717;
+}
+.profile-overview-page .social-brand-icon svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+}
 .candidate-social-links strong,
 .candidate-social-missing strong { color: #465166; font-size: 10px; }
 .candidate-social-links small { margin-left: auto; color: #a0a7b3; font-size: 9px; }
@@ -734,6 +748,7 @@ html[data-theme="dark"] .candidate-empty-state > a,
 html[data-theme="dark"] .candidate-panel-footer-link { color: #b5b2ff; }
 html[data-theme="dark"] .candidate-contact-list small { color: #9aa5b8; }
 html[data-theme="dark"] .candidate-panel-footer-link { border-top-color: #343b4b; }
+html[data-theme="dark"] .profile-overview-page .social-brand-icon.github { color: #f0f6fc; }
 html[data-theme="dark"] .candidate-preference-list > div { border-color: #343b4b; background: #1b2230; }
 html[data-theme="dark"] .candidate-preference-list small { color: #9aa5b8; }
 html[data-theme="dark"] .candidate-preference-list strong { color: #d3dae6; }
