@@ -154,7 +154,7 @@ html[data-theme="dark"] .messages-directory-empty { border-color: var(--messages
 @media (max-width: 700px) {
     .job-seeker-messages-page .messages-shell > .job-seeker-sidebar {
         position: sticky;
-        inset: auto;
+        inset: 0 auto auto;
         height: auto;
     }
     .job-seeker-messages-page .messages-shell > .messages-main { margin-left: 0; }
