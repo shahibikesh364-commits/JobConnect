@@ -7541,9 +7541,9 @@ html[data-theme="dark"] .admin-account-activity-list strong { color: #d7dce7; }
     }
 
     .admin-brand-icon {
-        width: 32px !important;
-        height: 32px !important;
-        flex: 0 0 32px !important;
+        width: 36px !important;
+        height: 36px !important;
+        flex: 0 0 36px !important;
     }
 
     .admin-brand-text {
@@ -7635,6 +7635,21 @@ html[data-theme="dark"] .admin-account-activity-list strong { color: #d7dce7; }
     .admin-brand-text .admin-badge {
         display: none !important;
     }
+
+    .admin-brand-text {
+        transform: none;
+    }
+
+    .admin-brand-text strong {
+        font-size: 16px !important;
+        line-height: 1 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-header-left .admin-brand {
+        transform: translateY(8px) !important;
+    }
 }
 
 @media (max-width: 360px) {
@@ -7645,6 +7660,12 @@ html[data-theme="dark"] .admin-account-activity-list strong { color: #d7dce7; }
 
     .admin-header-right {
         gap: 4px !important;
+    }
+
+    .admin-brand-icon {
+        width: 32px !important;
+        height: 32px !important;
+        flex: 0 0 32px !important;
     }
 
     .admin-header-right .notification-bell > summary,
