@@ -612,8 +612,8 @@ html[data-theme="dark"] .profile-completion small { color: #9aa5b8; }
 .candidate-completion-panel progress::-webkit-progress-bar { border-radius: 99px; background: #dfe2f0; }
 .candidate-completion-panel progress::-webkit-progress-value { border-radius: 99px; background: linear-gradient(90deg, #635bdf, #8b7cf6); }
 .candidate-completion-panel progress::-moz-progress-bar { border-radius: 99px; background: #635bdf; }
-.candidate-completion-panel > a { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: #4f46c2; font-size: 10px; font-weight: 750; text-decoration: none; }
-.candidate-completion-panel > a:hover { text-decoration: underline; }
+.candidate-completion-panel > a:not(.candidate-hero-edit) { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; color: #4f46c2; font-size: 10px; font-weight: 750; text-decoration: none; }
+.candidate-completion-panel > a:not(.candidate-hero-edit):hover { text-decoration: underline; }
 .candidate-contact-list { display: grid; gap: 13px; }
 .candidate-contact-list > div { display: flex; min-width: 0; align-items: center; gap: 10px; }
 .contact-symbol { display: grid; width: 31px; height: 31px; flex: 0 0 31px; place-items: center; border-radius: 9px; background: #f0efff; color: #5c53d4; font-size: 14px; }
@@ -701,7 +701,7 @@ html[data-theme="dark"] .completion-panel-caption { color: #bbb8ff; }
 html[data-theme="dark"] .profile-overview-page .candidate-completion-panel { border-color: #3b4262; background: radial-gradient(circle at 100% 0%, rgba(117, 111, 238, .13), transparent 43%), linear-gradient(145deg, #222938, #252b40); }
 html[data-theme="dark"] .completion-panel-score { color: #efefff; }
 html[data-theme="dark"] .candidate-completion-panel > p { color: #b0bbce; }
-html[data-theme="dark"] .candidate-completion-panel > a { color: #c0bdff; }
+html[data-theme="dark"] .candidate-completion-panel > a:not(.candidate-hero-edit) { color: #c0bdff; }
 html[data-theme="dark"] .candidate-completion-panel progress,
 html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-bar { background: #343b4b; }
 @media (max-width: 1120px) {
@@ -782,4 +782,64 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
     .profile-editor-page { max-width: 2200px; }
     .profile-page { max-width: 2200px; }
     .profile-overview-page { width: min(calc(100% - 128px), 2400px); }
+}
+
+/* Compact spacing across the profile overview. */
+.profile-overview-page {
+    margin-block: 18px 28px;
+}
+.profile-overview-page .candidate-profile-hero {
+    min-height: 0;
+    gap: 16px;
+    padding: 16px clamp(18px, 2.5vw, 32px);
+}
+.profile-overview-page .candidate-identity {
+    gap: 18px;
+}
+.profile-overview-page .candidate-completion-panel {
+    padding: 14px;
+}
+.profile-overview-page .completion-panel-score {
+    margin-top: 6px;
+}
+.profile-overview-page .candidate-completion-panel > p {
+    margin: 4px 0 7px;
+}
+.profile-overview-page .candidate-completion-panel > a {
+    margin-top: 5px;
+}
+.profile-overview-page .profile-snapshot {
+    gap: 8px;
+    margin: 10px 0 14px;
+}
+.profile-overview-page .snapshot-card {
+    gap: 9px;
+    padding: 12px;
+}
+.profile-overview-page .candidate-profile-grid {
+    gap: 10px;
+}
+.profile-overview-page .candidate-profile-main,
+.profile-overview-page .candidate-profile-aside {
+    gap: 10px;
+}
+.profile-overview-page .candidate-panel {
+    padding: 18px;
+}
+.profile-overview-page .candidate-panel-heading {
+    margin-bottom: 11px;
+}
+.profile-overview-page .candidate-panel-heading.compact {
+    margin-bottom: 9px;
+}
+.profile-overview-page .candidate-contact-list {
+    gap: 9px;
+}
+.profile-overview-page .candidate-preference-list {
+    gap: 7px;
+}
+@media (max-width: 720px) {
+    .profile-overview-page .candidate-profile-hero {
+        padding: 15px;
+    }
 }
