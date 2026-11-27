@@ -1,0 +1,150 @@
+/* Shared raised icon treatment for the authenticated site areas. */
+:root {
+    --site-icon-shadow: rgba(34, 43, 91, .2);
+}
+
+html[data-theme="dark"] {
+    --site-icon-shadow: rgba(0, 0, 0, .48);
+}
+
+:is(
+    .activity-icon,
+    .admin-account-section-icon,
+    .admin-brand-icon,
+    .admin-shield-icon,
+    .application-icon,
+    .application-tips-icon,
+    .brand-icon,
+    .candidate-empty-icon,
+    .company-icon,
+    .company-profile-stat-icon,
+    .completion-panel-icon,
+    .command-icon-wrap,
+    .companies-metric-icon,
+    .contact-symbol,
+    .control-stat-icon,
+    .empty-icon,
+    .empty-state-icon,
+    .employer-dashboard-attention-icon,
+    .employer-dashboard-insight-icon,
+    .employer-dashboard-priority-icon,
+    .employer-dashboard-stat-icon,
+    .employer-insight-icon,
+    .employer-listing-icon,
+    .employer-stat-icon,
+    .employer-workspace-toolbar-icon,
+    .feed-icon-box,
+    .help-icon,
+    .help-topic-icon,
+    .job-editor-icon,
+    .job-feature-icon,
+    .job-icon,
+    .jobs-empty-icon,
+    .jobs-summary-icon,
+    .kpi-icon-wrap,
+    .login-role-icon,
+    .management-icon,
+    .messages-overview-icon,
+    .notification-row-icon,
+    .notifications-stat-icon,
+    .opportunity-summary-icon,
+    .overview-icon,
+    .panel-icon,
+    .profile-editor-icon,
+    .quick-action-icon,
+    .recommended-company-icon,
+    .registration-role-icon,
+    .resume-file-icon,
+    .saved-empty-icon,
+    .saved-job-icon,
+    .saved-stat-icon,
+    .section-icon,
+    .side-icon,
+    .snapshot-icon,
+    .social-brand-icon,
+    .sort-icon-svg,
+    .state-icon,
+    .stat-icon,
+    .summary-icon,
+    .topbar-context-icon
+) {
+    filter: drop-shadow(0 4px 3px var(--site-icon-shadow));
+    transform: perspective(120px) rotateX(4deg) translateY(-1px);
+    transform-style: preserve-3d;
+    transition: filter .18s ease, transform .18s ease;
+}
+
+:is(
+    .activity-icon,
+    .admin-account-section-icon,
+    .admin-brand-icon,
+    .admin-shield-icon,
+    .application-icon,
+    .application-tips-icon,
+    .brand-icon,
+    .candidate-empty-icon,
+    .company-icon,
+    .company-profile-stat-icon,
+    .completion-panel-icon,
+    .command-icon-wrap,
+    .companies-metric-icon,
+    .contact-symbol,
+    .control-stat-icon,
+    .empty-icon,
+    .empty-state-icon,
+    .employer-dashboard-attention-icon,
+    .employer-dashboard-insight-icon,
+    .employer-dashboard-priority-icon,
+    .employer-dashboard-stat-icon,
+    .employer-insight-icon,
+    .employer-listing-icon,
+    .employer-stat-icon,
+    .employer-workspace-toolbar-icon,
+    .feed-icon-box,
+    .help-icon,
+    .help-topic-icon,
+    .job-editor-icon,
+    .job-feature-icon,
+    .job-icon,
+    .jobs-empty-icon,
+    .jobs-summary-icon,
+    .kpi-icon-wrap,
+    .login-role-icon,
+    .management-icon,
+    .messages-overview-icon,
+    .notification-row-icon,
+    .notifications-stat-icon,
+    .opportunity-summary-icon,
+    .overview-icon,
+    .panel-icon,
+    .profile-editor-icon,
+    .quick-action-icon,
+    .recommended-company-icon,
+    .registration-role-icon,
+    .resume-file-icon,
+    .saved-empty-icon,
+    .saved-job-icon,
+    .saved-stat-icon,
+    .section-icon,
+    .side-icon,
+    .snapshot-icon,
+    .social-brand-icon,
+    .sort-icon-svg,
+    .state-icon,
+    .stat-icon,
+    .summary-icon,
+    .topbar-context-icon
+):hover {
+    filter: drop-shadow(0 6px 4px var(--site-icon-shadow));
+    transform: perspective(120px) rotateX(0deg) translateY(-2px) scale(1.035);
+}
+
+:is(
+    .admin-nav-icon,
+    .employer-sidebar-icon,
+    .job-seeker-nav-icon,
+    .job-seeker-nav-icon-art,
+    .employer-navigation-menu-icon
+) {
+    filter: drop-shadow(0 2px 2px var(--site-icon-shadow));
+}
