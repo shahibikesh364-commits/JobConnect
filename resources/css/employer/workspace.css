@@ -2419,6 +2419,10 @@ html[data-theme="dark"] body.employer-messages-page::before {
     display: none;
 }
 
+.employer-toolbar-branding-group {
+    display: contents;
+}
+
 @media (max-width: 1100px) {
     .employer-mobile-drawer-toggle {
         position: fixed;
@@ -2549,9 +2553,39 @@ html[data-theme="dark"] body.employer-messages-page::before {
 
     .employer-workspace-toolbar-top-row {
         display: flex !important;
+        align-items: center !important;
         flex-wrap: nowrap;
         justify-content: space-between;
         gap: 8px;
+    }
+
+    .employer-toolbar-branding-group {
+        display: flex;
+        min-width: 0;
+        flex: 0 1 auto;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .employer-toolbar-branding-group > .employer-mobile-drawer-button {
+        position: relative;
+        top: auto;
+        left: auto;
+        align-self: center;
+        flex: 0 0 auto;
+        width: 40px;
+        height: 40px;
+    }
+
+    .employer-toolbar-branding-group > .employer-toolbar-brand {
+        flex: 0 1 auto;
+        margin: 0;
+        white-space: nowrap;
+    }
+
+    .employer-workspace-toolbar-top-row > .employer-workspace-toolbar-actions {
+        order: 2;
+        flex: 0 0 auto;
     }
 
     .employer-workspace-toolbar-center {
@@ -2625,6 +2659,12 @@ html[data-theme="dark"] body.employer-messages-page::before {
     }
 
     .employer-mobile-drawer-button {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .employer-toolbar-branding-group > .employer-mobile-drawer-button {
         width: 36px;
         height: 36px;
         flex-basis: 36px;
