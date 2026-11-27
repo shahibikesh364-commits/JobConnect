@@ -53,14 +53,6 @@
     <label class="employer-mobile-drawer-backdrop" for="employer-mobile-navigation-toggle"
         aria-hidden="true"></label>
     <aside id="employer-mobile-navigation" class="employer-mobile-drawer" aria-label="Employer navigation">
-        <div class="employer-mobile-drawer-heading">
-            <a href="{{ route('employer.dashboard') }}" class="employer-mobile-drawer-brand">
-                <x-jobconnect-logo class="employer-mobile-drawer-logo" />
-                <span>JobConnect</span>
-            </a>
-            <label class="employer-mobile-drawer-close" for="employer-mobile-navigation-toggle"
-                aria-label="Close navigation">×</label>
-        </div>
         <nav class="employer-mobile-drawer-links" aria-label="Employer workspace navigation">
             @include('components.employer-nav-links')
             <a href="{{ route('employer.jobs.create') }}">
