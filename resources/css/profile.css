@@ -1021,6 +1021,15 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
     }
 }
 
+@media (min-width: 721px) and (max-width: 1120px) {
+    .profile-overview-page .candidate-profile-aside .candidate-preferences-panel {
+        grid-column: 1 / -1;
+    }
+    .profile-overview-page .candidate-profile-aside .candidate-preference-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
 /* Keep the profile identity and completion card readable on phones. */
 @media (max-width: 720px) {
     .profile-overview-page .candidate-profile-hero {
