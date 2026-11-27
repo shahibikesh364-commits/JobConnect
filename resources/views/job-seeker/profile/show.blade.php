@@ -165,11 +165,16 @@
                 <section class="candidate-panel" aria-labelledby="links-heading">
                     <div class="candidate-panel-heading compact"><div><span class="candidate-section-kicker">AROUND THE WEB</span><h2 id="links-heading">Professional links</h2></div></div>
                     <div class="candidate-social-links">
-                        @foreach ([['LinkedIn', $profile?->linkedin_url, 'in'], ['GitHub', $profile?->github_url, 'gh'], ['Portfolio', $profile?->portfolio_url, '↗']] as [$label, $url, $symbol])
+                        @foreach ([['LinkedIn', $profile?->linkedin_url], ['GitHub', $profile?->github_url], ['Portfolio', $profile?->portfolio_url]] as [$label, $url])
+                            @php($iconName = strtolower($label))
                             @if ($url)
-                                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"><span>{{ $symbol }}</span><strong>{{ $label }}</strong><span class="external-arrow" aria-hidden="true">↗</span></a>
+                                <a href="{{ $url }}" target="_blank" rel="noopener noreferrer"><span class="social-brand-icon {{ $iconName }}" aria-hidden="true">
+                                    @include('job-seeker.profile.partials.social-icon', ['iconName' => $iconName])
+                                </span><strong>{{ $label }}</strong><span class="external-arrow" aria-hidden="true">↗</span></a>
                             @else
-                                <div class="candidate-social-missing"><span>{{ $symbol }}</span><strong>{{ $label }}</strong><small>Not added</small></div>
+                                <div class="candidate-social-missing"><span class="social-brand-icon {{ $iconName }}" aria-hidden="true">
+                                    @include('job-seeker.profile.partials.social-icon', ['iconName' => $iconName])
+                                </span><strong>{{ $label }}</strong><small>Not added</small></div>
                             @endif
                         @endforeach
                     </div>
