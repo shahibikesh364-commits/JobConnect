@@ -2504,50 +2504,6 @@ html[data-theme="dark"] body.employer-messages-page::before {
         pointer-events: auto;
     }
 
-    .employer-mobile-drawer-heading {
-        display: flex;
-        min-height: 48px;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 0 4px 16px;
-        margin-bottom: 14px;
-        border-bottom: 1px solid var(--employer-border, #e5eaf0);
-    }
-
-    .employer-mobile-drawer-brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--employer-midnight, #172033);
-        font-size: 16px;
-        font-weight: 800;
-        text-decoration: none;
-    }
-
-    .employer-mobile-drawer-logo {
-        width: 36px;
-        height: 36px;
-    }
-
-    .employer-mobile-drawer-close {
-        display: grid;
-        width: 36px;
-        height: 36px;
-        flex: 0 0 36px;
-        place-items: center;
-        border-radius: 9px;
-        color: var(--employer-steel, #64748b);
-        font-size: 25px;
-        line-height: 1;
-        cursor: pointer;
-    }
-
-    .employer-mobile-drawer-close:hover {
-        background: #f3f6fa;
-        color: var(--employer-midnight, #172033);
-    }
-
     .employer-mobile-drawer-links {
         display: grid;
         align-content: start;
@@ -2713,11 +2669,6 @@ html[data-theme="dark"] .employer-mobile-drawer-button {
     color: #e8eef7;
 }
 
-html[data-theme="dark"] .employer-mobile-drawer-heading {
-    border-color: #344154;
-}
-
-html[data-theme="dark"] .employer-mobile-drawer-brand,
 html[data-theme="dark"] .employer-mobile-drawer-links a {
     color: #bdc6d5;
 }
