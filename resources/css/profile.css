@@ -1051,4 +1051,25 @@ html[data-theme="dark"] .candidate-completion-panel progress::-webkit-progress-b
         padding: 8px 10px;
         white-space: nowrap;
     }
+    .profile-overview-page [aria-labelledby="education-heading"] .candidate-timeline-title {
+        flex-direction: row;
+        align-items: center;
+        gap: 8px;
+    }
+    .profile-overview-page [aria-labelledby="education-heading"] .candidate-timeline-title > div {
+        min-width: 0;
+    }
+    .profile-overview-page [aria-labelledby="education-heading"] .candidate-date-range {
+        align-self: center;
+        margin-left: auto;
+    }
+    .profile-overview-page [aria-labelledby="education-heading"].candidate-panel {
+        padding: 14px;
+    }
+    .profile-overview-page [aria-labelledby="education-heading"] .candidate-panel-heading {
+        margin-bottom: 8px;
+    }
+    .profile-overview-page [aria-labelledby="education-heading"] .candidate-timeline-item {
+        padding-bottom: 0;
+    }
 }
