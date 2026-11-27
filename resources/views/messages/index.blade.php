@@ -53,8 +53,6 @@
                     </div>
 
                     <div class="messages-heading-actions">
-
-
                         @if (auth()->user()->isEmployer())
                             <a href="{{ route('employer.messages.new') }}" class="new-conversation-main-button">
                                 <span aria-hidden="true">＋</span>
@@ -67,15 +65,11 @@
                             </a>
                         @endif
 
-
                         <a href="{{ auth()->user()->isEmployer() ? route('employer.jobs.index') : route('applications.mine') }}"
                             class="messages-context-link">
-
                             {{ auth()->user()->isEmployer() ? 'Manage job listings' : 'View my applications' }}
-
                             <span aria-hidden="true">→</span>
                         </a>
-
                     </div>
                 </div>
 
@@ -86,7 +80,7 @@
                 <div id="messages-results">
                     <section class="messages-panel" aria-labelledby="conversation-list-title">
                         <div class="messages-panel-heading">
-                            <div>
+                            <div class="messages-panel-title-block">
                                 <h2 id="conversation-list-title">
                                     {{ auth()->user()->isEmployer() ? 'Candidate conversations' : 'Recent conversations' }}
                                 </h2>
@@ -94,54 +88,78 @@
                                     {{ \Illuminate\Support\Str::plural('conversation', $conversations->total()) }}{{ $filter === 'unread' ? ' with unread messages' : '' }}
                                 </p>
                             </div>
+
                             <nav class="messages-filter-tabs" aria-label="Filter conversations">
                                 <a href="{{ route('messages.index', array_filter(['search' => $search !== '' ? $search : null, 'filter' => 'all', 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}"
                                     @class(['is-active' => $filter === 'all'])
-                                    @if ($filter === 'all') aria-current="page" @endif>All
-                                    <span>{{ $conversationCount }}</span></a>
+                                    @if ($filter === 'all') aria-current="page" @endif>
+                                    All
+                                    <span class="tab-count">{{ $conversationCount }}</span>
+                                </a>
                                 <a href="{{ route('messages.index', array_filter(['search' => $search !== '' ? $search : null, 'filter' => 'unread', 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}"
-                                    @class(['is-active' => $filter === 'unread'])
-                                    @if ($filter === 'unread') aria-current="page" @endif>Unread
-                                    <span>{{ $unreadConversationCount }}</span></a>
+                                    @class(['is-active' => $filter === 'unread', 'has-unread-tab' => $unreadConversationCount > 0])
+                                    @if ($filter === 'unread') aria-current="page" @endif>
+                                    Unread
+                                    <span class="tab-count">{{ $unreadConversationCount }}</span>
+                                </a>
                                 <a href="{{ route('messages.index', array_filter(['search' => $search !== '' ? $search : null, 'filter' => 'applications', 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}"
                                     @class(['is-active' => $filter === 'applications'])
-                                    @if ($filter === 'applications') aria-current="page" @endif>Applications
-                                    <span>{{ $applicationConversationCount }}</span></a>
+                                    @if ($filter === 'applications') aria-current="page" @endif>
+                                    Applications
+                                    <span class="tab-count">{{ $applicationConversationCount }}</span>
+                                </a>
                                 <a href="{{ route('messages.index', array_filter(['search' => $search !== '' ? $search : null, 'filter' => 'general', 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}"
                                     @class(['is-active' => $filter === 'general'])
-                                    @if ($filter === 'general') aria-current="page" @endif>General
-                                    <span>{{ $generalConversationCount }}</span></a>
+                                    @if ($filter === 'general') aria-current="page" @endif>
+                                    General
+                                    <span class="tab-count">{{ $generalConversationCount }}</span>
+                                </a>
                                 <a href="{{ route('messages.index', array_filter(['search' => $search !== '' ? $search : null, 'filter' => 'archived', 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}"
                                     @class(['is-active' => $filter === 'archived'])
-                                    @if ($filter === 'archived') aria-current="page" @endif>Archived
-                                    <span>{{ $archivedConversationCount }}</span></a>
+                                    @if ($filter === 'archived') aria-current="page" @endif>
+                                    Archived
+                                    <span class="tab-count">{{ $archivedConversationCount }}</span>
+                                </a>
                             </nav>
                         </div>
 
-                        <form class="messages-search" method="GET" action="{{ route('messages.index') }}">
-                            <label for="conversation-search">Search conversations</label>
-                            <div class="messages-search-controls">
-                                <input id="conversation-search" type="search" name="search"
-                                    value="{{ $search }}" placeholder="Search people, companies, jobs, or messages">
+                        <div class="messages-query-toolbar">
+                            <form class="messages-search-form" method="GET" action="{{ route('messages.index') }}">
+                                <div class="messages-search-field">
+                                    <svg class="search-lens-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                        <circle cx="11" cy="11" r="8"></circle>
+                                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                    </svg>
+                                    <input id="conversation-search" type="search" name="search"
+                                        value="{{ $search }}" placeholder="Search people, companies, roles, or messages...">
+                                    @if ($search !== '')
+                                        <a href="{{ route('messages.index', array_filter(['filter' => $filter !== 'all' ? $filter : null, 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}" class="search-clear-inline" title="Clear search">✕</a>
+                                    @endif
+                                </div>
                                 <input type="hidden" name="filter" value="{{ $filter }}">
                                 <input type="hidden" name="sort" value="{{ $sort }}">
-                                <button type="submit">Search</button>
-                                @if ($search !== '')
-                                    <a href="{{ route('messages.index', array_filter(['filter' => $filter !== 'all' ? $filter : null, 'sort' => $sort !== 'recent' ? $sort : null], fn($value) => $value !== null && $value !== '')) }}">Clear search</a>
-                                @endif
-                            </div>
-                        </form>
+                                <button type="submit" class="search-submit-btn">Search</button>
+                            </form>
 
-                        <form class="messages-sort" method="GET" action="{{ route('messages.index') }}">
-                            <label for="conversation-sort">Sort by</label>
-                            <input type="hidden" name="search" value="{{ $search }}">
-                            <input type="hidden" name="filter" value="{{ $filter }}">
-                            <select id="conversation-sort" name="sort" aria-label="Sort conversations">
-                                <option value="recent" @selected($sort === 'recent')>Most recent</option>
-                                <option value="oldest" @selected($sort === 'oldest')>Oldest first</option>
-                            </select>
-                            <button type="submit">Apply</button>
-                        </form>
+                            <form class="messages-sort-form" method="GET" action="{{ route('messages.index') }}">
+                                <input type="hidden" name="search" value="{{ $search }}">
+                                <input type="hidden" name="filter" value="{{ $filter }}">
+                                <div class="sort-select-wrapper">
+                                    <svg class="sort-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="3" y1="6" x2="15" y2="6"></line>
+                                        <line x1="3" y1="12" x2="11" y2="12"></line>
+                                        <line x1="3" y1="18" x2="7" y2="18"></line>
+                                        <polyline points="18 10 21 13 18 16"></polyline>
+                                        <line x1="21" y1="13" x2="13" y2="13"></line>
+                                    </svg>
+                                    <label for="conversation-sort" class="sr-only">Sort by</label>
+                                    <select id="conversation-sort" name="sort" onchange="this.form.submit()" aria-label="Sort conversations">
+                                        <option value="recent" @selected($sort === 'recent')>Sort: Most recent</option>
+                                        <option value="oldest" @selected($sort === 'oldest')>Sort: Oldest first</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
 
                         @if ($conversations->isEmpty())
                             <div class="messages-empty">
@@ -197,58 +215,97 @@
 
                                     <a href="{{ route('messages.show', $conversation) }}"
                                         class="conversation-card {{ $conversation->unread_count > 0 ? 'has-unread' : '' }}">
-                                        <x-user-avatar :user="$otherUser" class="conversation-avatar" />
-                                        <span class="conversation-content">
-                                            <span class="conversation-top">
-                                                <strong>{{ $otherUser->name ?? (auth()->user()->isEmployer() ? 'Candidate unavailable' : 'Employer unavailable') }}</strong>
-                                                @if ($lastMessage)
-                                                    <time class="conversation-time"
-                                                        datetime="{{ $lastMessage->created_at->toIso8601String() }}"
-                                                        title="{{ $lastMessage->created_at->format('M j, Y · g:i A') }}">{{ $lastMessage->created_at->diffForHumans() }}</time>
-                                                @endif
-                                            </span>
-                                            @if (auth()->user()->isEmployer() && $otherUser?->jobSeekerProfile?->headline)
-                                                <span
-                                                    class="conversation-profile-detail">{{ $otherUser->jobSeekerProfile->headline }}</span>
+
+                                        {{-- 1. Left Avatar --}}
+                                        <div class="conv-avatar-col">
+                                            <x-user-avatar :user="$otherUser" class="conv-avatar" />
+                                            @if ($conversation->unread_count > 0)
+                                                <span class="conv-unread-dot" title="Unread message"></span>
                                             @endif
-                                            @if ($otherUser?->isAdmin())
-                                                <span class="conversation-role-label">JobConnect team</span>
-                                            @endif
-                                            @if ($conversation->job_listing_id)
-                                                <span class="conversation-context-line">
-                                                    <span class="job-title">{{ $conversation->job?->title ?? 'Job listing no longer available' }}</span>
-                                                    @if ($companyName)
-                                                        <span class="conversation-company">{{ $companyName }}</span>
+                                        </div>
+
+                                        {{-- 2. Center Content (Topline + Bottomline) --}}
+                                        <div class="conv-main-col">
+                                            <div class="conv-topline">
+                                                <div class="conv-identity-row">
+                                                    <strong class="conv-name">
+                                                        {{ $otherUser->name ?? (auth()->user()->isEmployer() ? 'Candidate unavailable' : 'Employer unavailable') }}
+                                                    </strong>
+
+                                                    @if ($otherUser?->isAdmin())
+                                                        <span class="conv-team-badge">JobConnect Team</span>
                                                     @endif
-                                                    @if ($conversation->application_status)
-                                                        <span class="messages-application-status status-{{ $conversation->application_status }}">
-                                                            Application · {{ $conversation->application_status === 'submitted' ? 'New' : ucfirst($conversation->application_status) }}
+
+                                                    @if ($conversation->job_listing_id)
+                                                        <span class="conv-job-tag" title="{{ $conversation->job?->title }}">
+                                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                                            </svg>
+                                                            <span>{{ $conversation->job?->title ?? 'Job listing' }}</span>
+                                                            @if ($companyName)
+                                                                <span class="conv-company-dot">·</span>
+                                                                <span class="conv-company-text">{{ $companyName }}</span>
+                                                            @endif
                                                         </span>
+
+                                                        @if ($conversation->application_status)
+                                                            <span class="conv-status-badge status-{{ $conversation->application_status }}">
+                                                                ● {{ $conversation->application_status === 'submitted' ? 'New Application' : ucfirst($conversation->application_status) }}
+                                                            </span>
+                                                        @endif
                                                     @else
-                                                        <span class="conversation-type-label">Application</span>
+                                                        <span class="conv-general-tag">
+                                                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                                            </svg>
+                                                            General Conversation
+                                                        </span>
+                                                        @if ($companyName)
+                                                            <span class="conv-company-alone">{{ $companyName }}</span>
+                                                        @endif
                                                     @endif
-                                                </span>
-                                            @else
-                                                @if ($companyName)
-                                                    <span class="conversation-company">{{ $companyName }}</span>
-                                                @endif
-                                                <span class="conversation-type-label is-general">General conversation</span>
-                                            @endif
-                                            <span class="last-message">
+                                                </div>
+
                                                 @if ($lastMessage)
-                                                    @if ($lastMessage->sender_id === auth()->id())
-                                                        <span class="last-message-prefix">You: </span>
-                                                    @endif{{ $lastMessage->body }}
-                                                @else
-                                                    No messages yet. Start the conversation.
+                                                    <time class="conv-timestamp" datetime="{{ $lastMessage->created_at->toIso8601String() }}">
+                                                        {{ $lastMessage->created_at->diffForHumans() }}
+                                                    </time>
                                                 @endif
-                                            </span>
-                                        </span>
-                                        @if ($conversation->unread_count > 0)
-                                            <span class="unread-badge"
-                                                aria-label="{{ $conversation->unread_count }} unread messages">{{ $conversation->unread_count }}</span>
-                                        @endif
-                                        <span class="conversation-open-indicator" aria-hidden="true">→</span>
+                                            </div>
+
+                                            {{-- Subtitle/Headline if present --}}
+                                            @if (auth()->user()->isEmployer() && $otherUser?->jobSeekerProfile?->headline)
+                                                <p class="conv-headline">{{ $otherUser->jobSeekerProfile->headline }}</p>
+                                            @endif
+
+                                            {{-- Bottomline: Message snippet and Action --}}
+                                            <div class="conv-bottomline">
+                                                <p class="conv-preview-text {{ $conversation->unread_count > 0 ? 'is-unread' : '' }}">
+                                                    @if ($lastMessage)
+                                                        @if ($lastMessage->sender_id === auth()->id())
+                                                            <span class="conv-you-prefix">You:</span>
+                                                        @endif
+                                                        <span class="conv-message-body">{{ $lastMessage->body }}</span>
+                                                    @else
+                                                        <span class="conv-empty-text">No messages yet. Click to start the conversation.</span>
+                                                    @endif
+                                                </p>
+
+                                                <div class="conv-row-end">
+                                                    @if ($conversation->unread_count > 0)
+                                                        <span class="conv-unread-pill">{{ $conversation->unread_count }} new</span>
+                                                    @endif
+                                                    <span class="conv-open-indicator">
+                                                        <span>Open chat</span>
+                                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                                        </svg>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </a>
                                 @endforeach
                             </div>
