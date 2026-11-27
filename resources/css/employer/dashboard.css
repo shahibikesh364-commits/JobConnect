@@ -363,6 +363,46 @@ body.employer-workspace .employer-dashboard-chart-empty {
     text-align: center;
 }
 
+@media (max-width: 650px) {
+    body.employer-workspace .employer-dashboard-chart {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    body.employer-workspace .employer-dashboard-chart-column {
+        position: relative;
+        min-width: 0;
+    }
+
+    body.employer-workspace .employer-dashboard-chart-column small {
+        position: absolute;
+        right: auto;
+        bottom: 0;
+        left: 50%;
+        width: max-content;
+        max-width: calc(100vw - 48px);
+        overflow: hidden;
+        text-align: center;
+        text-overflow: clip;
+        transform: translateX(-50%);
+    }
+
+    body.employer-workspace .employer-dashboard-chart-column:first-child small {
+        left: 0;
+        text-align: left;
+        transform: none;
+    }
+
+    body.employer-workspace .employer-dashboard-chart-column:last-child small {
+        right: 0;
+        left: auto;
+        text-align: right;
+        transform: none;
+    }
+}
+
 body.employer-workspace .employer-dashboard-secondary-grid {
     display: grid;
     grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.5fr);
