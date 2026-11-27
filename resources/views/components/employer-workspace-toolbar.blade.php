@@ -23,17 +23,19 @@
 <div class="employer-workspace-toolbar-slot">
     <header class="employer-workspace-toolbar">
         <div class="employer-workspace-toolbar-top-row">
-            <label class="employer-mobile-drawer-button" for="employer-mobile-navigation-toggle"
-                aria-label="Toggle employer navigation" title="Open navigation">
-                <span aria-hidden="true">☰</span>
-            </label>
-            <a class="employer-toolbar-brand" href="{{ route('employer.dashboard') }}" aria-label="JobConnect employer dashboard">
-                <x-jobconnect-logo class="employer-toolbar-brand-logo" />
-                <span class="employer-toolbar-brand-copy">
-                    <strong>JobConnect</strong>
-                    <small>Employer workspace</small>
-                </span>
-            </a>
+            <div class="employer-toolbar-branding-group">
+                <label class="employer-mobile-drawer-button" for="employer-mobile-navigation-toggle"
+                    aria-label="Toggle employer navigation" title="Open navigation">
+                    <span aria-hidden="true">☰</span>
+                </label>
+                <a class="employer-toolbar-brand" href="{{ route('employer.dashboard') }}" aria-label="JobConnect employer dashboard">
+                    <x-jobconnect-logo class="employer-toolbar-brand-logo" />
+                    <span class="employer-toolbar-brand-copy">
+                        <strong>JobConnect</strong>
+                        <small>Employer workspace</small>
+                    </span>
+                </a>
+            </div>
             <div class="employer-workspace-toolbar-center">
                 <x-employer-nav-menu />
                 <a class="employer-toolbar-post-job" href="{{ route('employer.jobs.create') }}">
